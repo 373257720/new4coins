@@ -1,6 +1,10 @@
 <template>
   <div class="login">
-    <div id="top">NETNOTE</div>
+    <div id="top">
+      <div class="top con">
+        NETNOTE
+      </div> 
+    </div>
     <div class="content">
       <div class="box">
         <h1>WELCOME</h1>
@@ -44,6 +48,7 @@ export default {
 .name input.el-input__inner {
   background: #25262e;
   height: 40px;
+  width: 474px;
   border-radius: 0px;
   border: 0;
   color: #aaaaaa;
@@ -51,6 +56,7 @@ export default {
 }
 .password input.el-input__inner {
   background: #25262e;
+  width: 474px;
   height: 40px;
   border-radius: 0px;
   border: 0;
@@ -62,22 +68,17 @@ export default {
 <style lang="scss" scoped>
 .content {
   height: 700px;
+  width: 1200px;
+  margin:0 auto;
 }
-#top {
-  height: 60px;
-  background: #25262e;
-  color: white;
-  font-size: 24px;
-  line-height: 60px;
-  padding-left: 100px;
-}
+
 .box {
   height: 335px;
 
   width: 475px;
   color: #bec8d6;
   // background: white;
-  margin: 110px 0 0 368px;
+  margin: 80px 0 0 0;
   h1 {
     margin-bottom: 58px;
     font-size: 30px;
@@ -104,13 +105,13 @@ export default {
     font-weight: 700;
   }
 }
-.login {
+.content {
   position: relative;
 }
 .photo {
   position: absolute;
-  right: 381px;
-  top: 148px;
+  right: 0px;
+  top: 0px;
 }
 </style>
 

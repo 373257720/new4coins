@@ -1,6 +1,8 @@
 <template>
   <div class="receive">
-    <div id="top">TRANSFER</div>
+    <div id="top">
+      <div class="top con">TRANSFER</div>
+    </div>
     <div class="content">
       <div class="title con">
         <img src="../assets/hkd.png" alt>
@@ -28,17 +30,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.content{
-    height: 750px;
+.content {
+  height: 750px;
 }
-#top {
-  height: 60px;
-  background: #25262e;
-  color: white;
-  font-size: 24px;
-  line-height: 60px;
-  padding-left: 100px;
-}
+
 .title {
   height: 50px;
   width: 1200px;

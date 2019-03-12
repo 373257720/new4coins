@@ -68,6 +68,19 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 } */
+#top {
+  height: 60px;
+  background: #25262e;
+  font-size: 24px;
+  line-height: 60px;
+
+
+}  
+#top .top{
+    height: 60px;
+    color: white;
+    text-indent:-100px;
+  }
 </style>
 <style lang="scss" scoped>
 #content {

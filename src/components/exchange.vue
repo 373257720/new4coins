@@ -1,6 +1,10 @@
 <template>
   <div class="exchange">
-    <div id="top">EXCHANGE</div>
+    <div id="top">
+      <div class="top con">
+        EXCHANGE
+      </div>
+      </div>
     <div class="content">
       <div class="list">
         <p>Fiat&nbsp;to&nbsp;Coin</p>
@@ -130,14 +134,7 @@ export default {
     } */
 </style>
 <style lang="scss" scoped>
-#top {
-  height: 60px;
-  background: #25262e;
-  color: white;
-  font-size: 24px;
-  line-height: 60px;
-  padding-left: 100px;
-}
+
 .content {
   height: 800px;
   padding-top: 65px;

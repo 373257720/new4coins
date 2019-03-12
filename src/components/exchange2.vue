@@ -1,6 +1,8 @@
 <template>
   <div class="exchange2">
-    <div id="top">EXCHANGE</div>
+    <div id="top">
+      <div class="top con">EXCHANGE</div>
+    </div>
     <div class="content list">
       <p>Fiat&nbsp;to&nbsp;Coin</p>
       <div class="list_top">
@@ -16,7 +18,8 @@
         <img src="../assets/hkd.png" alt>
         <span>RMBn</span>
         <span>
-          Balance:$
+          Balance:
+          $
           <em>9999.9999</em>
         </span>
       </div>
@@ -56,38 +59,39 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-#top {
-  height: 60px;
-  background: #25262e;
-  color: white;
-  font-size: 24px;
-  line-height: 60px;
-  padding-left: 100px;
-}
 .content {
-  height: 720px;
-
-  .btn {
-    height: 38px;
-    width: 475px;
-    background: #5ce2ee;
-    border-radius: 20px;
-    // margin-top: 126px;
-    color: #25262e;
-    line-height: 38px;
-    text-align: center;
-    font-weight: 700;
-    margin: 0 auto;
-  }
-}
-.list {
-  //   height: 120px;
+  height: 700px;
   width: 1200px;
   margin-top: 70px;
   //   background:
   color: #ffffff;
   font-size: 20px;
   margin: 0 auto;
+  .list_top {
+    height: 50px;
+    width: 468px;
+    margin: 0 auto;
+    background: #302f39;
+    margin-bottom: 12px;
+
+    img,
+    span {
+      //   line-height: 50px;
+      vertical-align: middle;
+    }
+    img {
+      margin: 7px 12px 0 12px;
+    }
+    > span:nth-child(2) {
+      font-size: 20px;
+      margin-right: 170px;
+    }
+    > span:nth-child(3) {
+      font-size: 14px;
+   
+      //   margin-left:203px;
+    }
+  }
   .rate {
     margin: 0 auto;
     width: 470px;
@@ -109,7 +113,6 @@ export default {
       margin-bottom: 12px;
     }
   }
-
   > p {
     height: 50px;
     background: #302f39;
@@ -118,38 +121,27 @@ export default {
     margin-bottom: 50px;
     margin-top: 36px;
   }
-  .list_top {
-    height: 50px;
-    width: 468px;
+  .btn {
+    height: 38px;
+    width: 475px;
+    background: #5ce2ee;
+    border-radius: 20px;
+    color: #25262e;
+    line-height: 38px;
+    text-align: center;
+    font-weight: 700;
     margin: 0 auto;
-    background: #302f39;
-    margin-bottom: 12px;
- 
-    img,
-    span {
-      //   line-height: 50px;
-      vertical-align: middle;
-    }
-    img {
-      margin: 7px 12px 0 12px;
-    }
-    > span:nth-child(2) {
-      font-size: 20px;
-      margin-right: 170px;
-    }
-    > span:nth-child(3) {
-      font-size: 14px;
-      //   margin-left:203px;
-    }
   }
+}
+
+
+  
   .rate_sign {
     font-size: 12px;
     margin: 0 auto;
     width: 468px;
     margin-bottom: 45px;
   }
-
-}
 
 </style>
 

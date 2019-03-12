@@ -3,7 +3,7 @@
     <div class="varitey con">
       <div class="coinpic fl">
           <div class="coinpic_left fl">
-            <img :src="son.text" alt="">
+            <img :src="son.text"alt="">
           </div>
           <div class="coinpic_right fr">
               <p>HKDn</p>
@@ -56,7 +56,13 @@ export default {
       .coinpic_left{
           width: 60px;
           height: 80px;
-          background:white;
+          padding-top: 18px;
+          box-sizing: border-box;
+          // background:white;
+          // img{
+          //   width: 60px;
+          //   height: 80px;
+          // }
       }
       .coinpic_right{
           width: 140px;

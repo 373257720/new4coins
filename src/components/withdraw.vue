@@ -1,13 +1,15 @@
 <template>
   <div class="withdraw">
-    <div id="top">WITHDRAW</div>
+    <div id="top">
+      <div class="top con"> WITHDRAW</div>    
+    </div>
     <div class="content">
-      <div class style="margin-top:28px;">
+      <div class="content_first">
         <p>
           <span>Fiat</span>
           <span>Available balance $
-            <em>99999.99999</em>
-            <span>RMB</span>
+              <em>99999.99999</em>
+              <span>RMB</span>
           </span>
         </p>
         <div class="choose">
@@ -21,11 +23,12 @@
           </el-select>
         </div>
       </div>
-      <div class="rate first" style="margin-top:28px;">
+      <div class="rate_first" style="margin-top:28px;">
         <p>RMBn</p>
-        <el-input v-model="input2" placeholder="请输入内容"></el-input>
+        <el-input v-model="input3" placeholder="请输入内容"></el-input>
         <u>Max</u>
       </div>
+       <div class="btn">SUBMIT</div>
     </div>
   </div>
 </template>
@@ -33,28 +36,100 @@
 export default {
   name: "withdraw",
   data() {
-    return {};
+    return {
+      options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
+        value: '',
+        input3:''
+    };
   }
 };
 </script>
 <style>
-    
+.choose .el-input__inner{
+   border-radius: 0;
+    background: #25262e;
+    border:0;
+    color:#BEC8D6;
+     width:468px;
+}
+.rate_first .el-input__inner{
+   border-radius: 0;
+    background: #25262e;
+    border:0;
+    color:#BEC8D6;
+     width:468px;
+     
+}
 </style>
 
 <style lang="scss" scoped>
-#top {
-  height: 60px;
-  background: #25262e;
-  color: white;
-  font-size: 24px;
-  line-height: 60px;
-  padding-left: 100px;
-}
+
 .content {
   height: 800px;
   width: 468px;
   margin: 0 auto;
+  color:#aaaaaa;
+  margin-top:90px;
+  .content_first{
+    // height: 63px;
+    p{
+      width: 468px;
+      // display: flex;
+      font-size: 14px;
+      margin-bottom:10px;
+      >span:nth-child(1){
+        margin-right:215px;
+        padding-left:2px;
+      }
+       >span:nth-child(2){
+        font-size: 12px;
+      }
+      
+    }
+    
+  }
+  .rate_first{
+    position: relative;
+    p{
+       width: 468px;
+      display: flex;
+      font-size: 14px;
+      margin-bottom:10px;
+    }
+    u{
+      position: absolute;
+      right:8px;
+      top:35px;
+       color: #5ce2ee;
+    }
+  }
 }
+.btn {
+    height: 38px;
+    width: 475px;
+    background: #5ce2ee;
+    border-radius: 20px;
+    margin-top: 60px;
+    color: #25262e;
+    line-height: 38px;
+    text-align: center;
+    font-weight: 700;
+  }
 </style>
 
 

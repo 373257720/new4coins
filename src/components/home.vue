@@ -1,9 +1,20 @@
 <template>
   <div>
-    <div id="top">NETNOTE</div>
+    <div id="top">
+      <div class="top con">NETNOTE</div>
+    </div>
     <div class="content">
       <div class="trend"></div>
       <variety v-for="(item,index) in tabs" :key="index" :son="tabs[index]"></variety>
+      <div class="content_bottom">
+        <div>
+          <span>FAIT WITHDRAW</span>
+          <span>EXCHANGE</span>
+        </div>
+        <div>
+          <span>FIAT DEPOSIT</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -16,19 +27,20 @@ export default {
       tabs: [
         {
           id: 0,
-          text: "../assets/hkd.png"
+          text: require('../assets/hkd.png')
         },
         {
           id: 1,
-          text: "../assets/jpy.png"
+          text: require('../assets/jpy.png')
         },
         {
           id: 2,
-          text: "../assets/rmb.png"
+          text: require('../assets/rmb.png')
         },
         {
           id: 3,
-          text: "../assets/usd.png"
+          text: require('../assets/usd.png')
+        
         }
       ]
     };
@@ -41,20 +53,55 @@ export default {
 
 
 <style lang="scss" scoped>
-.content{
+.content {
   height: 870px;
-}
-#top {
-  height: 60px;
-  background: #25262e;
-  color: white;
-  font-size: 24px;
-  line-height: 60px;
-  padding-left: 100px;
+  .content_bottom {
+    width: 1200px;
+    margin: 0 auto;
+    font-size: 16px;
+    padding-top: 4px;
+    box-sizing: border-box;
+    height: 70px;
+    // padding-top: -10px;
+    display: flex;
+    justify-content: space-between;
+    div:nth-child(1) {
+      width: 396px;
+      display: flex;
+       justify-content: space-between;
+      span {
+          display: inline-block;
+        height: 50px;
+        width: 180px;
+        background: #5ce2ee;
+        border-radius: 25px;
+        color: #25262e;
+        line-height: 50px;
+        text-align: center;
+        font-weight: 600;
+      }
+    }
+    div:nth-child(2) {
+      width: 495px;
+      span {
+        display: inline-block;
+        height: 50px;
+        width: 495px;
+        background: #5ce2ee;
+        border-radius: 25px;
+        color: #25262e;
+        line-height: 50px;
+        text-align: center;
+        font-weight: 600;
+      }
+    }
+  }
 }
 .trend {
+  width: 1200px;
+  margin:0 auto;
   height: 400px;
-  // background: red;
+  background: #58bc58;
   margin-bottom: 40px;
 }
 </style>

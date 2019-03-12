@@ -1,6 +1,10 @@
 <template>
   <div class="deposit">
-    <div id="top">DEPOSIT</div>
+    <div id="top">
+      <div class="top con">
+        DEPOSIT
+      </div>  
+    </div>
     <div class="content con">
       <div class="title">
         <img src="../assets/up.png" alt>
@@ -121,14 +125,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-#top {
-  height: 60px;
-  background: #25262e;
-  color: white;
-  font-size: 24px;
-  line-height: 60px;
-  padding-left: 100px;
-}
+
 .content {
   height: 800px;
   // background:#363541;
