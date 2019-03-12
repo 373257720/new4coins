@@ -1,0 +1,127 @@
+<template>
+  <div id="varitey">
+    <div class="varitey con">
+      <div class="coinpic fl">
+          <div class="coinpic_left fl">
+            <img :src="son.text" alt="">
+          </div>
+          <div class="coinpic_right fr">
+              <p>HKDn</p>
+              <p>
+                <span>1.0</span>&nbsp;HKDn&nbsp;per<span>1</span>&nbsp;HKD        
+              </p>
+             
+          </div>
+      </div>
+      <div class="mid fl">
+            <p>HKDn&nbsp;&nbsp;&nbsp;$<span>0</span></p>
+            <p>HKD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$<span>0</span></p>
+      </div>
+      <div class="end fl">
+            <span>REVEIVE</span>
+            <span>SEND</span>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import axios from "axios";
+export default {
+  props:['son'],
+  name: "variety",
+  data() {
+    return {
+        
+      // son:[{}]
+    };
+  },
+  created() {
+    console.log(this.son.text)
+  }
+};
+</script>
+<style lang="scss" scoped>
+#varitey {
+  .varitey {
+    width: 1200px;
+    height: 80px;
+    background: #25262e;
+    margin-bottom:10px;
+    .coinpic {
+      width: 200px;
+      height: 80px;
+      // overflow: hidden;
+      // background: yellow;
+      margin-left: 66px;
+      .coinpic_left{
+          width: 60px;
+          height: 80px;
+          background:white;
+      }
+      .coinpic_right{
+          width: 140px;
+          height: 80px;
+          padding-top:15px;
+          box-sizing: border-box;
+          
+          // background: yellow;
+          p:nth-child(1){
+              font-size: 20px;
+              color:#fff;
+              margin-bottom:5px;
+          }
+          p:nth-child(2){
+            color:#aaaaaa;
+            font-size: 12px;
+          }
+      }
+    }
+    .mid{
+      width: 80px;
+      height: 40px;
+      margin-left:185px;
+      margin-top:18px;
+      box-sizing: border-box;
+       color:#aaaaaa;font-size: 12px;
+       p:nth-child(1){
+         margin-bottom:10px;
+         
+       }
+      
+    }
+    .end{
+      width: 305px;
+      height: 40px;
+      margin-top:18px;
+      margin-left:250px;
+      box-sizing: border-box;
+      // background: white;
+      display: -webkit-flex;
+      display:flex;
+      color:#59D6E2;
+       -webkit-justify-content: space-between;
+    justify-content: space-between;
+      span{
+          // flex:1;
+          //  box-sizing: border-box;
+           width: 116px;
+           height: 40px;
+           text-align: center;
+           line-height: 40px;
+           border-radius:25px;
+           background:#25262e;  
+           border:1px solid #59D6E2;
+          // -webkit-box-sizing: border-box;
+          
+           
+
+          // justify-content: space-between;
+      }
+    
+      
+      
+    }
+  }
+}
+
+</style>
