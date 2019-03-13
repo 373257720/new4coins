@@ -41,8 +41,21 @@
 </template>
 
 <script>
+// import axios from "axios";
+// 把axios写入Vue的原型对象，方便后面调用
+// Vue.prototype.$axios = axios;
 export default {
   name: "App",
+  data() {
+    return {};
+  },
+  // methods: {
+  //   goto(path) {
+  //     this.$router.replace({
+  //       path
+  //     });
+  //   }
+  // }
   // data: {
   //   currentRoute: window.location.pathname
   // },
@@ -73,14 +86,12 @@ export default {
   background: #25262e;
   font-size: 24px;
   line-height: 60px;
-
-
-}  
-#top .top{
-    height: 60px;
-    color: white;
-    text-indent:-100px;
-  }
+}
+#top .top {
+  height: 60px;
+  color: white;
+  text-indent: -100px;
+}
 </style>
 <style lang="scss" scoped>
 #content {

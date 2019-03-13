@@ -15,6 +15,7 @@
               :key="item.value"
               :label="item.label"
               :value="item.value"
+           
             ></el-option>
           </el-select>
           <span class="small">
@@ -23,31 +24,32 @@
           <el-select v-model="value" placeholder="请选择">
             <el-option
               v-for="item in options"
-              :key="item.value2"
+              :key="item.value"
               :label="item.label2"
-              :value="item.value2"
+              :value="item.value"
             ></el-option>
           </el-select>
         </div>
         <p>Coin&nbsp;to&nbsp;Coin</p>
         <div class="common">
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="value2" placeholder="请选择">
             <el-option
               v-for="item in options"
               :key="item.value"
-              :label="item.label"
+              :label="item.label2"
               :value="item.value"
             ></el-option>
           </el-select>
           <span class="small">
             <img src="../assets/1552372995.png" alt>
           </span>
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="value3" placeholder="请选择">
             <el-option
               v-for="item in options"
               :key="item.value"
-              :label="item.label"
+              :label="item.label2"
               :value="item.value"
+              
             ></el-option>
           </el-select>
         </div>
@@ -73,7 +75,7 @@
             ></el-option>
           </el-select>
         </div>
-         <div class="btn">SUBMIT</div>
+         <div class="btn" @click="exchange2">SUBMIT</div>
       </div>
 
     </div>
@@ -87,34 +89,46 @@ export default {
       options: [
         {
           value: "01",
-          value2:'01',
+          // value2:'01',
           //   value2:'选项2',
           label: "HKD",
           label2: "HKDn"
         },
         {
           value: "02",
-          value2:'02',
+          // value2:'02',
           //   value2:'选项2',
           label: "JPY",
           label2: "JPYn"
         },
         {
           value: "03",
-          value2:'03',
+          // value2:'03',
           label: "RMB",
           label2: "RMBn"
         },
         {
           value: "04",
-          value2:'04',
+          // value2:'04',
           label: "USD",
           label2: "USDn"
         }
       ],
+   
       value: "",
-        value2: ""
+        value2: "",
+        value3:''
     };
+  },
+  methods:{
+    exchange2(){
+        this.$router.push({
+        name: "exchange2",
+        params: {
+          // exchange2: id
+        }
+      });
+    }
   }
 };
 </script>

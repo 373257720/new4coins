@@ -1,9 +1,7 @@
 <template>
   <div class="login">
     <div id="top">
-      <div class="top con">
-        NETNOTE
-      </div> 
+      <div class="top con">NETNOTE</div>
     </div>
     <div class="content">
       <div class="box">
@@ -11,16 +9,16 @@
         <div>
           <h3>Enter your name</h3>
           <p class="name">
-            <el-input placeholder="请输入内容" v-model="name" clearable></el-input>
+            <el-input placeholder="Emails" v-model="name" clearable></el-input>
           </p>
         </div>
         <div>
           <h3>Enter your password</h3>
           <p class="password">
-            <el-input placeholder="请输入内容" v-model="password" clearable></el-input>
+            <el-input placeholder="Password" v-model="password" clearable></el-input>
           </p>
         </div>
-        <div class="btn">SIGN UP</div>
+        <div class="btn" @click="goto">SIGN UP</div>
       </div>
       <div class="photo">
         <img src="../assets/img.png" alt>
@@ -36,6 +34,58 @@ export default {
       name: "",
       password: ""
     };
+  },
+  computed: {
+ 
+  },
+  methods: {
+    //邮箱验证
+    // sendEmail() {
+    //   var regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+    //   if (this.name == "") {
+    //     alert("请输入邮箱");
+    //   } else if (!regEmail.test(this.email)) {
+    //     alert("邮箱格式不正确");
+    //   }
+    // },
+
+    goto() {
+         //邮箱验证
+          
+          // if(this.name==''){
+          //     alert("请输入邮箱");
+          // }else if(!regEmail.test(this.email)){
+          //     alert("邮箱格式不正确");
+          // }
+          this.$router.push({
+              name: "home"
+            });
+
+      // let postData = this.$qs.stringify({
+      //   tel: this.name,
+      //   password: this.password
+      // });
+      // this.$axios
+      //   .post("http://39.108.252.230:4008/login", postData)
+      //   .then(res => {
+      //     if (res.data.code == 0) {
+      //       this.infor = "您尚未注册";
+      //     } else if (res.data.code == 2) {
+      //       this.infor = "您输入的号码或密码有误";
+      //     } else {
+      //       let storage = { token: res.data.token, tel: res.data.data };
+      //       storage = JSON.stringify(storage);
+      //       localStorage.setItem("tokenData", storage);
+
+      //       this.$router.push({
+      //         name: "home"
+      //       });
+      //     }
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //   });
+    }
   }
 };
 </script>
@@ -69,7 +119,7 @@ export default {
 .content {
   height: 700px;
   width: 1200px;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .box {
@@ -103,6 +153,7 @@ export default {
     line-height: 38px;
     text-align: center;
     font-weight: 700;
+    cursor: pointer;
   }
 }
 .content {

@@ -44,6 +44,9 @@ export default {
       amount: "",
       remark: ""
     };
+  },
+  created(){
+    console.log(this.$route.params.sendid)
   }
 };
 </script>
@@ -59,7 +62,7 @@ export default {
 </style>
 <style lang="scss" scoped>
 .content {
-  height: 530px;
+  height: 750px;
 }
 
 .title {

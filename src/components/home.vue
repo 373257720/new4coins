@@ -4,15 +4,17 @@
       <div class="top con">NETNOTE</div>
     </div>
     <div class="content">
-      <div class="trend"></div>
+      <div class="trend">
+        <img src="../assets/2主界面_r2_c2.png" alt="">
+      </div>
       <variety v-for="(item,index) in tabs" :key="index" :son="tabs[index]"></variety>
       <div class="content_bottom">
         <div>
-          <span>FAIT WITHDRAW</span>
-          <span>EXCHANGE</span>
+          <span @click="withdraw">FAIT WITHDRAW</span>
+          <span @click="exchange">EXCHANGE</span>
         </div>
         <div>
-          <span>FIAT DEPOSIT</span>
+          <span @click="deposit">FIAT DEPOSIT</span>
         </div>
       </div>
     </div>
@@ -27,26 +29,43 @@ export default {
       tabs: [
         {
           id: 0,
-          text: require('../assets/hkd.png')
+          text: require("../assets/hkd.png")
         },
         {
           id: 1,
-          text: require('../assets/jpy.png')
+          text: require("../assets/jpy.png")
         },
         {
           id: 2,
-          text: require('../assets/rmb.png')
+          text: require("../assets/rmb.png")
         },
         {
           id: 3,
-          text: require('../assets/usd.png')
-        
+          text: require("../assets/usd.png")
         }
       ]
     };
   },
   components: {
     variety
+  },
+  methods: {
+    withdraw() {
+      this.$router.push({
+        name: "withdraw"
+      });
+    },
+    exchange() {
+      this.$router.push({
+        name: "exchange"
+      });
+    },
+    deposit(){
+      this.$router.push({
+        name: "deposit"
+      });
+    }
+
   }
 };
 </script>
@@ -68,9 +87,9 @@ export default {
     div:nth-child(1) {
       width: 396px;
       display: flex;
-       justify-content: space-between;
+      justify-content: space-between;
       span {
-          display: inline-block;
+        display: inline-block;
         height: 50px;
         width: 180px;
         background: #5ce2ee;
@@ -99,7 +118,7 @@ export default {
 }
 .trend {
   width: 1200px;
-  margin:0 auto;
+  margin: 0 auto;
   height: 400px;
   background: #58bc58;
   margin-bottom: 40px;
