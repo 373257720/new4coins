@@ -30,7 +30,7 @@
 
         <h3>Currency</h3>
         <div class="select common">
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="value" placeholder="-">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -41,9 +41,9 @@
         </div>
         <h3>Amount</h3>
         <div class="amount common">
-          <el-input placeholder="请输入内容" v-model="input7" clearable></el-input>
+          <el-input placeholder="-" v-model="input7" clearable></el-input>
         </div>
-        <div class="btn">SUBMIT</div>
+        <div class="btn" @click="goto">SUBMIT</div>
       </div>
     </div>
   </div>
@@ -59,24 +59,21 @@ export default {
       options: [
         {
           value: "选项1",
-          label: "黄金糕"
+          label: "HKD"
         },
         {
           value: "选项2",
-          label: "双皮奶"
+          label: "JPY"
         },
         {
           value: "选项3",
-          label: "蚵仔煎"
+          label: "RMB"
         },
         {
           value: "选项4",
-          label: "龙须面"
+          label: "USD"
         },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
+      
       ],
       value: ""
       //   dialogImageUrl: "",
@@ -84,6 +81,11 @@ export default {
     };
   },
   methods: {
+    goto(){
+       this.$router.push({
+              name: "home"
+        })
+    },
     dispear(response, file, fileList){
             console.log(response,file,fileList)
     },
@@ -98,6 +100,18 @@ export default {
 };
 </script>
 <style>
+.pic{
+  padding-top: 37px;
+
+  box-sizing: border-box;
+}
+.pic .el-upload-list--picture-card .el-upload-list__item{
+  /* width: 100%;
+  height: 100%; */
+  /* display: block;
+  margin:0 auto; */
+}
+
 .pic .avatar-uploader {
   width: 468px;
   height: 222px;
@@ -115,6 +129,15 @@ export default {
     background: #25262e;
     border:0;
     color:#BEC8D6;
+}
+.pic .el-upload--picture-card{
+      background:none;
+      /* display: block;
+      margin :0 auto; */
+      /* text-align: center； */
+      
+      
+      /* display: block; */
 }
 /* .pic .el-icon-plus{
         display: inline-block;

@@ -28,7 +28,7 @@
         <el-input v-model="input3" placeholder="请输入内容"></el-input>
         <u>Max</u>
       </div>
-       <div class="btn">SUBMIT</div>
+       <div class="btn" @click="goto">SUBMIT</div>
     </div>
   </div>
 </template>
@@ -39,23 +39,27 @@ export default {
     return {
       options: [{
           value: '选项1',
-          label: '黄金糕'
+          label: 'HKD'
         }, {
           value: '选项2',
-          label: '双皮奶'
+          label: 'JPY'
         }, {
           value: '选项3',
-          label: '蚵仔煎'
+          label: 'RMB'
         }, {
           value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          label: 'USD'
         }],
         value: '',
         input3:''
     };
+  },
+  methods:{
+     goto(){
+       this.$router.push({
+              name: "home"
+        })
+    },
   }
 };
 </script>

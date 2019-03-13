@@ -15,22 +15,22 @@
         <div>
           <h3>To :</h3>
           <p class="to same">
-            <el-input placeholder="请输入内容" v-model="to" clearable></el-input>
+            <el-input placeholder="-" v-model="to" clearable></el-input>
           </p>
         </div>
         <div>
           <h3>Amount :</h3>
           <p class="amount same">
-            <el-input placeholder="请输入内容" v-model="amount" clearable></el-input>
+            <el-input placeholder="-" v-model="amount" clearable></el-input>
           </p>
         </div>
         <div>
           <h3>Remark :</h3>
           <p class="remark same">
-            <el-input placeholder="请输入内容" v-model="remark" clearable></el-input>
+            <el-input placeholder="-" v-model="remark" clearable></el-input>
           </p>
         </div>
-        <div class="btn">SUBMIT</div>
+        <div class="btn" @click="goto">SUBMIT</div>
       </div>
     </div>
   </div>
@@ -47,6 +47,13 @@ export default {
   },
   created(){
     console.log(this.$route.params.sendid)
+  },
+  methods:{
+     goto(){
+       this.$router.push({
+              name: "home"
+        })
+    },
   }
 };
 </script>

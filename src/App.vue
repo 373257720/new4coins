@@ -90,7 +90,7 @@ export default {
 #top .top {
   height: 60px;
   color: white;
-  text-indent: -100px;
+  text-indent: -230px;
 }
 </style>
 <style lang="scss" scoped>

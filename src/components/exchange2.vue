@@ -35,7 +35,7 @@
       </div>
       <div class="rate_sign">1RMbn=1.1681HKD</div>
       <!-- <p>1RMBn = </p> -->
-      <div class="btn">SUBMIT</div>
+      <div class="btn" @click="goto">SUBMIT</div>
     </div>
   </div>
 </template>
@@ -46,6 +46,13 @@ export default {
     return {
       input2: ""
     };
+  },
+  methods:{
+       goto(){
+       this.$router.push({
+              name: "home"
+        })
+    },
   }
 };
 </script>

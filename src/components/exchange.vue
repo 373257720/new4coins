@@ -1,27 +1,24 @@
 <template>
   <div class="exchange">
     <div id="top">
-      <div class="top con">
-        EXCHANGE
-      </div>
-      </div>
+      <div class="top con">EXCHANGE</div>
+    </div>
     <div class="content">
       <div class="list">
         <p>Fiat&nbsp;to&nbsp;Coin</p>
         <div class="common">
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="Ftocoin" placeholder="-">
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
-           
             ></el-option>
           </el-select>
           <span class="small">
             <img src="../assets/1552372995.png" alt>
           </span>
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="Ftocoin" placeholder="-">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -32,7 +29,7 @@
         </div>
         <p>Coin&nbsp;to&nbsp;Coin</p>
         <div class="common">
-          <el-select v-model="value2" placeholder="请选择">
+          <el-select v-model="coin1" placeholder="-">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -43,19 +40,18 @@
           <span class="small">
             <img src="../assets/1552372995.png" alt>
           </span>
-          <el-select v-model="value3" placeholder="请选择">
+          <el-select v-model="coin2" placeholder="-">
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label2"
               :value="item.value"
-              
             ></el-option>
           </el-select>
         </div>
         <p>Coin&nbsp;to&nbsp;Fiat</p>
         <div class="common" style="margin-bottom:75px;">
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="Ctofiat" placeholder="-">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -66,7 +62,7 @@
           <span class="small">
             <img src="../assets/1552372995.png" alt>
           </span>
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="Ctofiat" placeholder="-">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -75,9 +71,8 @@
             ></el-option>
           </el-select>
         </div>
-         <div class="btn" @click="exchange2">SUBMIT</div>
+        <div class="btn" @click="exchange2">SUBMIT</div>
       </div>
-
     </div>
   </div>
 </template>
@@ -114,15 +109,25 @@ export default {
           label2: "USDn"
         }
       ],
-   
-      value: "",
-        value2: "",
-        value3:''
+
+      Ftocoin: "",
+      coin1: "",
+      coin2: "",
+      Ctofiat: ""
     };
   },
-  methods:{
-    exchange2(){
-        this.$router.push({
+  watch: {
+    'Ftocoin': function(newval, oldval) {
+      console.log(newval,oldval)
+      (this.coin1 = ""), (this.coin2 = ""), (this.Ctofiat = "")
+    },
+    'coin1': function(newval, oldval) {
+      (this.Ftocoin = ""), (this.Ctofiat = "");
+    }
+  },
+  methods: {
+    exchange2() {
+      this.$router.push({
         name: "exchange2",
         params: {
           // exchange2: id
@@ -148,7 +153,6 @@ export default {
     } */
 </style>
 <style lang="scss" scoped>
-
 .content {
   height: 800px;
   padding-top: 65px;
@@ -182,17 +186,17 @@ export default {
   }
 }
 .btn {
-    height: 38px;
-    width: 475px;
-    background: #5ce2ee;
-    border-radius: 20px;
-    // margin-top: 126px;
-    color: #25262e;
-    line-height: 38px;
-    text-align: center;
-    font-weight: 700;
-    margin: 0 auto;
-  }
+  height: 38px;
+  width: 475px;
+  background: #5ce2ee;
+  border-radius: 20px;
+  // margin-top: 126px;
+  color: #25262e;
+  line-height: 38px;
+  text-align: center;
+  font-weight: 700;
+  margin: 0 auto;
+}
 </style>
 
 
