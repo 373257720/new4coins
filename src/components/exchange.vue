@@ -7,7 +7,7 @@
       <div class="list">
         <p>Fiat&nbsp;to&nbsp;Coin</p>
         <div class="common">
-          <el-select v-model="Ftocoin" placeholder="-">
+          <el-select v-model="Ftocoin" @change="nowchange" placeholder="-">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -84,27 +84,21 @@ export default {
       options: [
         {
           value: "01",
-          // value2:'01',
-          //   value2:'选项2',
           label: "HKD",
           label2: "HKDn"
         },
         {
           value: "02",
-          // value2:'02',
-          //   value2:'选项2',
           label: "JPY",
           label2: "JPYn"
         },
         {
           value: "03",
-          // value2:'03',
           label: "RMB",
           label2: "RMBn"
         },
         {
           value: "04",
-          // value2:'04',
           label: "USD",
           label2: "USDn"
         }
@@ -116,16 +110,27 @@ export default {
       Ctofiat: ""
     };
   },
-  watch: {
-    'Ftocoin': function(newval, oldval) {
-      console.log(newval,oldval)
-      (this.coin1 = ""), (this.coin2 = ""), (this.Ctofiat = "")
-    },
-    'coin1': function(newval, oldval) {
-      (this.Ftocoin = ""), (this.Ctofiat = "");
-    }
-  },
+  // watch: {
+  //   Ftocoin: function(newval, oldval) {
+  //     // console.log(newval, oldval);
+  //     // this.Ftocoin = "";
+  //     this.coin1 = "";
+  //     this.coin2 = "";
+  //     this.Ctofiat = "";
+  //     this.Ftocoin=this.Ftocoin;
+  //   },
+  //   coin1: function(newval, oldval) {
+  //     //  this.coin1 = "";
+  //     // this.coin2 = "";
+  //     // this.Ftocoin = ;
+  //     // this.Ctofiat = "";
+  //   }
+  // },
   methods: {
+    nowchange(){
+        this.coin1='',
+        this.coin2=''
+    },
     exchange2() {
       this.$router.push({
         name: "exchange2",

@@ -9,15 +9,16 @@
         <div>
           <h3>Enter your name</h3>
           <p class="name">
-            <el-input placeholder="Emails" v-model="name" clearable></el-input>
+            <el-input placeholder="Emails" v-model.trim="name" clearable focus></el-input>
           </p>
         </div>
         <div>
           <h3>Enter your password</h3>
           <p class="password">
-            <el-input placeholder="Password" v-model="password" clearable></el-input>
+            <el-input placeholder="Password" v-model="password" clearable focus></el-input>
           </p>
         </div>
+        <aside>{{this.warn}}</aside>
         <div class="btn" @click="goto">SIGN UP</div>
       </div>
       <div class="photo">
@@ -32,34 +33,40 @@ export default {
   data() {
     return {
       name: "",
-      password: ""
+      password: "",
+      warn:''
     };
   },
-  computed: {
- 
-  },
+  computed: {},
   methods: {
     //邮箱验证
     // sendEmail() {
     //   var regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
     //   if (this.name == "") {
     //     alert("请输入邮箱");
-    //   } else if (!regEmail.test(this.email)) {
+    //   } else if () {
     //     alert("邮箱格式不正确");
     //   }
     // },
 
     goto() {
-         //邮箱验证
-          
-          // if(this.name==''){
-          //     alert("请输入邮箱");
-          // }else if(!regEmail.test(this.email)){
-          //     alert("邮箱格式不正确");
-          // }
-          this.$router.push({
-              name: "home"
-            });
+      //邮箱验证
+      if (this.name && this.password) {
+            this.warn='';
+            var regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if(!regEmail.test(this.name){
+                this.warn='你的邮箱地址有误';
+            }
+            // this.$router.push({
+            //   name: "home"
+            // });
+        // if (this.name == "") {
+        //   alert("请输入邮箱");
+        } else {
+            this.warn='Please enter your email address or password'
+        }
+       
+      
 
       // let postData = this.$qs.stringify({
       //   tel: this.name,
@@ -143,12 +150,17 @@ export default {
       font-size: 12px;
     }
   }
+  aside{
+    height: 14px;
+    color:#bec8d6;
+    font-size: 14px;  
+  }
   .btn {
     height: 38px;
     width: 475px;
     background: #5ce2ee;
     border-radius: 20px;
-    margin-top: 60px;
+    margin-top: 13px;
     color: #25262e;
     line-height: 38px;
     text-align: center;
