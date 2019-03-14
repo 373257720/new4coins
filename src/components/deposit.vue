@@ -17,8 +17,8 @@
             action="https://jsonplaceholder.typicode.com/posts/"
             list-type="picture-card"
             :on-preview="handlePictureCardPreview"
-            :on-remove="handleRemove"
-            :on-success='dispear'
+            :on-remove="appear"
+            :before-upload='dispear'
             :limit=1
           >
             <i class="el-icon-plus"></i>
@@ -87,7 +87,26 @@ export default {
         })
     },
     dispear(response, file, fileList){
-            console.log(response,file,fileList)
+          // console.log(111)
+         var a=  document.querySelector('.el-upload--picture-card')
+            console.log(a)
+          a.style="display:none;transition:0s";
+
+          // var b=document.querySelector('.el-upload-list__item')
+          // b.style="transition:0s"
+          
+
+          
+            // console.log(response,file,fileList)
+    },
+    appear(file, fileList){
+         var a=  document.querySelector('.el-upload--picture-card')
+         var b=document.querySelector('.el-upload-list__item')
+          // a.style="display:";
+           b.style="transition:0s"
+          //  b.style="width:80%;height:80%;transition:0s"top
+          a.style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;"
+          //  a.style="margin:0 auto;display:block;"
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -102,14 +121,17 @@ export default {
 <style>
 .pic{
   padding-top: 37px;
-
+  position: relative;
   box-sizing: border-box;
 }
+.pic .el-upload-list__item-status-label{
+  background: #5ce2ee;
+}
 .pic .el-upload-list--picture-card .el-upload-list__item{
-  /* width: 100%;
-  height: 100%; */
-  /* display: block;
-  margin:0 auto; */
+   width: 300px;
+  /* height: 100%; */
+  display: block;
+  margin:0 auto;
 }
 
 .pic .avatar-uploader {
@@ -132,8 +154,9 @@ export default {
 }
 .pic .el-upload--picture-card{
       background:none;
-      /* display: block;
-      margin :0 auto; */
+
+      display: block;
+      margin :0 auto;
       /* text-align: center； */
       
       

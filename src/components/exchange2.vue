@@ -4,7 +4,7 @@
       <div class="top con">EXCHANGE</div>
     </div>
     <div class="content list">
-      <p>Fiat&nbsp;to&nbsp;Coin</p>
+      <p>Fiat&nbsp;to&nbsp;Note</p>
       <div class="list_top">
         <img src="../assets/hkd.png" alt>
         <span>RMBn</span>

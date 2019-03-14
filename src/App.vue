@@ -7,32 +7,16 @@
       <div class="bottom">
         <p>APK</p>
         <div class="bottommid">
-          <el-row :gutter="20" type="flex">
-            <el-col :span="3">
-              <div class="grid-content bg-purple">About us</div>
-            </el-col>
-            <el-col :span="3">
-              <div class="grid-content bg-purple">Contact us</div>
-            </el-col>
-            <el-col :span="3">
-              <div class="grid-content bg-purple">User agreement</div>
-            </el-col>
-            <el-col :span="3">
-              <div class="grid-content bg-purple">Privacy treaty</div>
-            </el-col>
-            <el-col :span="3">
-              <div class="grid-content bg-purple">Legal statement</div>
-            </el-col>
-            <el-col :span="3">
-              <div class="grid-content bg-purple">Rate standard</div>
-            </el-col>
-            <el-col :span="3" :pull="0">
-              <div class="grid-content bg-purple">Problemfeedback</div>
-            </el-col>
-            <el-col :span="3">
-              <div class="grid-content bg-purple">Novice tutorial</div>
-            </el-col>
-          </el-row>
+            <ul>
+              <li>About&nbsp;us</li>
+              <li>Contact&nbsp;us</li>
+              <li>User&nbsp;agreement</li>
+              <li>Privacy&nbsp;treaty</li>
+              <li>Legal&nbsp;statement</li>
+              <li>Rate&nbsp;standard</li>
+              <li>Problem&nbsp;feedback</li>
+              <li>Novice&nbsp;tutorial</li>
+            </ul>
         </div>
         <span>copyright@4coin web.2018</span>
       </div>
@@ -41,6 +25,8 @@
 </template>
 
 <script>
+
+
 // import axios from "axios";
 // 把axios写入Vue的原型对象，方便后面调用
 // Vue.prototype.$axios = axios;
@@ -49,24 +35,12 @@ export default {
   data() {
     return {};
   },
-  // methods: {
-  //   goto(path) {
-  //     this.$router.replace({
-  //       path
-  //     });
-  //   }
-  // }
-  // data: {
-  //   currentRoute: window.location.pathname
-  // },
-  // computed: {
-  //   ViewComponent() {
-  //     return routes[this.currentRoute] || NotFound;
-  //   }
-  // },
-  // render(h) {
-  //   return h(this.ViewComponent);
-  // }
+
+  methods: {
+      focuson:function(event){
+          event.target.focus();
+      }
+  }
 };
 </script>
 
@@ -119,29 +93,30 @@ export default {
       line-height: 80px;
     }
     .bottommid {
-      width: 1200px;
+      width: 818px;
       margin: 0 auto;
     }
-    // ul {
-    //   // margin-top:20;
-    //   height: 20px;
-    //   display:flex;
-    //   width: 1200px;
-    //   // margin-left: 200px;
-    //   overflow: hidden;
+    ul {
+      // margin-top:20;
+      height: 20px;
+      // display:flex;
+      // width: 1200px;
+      // margin-left: 200px;
+      // overflow: hidden;
 
-    //   li {
-    //     // float: left;
-    //     // flex:1;
-    //     color: #788aa2;
-    //     // margin-right: 30px;
-    //   }
-    // }
+      li {
+        float: left;
+        font-size: 12px;
+        // flex:1;
+        color: #788aa2;
+        margin-right: 20px;
+      }
+    }
     span {
       display: block;
       height: 20px;
       text-align: center;
-      font-size: 12px;
+      font-size: 1px;
       margin-top: 20px;
       color: #4d5c6f;
     }
@@ -169,6 +144,9 @@ export default {
 }
 .grid-content {
   border-radius: 4px;
+  color:#7A8DA6;
+  font-size: 12px;
+ 
   // min-height: 36px;
 }
 .row-bg {

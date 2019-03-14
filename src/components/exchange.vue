@@ -5,9 +5,9 @@
     </div>
     <div class="content">
       <div class="list">
-        <p>Fiat&nbsp;to&nbsp;Coin</p>
+        <p>Fiat&nbsp;to&nbsp;Note</p>
         <div class="common">
-          <el-select v-model="Ftocoin" @change="nowchange" placeholder="-">
+          <el-select v-model="Ftocoin"  placeholder="-">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -27,7 +27,7 @@
             ></el-option>
           </el-select>
         </div>
-        <p>Coin&nbsp;to&nbsp;Coin</p>
+        <p>Note&nbsp;to&nbsp;Note</p>
         <div class="common">
           <el-select v-model="coin1" placeholder="-">
             <el-option
@@ -40,7 +40,7 @@
           <span class="small">
             <img src="../assets/1552372995.png" alt>
           </span>
-          <el-select v-model="coin2" placeholder="-">
+          <el-select v-model="coin2"  placeholder="-">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -49,7 +49,7 @@
             ></el-option>
           </el-select>
         </div>
-        <p>Coin&nbsp;to&nbsp;Fiat</p>
+        <p>Note&nbsp;to&nbsp;Fiat</p>
         <div class="common" style="margin-bottom:75px;">
           <el-select v-model="Ctofiat" placeholder="-">
             <el-option
@@ -71,7 +71,7 @@
             ></el-option>
           </el-select>
         </div>
-        <div class="btn" @click="exchange2">SUBMIT</div>
+        <div class="btn" >SUBMIT</div>
       </div>
     </div>
   </div>
@@ -110,35 +110,35 @@ export default {
       Ctofiat: ""
     };
   },
-  // watch: {
-  //   Ftocoin: function(newval, oldval) {
-  //     // console.log(newval, oldval);
-  //     // this.Ftocoin = "";
-  //     this.coin1 = "";
-  //     this.coin2 = "";
-  //     this.Ctofiat = "";
-  //     this.Ftocoin=this.Ftocoin;
-  //   },
-  //   coin1: function(newval, oldval) {
-  //     //  this.coin1 = "";
-  //     // this.coin2 = "";
-  //     // this.Ftocoin = ;
-  //     // this.Ctofiat = "";
-  //   }
-  // },
-  methods: {
-    nowchange(){
-        this.coin1='',
-        this.coin2=''
+  watch: {
+    Ftocoin: function(newval, oldval) {
+      console.log(newval, oldval);
+      // this.Ftocoin = "";
+      this.coin1 = "";
+      this.coin2 = "";
+      this.Ctofiat = "";
+      this.Ftocoin=this.Ftocoin;
     },
-    exchange2() {
-      this.$router.push({
-        name: "exchange2",
-        params: {
-          // exchange2: id
-        }
-      });
+    coin1: function(newval, oldval) {
+      //  this.coin1 = "";
+      // this.coin2 = "";
+      // this.Ftocoin = ;
+      // this.Ctofiat = "";
     }
+  },
+  methods: {
+    // nowchange(){
+    //     this.coin1='',
+    //     this.coin2=''
+    // },
+    // exchange2() {
+    //   this.$router.push({
+    //     name: "exchange2",
+    //     params: {
+    //       // exchange2: id
+    //     }
+    //   });
+    // }
   }
 };
 </script>

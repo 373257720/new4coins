@@ -24,7 +24,7 @@
         </p>
       </div>
       <div class="end fl">
-        <span @click="receive(son.id)">REVEIVE</span>
+        <span @click="receive(son.id)">RECEIVE</span>
         <span @click="send(son.id)">SEND</span>
       </div>
     </div>
@@ -41,7 +41,7 @@ export default {
     };
   },
   created() {
-    console.log(this.son);
+    // console.log(this.son);
   },
   methods: {
     receive(id) {
@@ -103,7 +103,7 @@ export default {
         }
         p:nth-child(2) {
           color: #aaaaaa;
-          font-size: 12px;
+          font-size: 14px;
         }
       }
     }
@@ -114,9 +114,9 @@ export default {
       margin-top: 18px;
       box-sizing: border-box;
       color: #aaaaaa;
-      font-size: 12px;
+      font-size: 14px;
       p:nth-child(1) {
-        margin-bottom: 10px;
+        margin-bottom: 9px;
       }
     }
     .end {
@@ -126,21 +126,23 @@ export default {
       margin-left: 250px;
       box-sizing: border-box;
       // background: white;
+      font-size: 14px;
       display: -webkit-flex;
       display: flex;
       color: #59d6e2;
+      
       -webkit-justify-content: space-between;
       justify-content: space-between;
       span {
         // flex:1;
         //  box-sizing: border-box;
         width: 116px;
-        height: 40px;
+        height: 40px;box-sizing: border-box;
         text-align: center;
-        line-height: 40px;
+        line-height: 36px;
         border-radius: 25px;
         background: #25262e;
-        border: 1px solid #59d6e2;
+        border: 2px solid #59d6e2;
         // -webkit-box-sizing: border-box;
 
         // justify-content: space-between;

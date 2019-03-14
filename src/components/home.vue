@@ -4,13 +4,13 @@
       <div class="top con">NETNOTE</div>
     </div>
     <div class="content">
-      <div class="trend">
-        <img src="../assets/2主界面_r2_c2.png" alt="">
+      <div class="trend" ref='mychart'>
+        <!-- <img src="../assets/2主界面_r2_c2.png" alt=""> -->
       </div>
       <variety v-for="(item,index) in tabs" :key="index" :son="tabs[index]"></variety>
       <div class="content_bottom">
         <div>
-          <span @click="withdraw">FAIT WITHDRAW</span>
+          <span @click="withdraw">FIAT WITHDRAW</span>
           <span @click="exchange">EXCHANGE</span>
         </div>
         <div>
@@ -21,11 +21,29 @@
   </div>
 </template>
 <script>
+import echarts from "echarts"; //引入图表
 import variety from "@/components/variety";
 export default {
   name: "home",
   data() {
     return {
+      option: {
+        xAxis: {
+          data: ["2017-10-24", "2017-10-25", "2017-10-26", "2017-10-27"]
+        },
+        yAxis: {},
+        series: [
+          {
+            type: "k",
+            data: [
+              [20, 30, 10, 35],
+              [40, 35, 30, 55],
+              [33, 38, 33, 40],
+              [40, 40, 32, 42]
+            ]
+          }
+        ]
+      },
       tabs: [
         {
           id: 0,
@@ -49,7 +67,20 @@ export default {
   components: {
     variety
   },
+  mounted() {
+   
+  //  console.log(this.$refs.mychart)
+   var echart=echarts.init(this.$refs.mychart);
+   echart.setOption(this.option);
+    
+  },
   methods: {
+    //图表
+  
+
+    hidePopoverPanel() {
+      this.popoverPanelShow = false;
+    },
     withdraw() {
       this.$router.push({
         name: "withdraw"
@@ -60,13 +91,13 @@ export default {
         name: "exchange"
       });
     },
-    deposit(){
+    deposit() {
       this.$router.push({
         name: "deposit"
       });
     }
-
   }
+
 };
 </script>
 
@@ -97,7 +128,7 @@ export default {
         color: #25262e;
         line-height: 50px;
         text-align: center;
-        font-weight: 600;
+        font-weight: 700;
       }
     }
     div:nth-child(2) {
@@ -111,7 +142,7 @@ export default {
         color: #25262e;
         line-height: 50px;
         text-align: center;
-        font-weight: 600;
+        font-weight: 700;
       }
     }
   }
@@ -120,7 +151,6 @@ export default {
   width: 1200px;
   margin: 0 auto;
   height: 400px;
-  background: #58bc58;
   margin-bottom: 40px;
 }
 </style>
