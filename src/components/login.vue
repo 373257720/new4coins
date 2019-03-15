@@ -34,6 +34,8 @@
   </div>
 </template>
 <script>
+// import jquery from "jquery";
+import $ from 'jquery'
 export default {
   name: "login",
   data() {
@@ -81,30 +83,64 @@ export default {
         //   } else {
         //       this.warn='Please enter your email address or password'
         //   }
-        // let postData = this.$qs.stringify({
-        //   tel: this.name,
-        //   password: this.password
+        let postData = JSON.stringify({
+          keydatahash: this.name,
+          password: this.password
+        });
+        // console.log(posa.name);
+        // this.$axios
+        //   .post("/api/note/login", postData, {
+        //     headers: { "Content-type": "application/json" }
+        //   })
+        //   .then(res => {
+        //     console.log(res);
+        //   }) ;
+        // $.ajax({
+        //   url: "/api/note/login", //请求的url地址
+        //   headers: { 
+		    //         "Content-type": "application/json" 
+
+        //   },
+        //   dataType: "json", //返回格式为json
+        //   async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+        //   data: { keydatahash: this.name,password:this.password }, //参数值,键值对
+        //   type: "POST", //请求方式
+        //   beforeSend: function() {
+        //     //请求前的处理
+        //   },
+        //   success: function(req) {
+        //     //请求成功时处理
+        //     console.log(req)
+        //   },
+        //   complete: function() {
+        //     //请求完成的处理
+        //   },
+        //   error: function() {
+        //     //请求出错处理
+        //   }
         // });
-        this.$axios
-          .post("http://39.108.252.230:4008/login", postData)
-          .then(res => {
-            if (res.data.code == 0) {
-              this.infor = "您尚未注册";
-              // alert()
-            } else if (res.data.code == 2) {
-              this.warn = "您输入的号码或密码有误";
-            } else {
-              let storage = { token: res.data.token, tel: res.data.data };
+          this.$axios
+            .post("/api/api/note/login", {
+              headers: {
+                "Content-type": "application/json"
+              },
+              data: {
+                keydatahash: this.name,
+                password: this.password
+              }
+            })
+            .then(res => {
+              console.log(res.data);
+              let storage = { token: res.data.token };
               storage = JSON.stringify(storage);
-              localStorage.setItem("tokenData", storage);
+              sessioStorage.setItem("tokenData", storage);
               this.$router.push({
-                name: "home"
+                // name: "home"
               });
-            }
-          })
-          .catch(error => {
-            console.log(error);
-          });
+            })
+            .catch(error => {
+              console.log(error);
+            });
       } else {
         this.warn = "name or password can not be empty";
       }
@@ -171,7 +207,7 @@ export default {
     height: 14px;
     color: #bec8d6;
     font-size: 14px;
-    color:red;
+    color: red;
   }
   .btn {
     height: 38px;

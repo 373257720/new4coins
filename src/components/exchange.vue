@@ -7,7 +7,7 @@
       <div class="list">
         <p>Fiat&nbsp;to&nbsp;Note</p>
         <div class="common">
-          <el-select v-model="Ftocoin"  placeholder="-">
+          <el-select v-model="Ftocoin" placeholder="-">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -40,7 +40,7 @@
           <span class="small">
             <img src="../assets/1552372995.png" alt>
           </span>
-          <el-select v-model="coin2"  placeholder="-">
+          <el-select v-model="coin2" placeholder="-">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -71,7 +71,7 @@
             ></el-option>
           </el-select>
         </div>
-        <div class="btn" >SUBMIT</div>
+        <div class="btn">SUBMIT</div>
       </div>
     </div>
   </div>
@@ -110,20 +110,35 @@ export default {
       Ctofiat: ""
     };
   },
+  //监听一行输入框，其他2行输入框清空
   watch: {
     Ftocoin: function(newval, oldval) {
-      console.log(newval, oldval);
+      // console.log(newval, oldval);
+      if (this.Ftocoin) {
+        this.coin1 = "";
+        this.coin2 = "";
+        this.Ctofiat = "";
+      }
       // this.Ftocoin = "";
-      this.coin1 = "";
-      this.coin2 = "";
-      this.Ctofiat = "";
-      this.Ftocoin=this.Ftocoin;
     },
     coin1: function(newval, oldval) {
-      //  this.coin1 = "";
-      // this.coin2 = "";
-      // this.Ftocoin = ;
-      // this.Ctofiat = "";
+      if (this.coin1) {
+        this.Ftocoin = "";
+        this.Ctofiat = "";
+      }
+    },
+    coin2: function(newval, oldval) {
+      if (this.coin2) {
+        this.Ftocoin = "";
+        this.Ctofiat = "";
+      }
+    },
+    Ctofiat: function(newval, oldval) {
+      if (this.Ctofiat) {
+        this.Ftocoin = "";
+        this.coin1 = "";
+        this.coin2 = "";
+      }
     }
   },
   methods: {

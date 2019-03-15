@@ -4,7 +4,7 @@
       <div class="top con">NETNOTE</div>
     </div>
     <div class="content">
-      <div class="trend" ref='mychart'>
+      <div class="trend" ref="mychart">
         <!-- <img src="../assets/2主界面_r2_c2.png" alt=""> -->
       </div>
       <variety v-for="(item,index) in tabs" :key="index" :son="tabs[index]"></variety>
@@ -27,6 +27,7 @@ export default {
   name: "home",
   data() {
     return {
+      //图片数据
       option: {
         xAxis: {
           data: ["2017-10-24", "2017-10-25", "2017-10-26", "2017-10-27"]
@@ -67,17 +68,40 @@ export default {
   components: {
     variety
   },
+  created() {
+    console.log(tokendata);
+    this.$axios
+      .get("https://113.52.134.95:8004/api/note/wallet_data", {
+        params: {
+          // bearer: tokendata
+        },
+        headers: {
+          "Content-type": "application/json",
+          // "Authorization ": "Bearer tokendata"
+        }
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    // this.$axios
+    //   .get("//https://113.52.134.95:8004/api/note/wallet_data?lid=" + )
+    //   .then(res => {
+    //     let data = res.data;
+    //     console.log(data);
+    //     // this.recommend = data.data;
+    //     // this.name=data.name;
+    //   });
+  },
   mounted() {
-   
-  //  console.log(this.$refs.mychart)
-   var echart=echarts.init(this.$refs.mychart);
-   echart.setOption(this.option);
-    
+    //echart绑定节点
+    var echart = echarts.init(this.$refs.mychart);
+    echart.setOption(this.option);
   },
   methods: {
-    //图表
-  
-
     hidePopoverPanel() {
       this.popoverPanelShow = false;
     },
@@ -97,7 +121,6 @@ export default {
       });
     }
   }
-
 };
 </script>
 
