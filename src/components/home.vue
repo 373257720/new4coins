@@ -10,11 +10,11 @@
       <variety v-for="(item,index) in tabs" :key="index" :son="tabs[index]"></variety>
       <div class="content_bottom">
         <div>
-          <span @click="withdraw">FIAT WITHDRAW</span>
-          <span @click="exchange">EXCHANGE</span>
+          <span @click="withdraw" class="btn">FIAT WITHDRAW</span>
+          <span @click="exchange" class="btn">EXCHANGE</span>
         </div>
         <div>
-          <span @click="deposit">FIAT DEPOSIT</span>
+          <span @click="deposit" class="btn">FIAT DEPOSIT</span>
         </div>
       </div>
     </div>
@@ -33,6 +33,8 @@ export default {
           data: ["2017-10-24", "2017-10-25", "2017-10-26", "2017-10-27"]
         },
         yAxis: {},
+        label:'#333',
+        // barWidth:'30%',
         series: [
           {
             type: "k",
@@ -71,7 +73,7 @@ export default {
   created() {
     console.log(tokendata);
     this.$axios
-      .get("https://113.52.134.95:8004/api/note/wallet_data", {
+      .get("/api/note/wallet_data", {
         params: {
           // bearer: tokendata
         },

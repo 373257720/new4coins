@@ -120,11 +120,11 @@ export default {
         //   }
         // });
           this.$axios
-            .post("/api/api/note/login", {
+            .post("/haha/api/note/login", {
               headers: {
                 "Content-type": "application/json"
               },
-              data: {
+              data:{
                 keydatahash: this.name,
                 password: this.password
               }

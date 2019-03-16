@@ -71,7 +71,7 @@
             ></el-option>
           </el-select>
         </div>
-        <div class="btn">SUBMIT</div>
+        <div class="btn" @click="exchange2">SUBMIT</div>
       </div>
     </div>
   </div>
@@ -146,14 +146,14 @@ export default {
     //     this.coin1='',
     //     this.coin2=''
     // },
-    // exchange2() {
-    //   this.$router.push({
-    //     name: "exchange2",
-    //     params: {
-    //       // exchange2: id
-    //     }
-    //   });
-    // }
+    exchange2() {
+      this.$router.push({
+        name: "exchange2",
+        params: {
+          // exchange2: id
+        }
+      });
+    }
   }
 };
 </script>

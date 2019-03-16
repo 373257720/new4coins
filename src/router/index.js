@@ -52,6 +52,11 @@ export default new Router({
       component: withdraw
     },
     {
+      path: '*',
+      name: 'login',
+      component: login
+    },
+    {
       path: '/',
       redirect:{
           name:'login'

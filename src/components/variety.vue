@@ -24,8 +24,8 @@
         </p>
       </div>
       <div class="end fl">
-        <span @click="receive(son.id)">RECEIVE</span>
-        <span @click="send(son.id)">SEND</span>
+        <span @click="receive(son.id)" class="btn">RECEIVE</span>
+        <span @click="send(son.id)" class="btn">SEND</span>
       </div>
     </div>
   </div>

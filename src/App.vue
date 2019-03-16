@@ -7,16 +7,16 @@
       <div class="bottom">
         <p>APK</p>
         <div class="bottommid">
-            <ul>
-              <li>About&nbsp;us</li>
-              <li>Contact&nbsp;us</li>
-              <li>User&nbsp;agreement</li>
-              <li>Privacy&nbsp;treaty</li>
-              <li>Legal&nbsp;statement</li>
-              <li>Rate&nbsp;standard</li>
-              <li>Problem&nbsp;feedback</li>
-              <li>Novice&nbsp;tutorial</li>
-            </ul>
+          <ul>
+            <li>About&nbsp;us</li>
+            <li>Contact&nbsp;us</li>
+            <li>User&nbsp;agreement</li>
+            <li>Privacy&nbsp;treaty</li>
+            <li>Legal&nbsp;statement</li>
+            <li>Rate&nbsp;standard</li>
+            <li>Problem&nbsp;feedback</li>
+            <li>Novice&nbsp;tutorial</li>
+          </ul>
         </div>
         <span>copyright@4coin web.2018</span>
       </div>
@@ -25,8 +25,6 @@
 </template>
 
 <script>
-
-
 // import axios from "axios";
 // 把axios写入Vue的原型对象，方便后面调用
 // Vue.prototype.$axios = axios;
@@ -35,12 +33,12 @@ export default {
   data() {
     return {};
   },
-  created () {
-     var tokenData = sessionStorage.getItem('tokenData')
+  created() {
+    var tokenData = sessionStorage.getItem("tokenData");
     //在页面加载时读取sessionStorage里的状态信息
     // if (sessionStorage.getItem("store") ) {
     //     this.$store.replaceState(Object.assign({}, this.$store.state,JSON.parse(sessionStorage.getItem("store"))))
-    // } 
+    // }
 
     // //在页面刷新时将vuex里的信息保存到sessionStorage里
     // window.addEventListener("beforeunload",()=>{
@@ -48,20 +46,16 @@ export default {
     // })
   },
   methods: {
-      focuson:function(event){
-          event.target.focus();
-      }
-  },
-
+    focuson: function(event) {
+      event.target.focus();
+    }
+  }
 };
 </script>
 
 <style >
 @import "element-ui/lib/theme-chalk/index.css";
 @import "./css/base.css";
-
-
-
 
 /* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -80,8 +74,31 @@ export default {
 #top .top {
   height: 60px;
   color: white;
-  text-indent: -230px;
+  /* text-indent: -230px; */
 }
+.btn {
+  cursor: pointer;
+}
+@media screen and (min-width: 768px) {
+  #top .top {
+   text-indent: 0px;
+  }
+}
+@media screen and (min-width: 992px) {
+  #top .top {
+    text-indent: -30px;
+  }
+} 
+@media screen and (min-width: 1200px) {
+  #top .top {
+    text-indent: -230px;
+  }
+} /* 大型设备（大台式电脑，1200px 起） */
+
+
+/* 中型设备（台式电脑，992px 起） */
+
+ /* 小型设备（平板电脑，768px 起） */
 </style>
 <style lang="scss" scoped>
 #content {
@@ -156,9 +173,9 @@ export default {
 }
 .grid-content {
   border-radius: 4px;
-  color:#7A8DA6;
+  color: #7a8da6;
   font-size: 12px;
- 
+
   // min-height: 36px;
 }
 .row-bg {
