@@ -74,7 +74,7 @@ export default new Router({
 //   // from: Route: 当前导航正要离开的路由
 //   // next: Function: 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
 
-//   const nextRoute = ['home', 'good-list', 'good-detail', 'cart', 'profile'];
+//   const nextRoute = ['home', 'deposit', 'exc', 'cart', 'profile'];
 //   let isLogin = global.isLogin;  // 是否登录
 //   // 未登录状态；当路由到nextRoute指定页时，跳转至login
 //   if (nextRoute.indexOf(to.name) >= 0) {  

@@ -1,9 +1,9 @@
 <template>
   <div class="deposit">
     <div id="top">
-      <div class="top con">
+
         DEPOSIT
-      </div>  
+
     </div>
     <div class="content con">
       <div class="title">
@@ -14,10 +14,11 @@
         <h3>Receipt</h3>
         <div class="pic">
           <el-upload
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action="/haha/api/note/login"
             list-type="picture-card"
             :on-preview="handlePictureCardPreview"
             :on-remove="appear"
+            :on-error="appear"
             :before-upload='dispear'
             :limit=1
           >
@@ -86,19 +87,19 @@ export default {
               name: "home"
         })
     },
-    dispear(response, file, fileList){
+
+    //上传文件之前的钩子，参数为上传的文件,把那个十字选择框去掉
+    dispear(file){
           // console.log(111)
          var a=  document.querySelector('.el-upload--picture-card')
             console.log(a)
-          a.style="display:none;transition:0s";
-
+          a.style="display:none;"
           // var b=document.querySelector('.el-upload-list__item')
-          // b.style="transition:0s"
-          
-
-          
+          // b.style="transition:0s
             // console.log(response,file,fileList)
     },
+  //文件上传不成功时的钩子
+//文件列表移除文件时的钩子
     appear(file, fileList){
          var a=  document.querySelector('.el-upload--picture-card')
          var b=document.querySelector('.el-upload-list__item')
@@ -111,6 +112,7 @@ export default {
     handleRemove(file, fileList) {
       console.log(file, fileList);
     },
+    	//点击文件列表中已上传的文件时的钩子
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;

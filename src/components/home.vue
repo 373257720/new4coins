@@ -1,7 +1,13 @@
 <template>
   <div>
     <div id="top">
-      <div class="top con">NETNOTE</div>
+      NETNOTE
+      <span class="signout">
+        <i>
+          <img src="../assets/2e26699f27582e26d295c263d1e7c5c.png" alt>
+        </i>
+        <u @click="back">Sign out</u>
+      </span>
     </div>
     <div class="content">
       <div class="trend" ref="mychart">
@@ -30,11 +36,46 @@ export default {
       //图片数据
       option: {
         xAxis: {
-          data: ["2017-10-24", "2017-10-25", "2017-10-26", "2017-10-27"]
+          data: ["2017-10-24", "2017-10-25", "2017-10-26", "2017-10-27"],
+          axisLabel: {
+            show: true,
+            textStyle: {
+              color: "#aaaaaa"
+            }
+          },
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            show: false,
+            // onZero: true,
+            lineStyle: {
+              color: "#aaaaaa",
+              width: 1,
+              type: "solid"
+            }
+          } /*横轴边框色*/
         },
-        yAxis: {},
-        label:'#333',
-        // barWidth:'30%',
+        yAxis: {
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            show: false,
+            // onZero: true,
+            lineStyle: {
+              color: "#aaaaaa",
+              width: 1,
+              type: "solid"
+            }
+          },
+          axisLabel: {
+            show: true,
+            textStyle: {
+              color: "#aaaaaa"
+            }
+          }
+        },
         series: [
           {
             type: "k",
@@ -70,42 +111,40 @@ export default {
   components: {
     variety
   },
-  created() {
-    console.log(tokendata);
-    this.$axios
-      .get("/api/note/wallet_data", {
-        params: {
-          // bearer: tokendata
-        },
-        headers: {
-          "Content-type": "application/json",
-          // "Authorization ": "Bearer tokendata"
-        }
-      })
-      .then(function(response) {
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-
-    // this.$axios
-    //   .get("//https://113.52.134.95:8004/api/note/wallet_data?lid=" + )
-    //   .then(res => {
-    //     let data = res.data;
-    //     console.log(data);
-    //     // this.recommend = data.data;
-    //     // this.name=data.name;
-    //   });
+  beforeMount() {
+    var a = sessionStorage.getItem("aaa");
+    console.log(a);
   },
   mounted() {
-    //echart绑定节点
+    // console.log(tokendata);
     var echart = echarts.init(this.$refs.mychart);
     echart.setOption(this.option);
+    // this.$axios
+    //   .get("/api/note/wallet_data", {
+    //     params: {
+    //       // bearer: tokendata
+    //     },
+    //     headers: {
+    //       "Content-type": "application/json"
+    //       // "Authorization ": "Bearer tokendata"
+    //     }
+    //   })
+    //   .then(function(response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
   },
+
   methods: {
     hidePopoverPanel() {
       this.popoverPanelShow = false;
+    },
+    back() {
+      this.$router.push({
+        name: "login"
+      });
     },
     withdraw() {
       this.$router.push({
@@ -128,6 +167,19 @@ export default {
 
 
 <style lang="scss" scoped>
+.signout {
+  float: right;
+  i {
+    vertical-align: middle;
+  }
+  u {
+    font-size: 16px;
+    line-height: 60px;
+    color: #bec8d6;
+    cursor: pointer;
+    // padding-right: 5%;
+  }
+}
 .content {
   height: 870px;
   .content_bottom {

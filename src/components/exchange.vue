@@ -1,7 +1,7 @@
 <template>
   <div class="exchange">
     <div id="top">
-      <div class="top con">EXCHANGE</div>
+      EXCHANGE
     </div>
     <div class="content">
       <div class="list">

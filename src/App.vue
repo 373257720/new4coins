@@ -70,23 +70,29 @@ export default {
   background: #25262e;
   font-size: 24px;
   line-height: 60px;
+  color:white;
+  padding-left: 4%; 
+  padding-right: 10%;
+  
 }
-#top .top {
+
+/* #top .top {
   height: 60px;
   color: white;
+  position: relative;
   /* text-indent: -230px; */
-}
-.btn {
+
+.btn{
   cursor: pointer;
 }
 @media screen and (min-width: 768px) {
   #top .top {
-   text-indent: 0px;
+   /* text-indent: 0px; */
   }
 }
 @media screen and (min-width: 992px) {
   #top .top {
-    text-indent: -30px;
+    /* text-indent: -30px; */
   }
 } 
 @media screen and (min-width: 1200px) {

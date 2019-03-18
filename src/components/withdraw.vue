@@ -1,7 +1,7 @@
 <template>
   <div class="withdraw">
     <div id="top">
-      <div class="top con"> WITHDRAW</div>    
+      WITHDRAW
     </div>
     <div class="content">
       <div class="content_first">

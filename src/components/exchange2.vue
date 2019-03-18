@@ -1,7 +1,7 @@
 <template>
   <div class="exchange2">
     <div id="top">
-      <div class="top con">EXCHANGE</div>
+      EXCHANGE
     </div>
     <div class="content list">
       <p>Fiat&nbsp;to&nbsp;Note</p>

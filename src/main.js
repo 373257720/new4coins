@@ -6,6 +6,7 @@ import router from './router'
 import ElementUI from 'element-ui';
 import axios from 'axios'
 import qs from "qs";
+import 'babel-polyfill'  //ie浏览器
 Vue.prototype.$qs = qs;
 Vue.prototype.$axios = axios;
 // Vue.prototype.$axios = axios;
@@ -29,14 +30,7 @@ Vue.directive('focus', {
     // el.querySelector('input').focus();
   }
 })
-// 注册一个全局自定义指令 v-focus
-// Vue.directive('focus', function (el) {
-//     // 聚焦元素
 
-//     el.focus()
-//   }
-// )
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,

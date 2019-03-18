@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div id="top">
-      <div class="top con">NETNOTE</div>
+      NETNOTE
     </div>
     <div class="content">
       <div class="box">
@@ -130,10 +130,16 @@ export default {
               }
             })
             .then(res => {
-              console.log(res.data);
-              let storage = { token: res.data.token };
-              storage = JSON.stringify(storage);
-              sessioStorage.setItem("tokenData", storage);
+              // console.log(res.data);
+               this.warn="Incorrect username or password."
+              // sessionStorage.setItem("aaa",'111');
+              sessionStorage.setItem("aaa",'22');
+              // console.log(sessionStorage.setItem("tokendata",this.name))
+              // let storage = { token: res.data.token };
+              // storage = JSON.stringify(storage);
+              // sessionStorage.setItem("tokenData",storage);
+              // console.log(sessionStorage.setItem("tokenData",storage))
+              // window.sessioStorage.setItem("tokenData", storage);
               this.$router.push({
                 // name: "home"
               });
@@ -204,17 +210,19 @@ export default {
     margin-bottom: 30px;
   }
   aside {
-    height: 14px;
+    height: 55px;
     color: #bec8d6;
     font-size: 14px;
-    color: red;
+    color:#f56c6c;
+    line-height: 55px;
+    text-align: center;
   }
   .btn {
     height: 38px;
     width: 475px;
     background: #5ce2ee;
     border-radius: 20px;
-    margin-top: 13px;
+    // margin-top: 13px;
     color: #25262e;
     line-height: 38px;
     text-align: center;

@@ -54,13 +54,13 @@ export default {
       });
     },
     send(id) {
-      
-      this.$router.push({
-        name: "send",
-        params: {
-          sendid: id
-        }
-      });
+      alert('未开通')
+      // this.$router.push({
+      //   name: "send",
+      //   params: {
+      //     sendid: id
+      //   }
+      // });
     }
   }
 };

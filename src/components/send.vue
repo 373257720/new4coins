@@ -1,7 +1,7 @@
 <template>
   <div class="send">
     <div id="top">
-      <div class="top con">TRANSFER</div>
+      TRANSFER
     </div>
     <div class="content">
       <div class="title con">
