@@ -6,24 +6,28 @@
           <img :src="son.text" alt>
         </div>
         <div class="coinpic_right fr">
-          <p>HKDn</p>
+          <p>{{walletson&&walletson.CoinCurrency}}</p>
           <p>
-            <span>1.0</span>&nbsp;HKDn&nbsp;per
-            <span>1</span>&nbsp;HKD
+            <span>1.0</span>
+            &nbsp;{{walletson&&walletson.CoinCurrency}}&nbsp;per
+            <span>1</span>
+            &nbsp;{{walletson&&walletson.FiatCurrency}}
           </p>
         </div>
       </div>
       <div class="mid fl">
         <p>
-          HKDn&nbsp;&nbsp;&nbsp;$
-          <span>0</span>
+          <span>{{walletson&&walletson.CoinCurrency}}</span>
+          $
+          <span>{{walletson&&walletson.CoinBalance}}</span>
         </p>
         <p>
-          HKD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$
-          <span>0</span>
+          <span>{{walletson&&walletson.FiatCurrency}}</span>
+          $
+          <span>{{walletson&&walletson.FiatBalance}}</span>
         </p>
       </div>
-      <div class="end fl">
+      <div class="end fr">
         <span @click="receive(son.id)" class="btn">RECEIVE</span>
         <span @click="send(son.id)" class="btn">SEND</span>
       </div>
@@ -33,7 +37,7 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["son"],
+  props: ["son", "walletson"],
   name: "variety",
   data() {
     return {
@@ -41,11 +45,10 @@ export default {
     };
   },
   created() {
-    // console.log(this.son);
+    // console.log(this.walletson);
   },
   methods: {
     receive(id) {
-    
       this.$router.push({
         name: "receive",
         params: {
@@ -54,7 +57,7 @@ export default {
       });
     },
     send(id) {
-      alert('未开通')
+      alert("未开通");
       // this.$router.push({
       //   name: "send",
       //   params: {
@@ -103,41 +106,53 @@ export default {
         }
         p:nth-child(2) {
           color: #aaaaaa;
-          font-size: 14px;
+          font-size: 12px;
         }
       }
     }
     .mid {
-      width: 80px;
-      height: 40px;
+      // width: 80px;
+      // height: 40px;
       margin-left: 185px;
-      margin-top: 18px;
+      margin-top: 15px;
       box-sizing: border-box;
       color: #aaaaaa;
       font-size: 14px;
+      >p{
+        span:nth-child(1){
+          display: inline-block;
+            width: 54px;
+        }
+        span:nth-child(2){
+           display: inline-block;
+            // width: 54px;
+        }
+      }
       p:nth-child(1) {
         margin-bottom: 9px;
+       
       }
     }
     .end {
       width: 305px;
       height: 40px;
       margin-top: 18px;
-      margin-left: 250px;
+      margin-right: 96px;
       box-sizing: border-box;
       // background: white;
       font-size: 14px;
       display: -webkit-flex;
       display: flex;
       color: #59d6e2;
-      
+
       -webkit-justify-content: space-between;
       justify-content: space-between;
       span {
         // flex:1;
         //  box-sizing: border-box;
         width: 116px;
-        height: 40px;box-sizing: border-box;
+        height: 40px;
+        box-sizing: border-box;
         text-align: center;
         line-height: 36px;
         border-radius: 25px;

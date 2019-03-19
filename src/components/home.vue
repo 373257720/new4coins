@@ -13,7 +13,12 @@
       <div class="trend" ref="mychart">
         <!-- <img src="../assets/2主界面_r2_c2.png" alt=""> -->
       </div>
-      <variety v-for="(item,index) in tabs" :key="index" :son="tabs[index]"></variety>
+      <variety
+        v-for="(item,index) in tabs"
+        :key="index"
+        :son="tabs[index]"
+        :walletson="walletdata[index]"
+      ></variety>
       <div class="content_bottom">
         <div>
           <span @click="withdraw" class="btn">FIAT WITHDRAW</span>
@@ -34,6 +39,7 @@ export default {
   data() {
     return {
       //图片数据
+      walletdata: "",
       option: {
         xAxis: {
           data: ["2017-10-24", "2017-10-25", "2017-10-26", "2017-10-27"],
@@ -91,19 +97,19 @@ export default {
       tabs: [
         {
           id: 0,
-          text: require("../assets/hkd.png")
+          text: require("../assets/usd.png")
         },
         {
           id: 1,
-          text: require("../assets/jpy.png")
-        },
-        {
-          id: 2,
           text: require("../assets/rmb.png")
         },
         {
+          id: 2,
+          text: require("../assets/jpy.png")
+        },
+        {
           id: 3,
-          text: require("../assets/usd.png")
+          text: require("../assets/hkd.png")
         }
       ]
     };
@@ -111,51 +117,64 @@ export default {
   components: {
     variety
   },
-  beforeMount() {
-    var a = sessionStorage.getItem("aaa");
-    console.log(a);
-  },
+  // beforeMount() {
+  //   var token = sessionStorage.getItem("token");
+  //   console.log(token);
+  // },
   mounted() {
-    // console.log(tokendata);
+    var token = sessionStorage.getItem("token");
+    console.log(token);
+    this.$axios({
+      method: "get",
+      url: "/haha/api/note/wallet_data",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer" + " " + token
+      }
+      // data: {
+      //   keydatahash: this.name,
+      //   password: this.password
+      // }
+    })
+      .then(res => {
+        console.log(res.data);
+        if (token) {
+          this.walletdata = res.data.Tokens;
+        }
+      })
+      .catch(err => {
+        console.log(err); //错误信息
+      });
+    //图片初始化实例
     var echart = echarts.init(this.$refs.mychart);
     echart.setOption(this.option);
-    // this.$axios
-    //   .get("/api/note/wallet_data", {
-    //     params: {
-    //       // bearer: tokendata
-    //     },
-    //     headers: {
-    //       "Content-type": "application/json"
-    //       // "Authorization ": "Bearer tokendata"
-    //     }
-    //   })
-    //   .then(function(response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
+
   },
 
   methods: {
     hidePopoverPanel() {
       this.popoverPanelShow = false;
     },
+    //退出登录
     back() {
+      sessionStorage.removeItem("token");
       this.$router.push({
         name: "login"
       });
     },
+    //点击跳到取现
     withdraw() {
       this.$router.push({
         name: "withdraw"
       });
     },
+    //点击跳到兑换
     exchange() {
       this.$router.push({
         name: "exchange"
       });
     },
+    //点击存款
     deposit() {
       this.$router.push({
         name: "deposit"

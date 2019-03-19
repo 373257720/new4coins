@@ -1,8 +1,6 @@
 <template>
   <div class="login">
-    <div id="top">
-      NETNOTE
-    </div>
+    <div id="top">NETNOTE</div>
     <div class="content">
       <div class="box">
         <h1>WELCOME</h1>
@@ -25,7 +23,7 @@
           </p>
         </div>
         <aside>{{this.warn}}</aside>
-        <div class="btn" @click="goto">SIGN&nbsp;&nbsp;IN</div>
+        <div class="btn" @click="goto1">SIGN&nbsp;&nbsp;IN</div>
       </div>
       <div class="photo">
         <img src="../assets/img.png" alt>
@@ -35,7 +33,7 @@
 </template>
 <script>
 // import jquery from "jquery";
-import $ from 'jquery'
+import $ from "jquery";
 export default {
   name: "login",
   data() {
@@ -45,18 +43,10 @@ export default {
       warn: ""
     };
   },
-  computed: {
-    //  focuson: function(name, event) {
-    //   if (this.name=="") {
-    //     console.log(event)
-    //     // .focus();
-    //   }
-    //   //  console.log(event)
-    // },
+  created(){
+     console.log(sessionStorage.getItem("token"))
   },
   methods: {
-    // 清空输入框重新获取焦点
-    // focus(){},
     //邮箱验证
     // sendEmail() {
     //   var regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
@@ -67,86 +57,55 @@ export default {
     //   }
     // },
 
-    goto() {
-      //邮箱验证
+    goto1() {
       if (this.name && this.password) {
         this.warn = "";
-        //  var regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-        //       if(!regEmail.test(this.name){
-        //           this.warn='你的邮箱地址有误';
-        //       }
-        //       // this.$router.push({
-        //       //   name: "home"
-        //       // });
-        //   // if (this.name == "") {
-        //   //   alert("请输入邮箱");
-        //   } else {
-        //       this.warn='Please enter your email address or password'
-        //   }
-        let postData = JSON.stringify({
-          keydatahash: this.name,
-          password: this.password
-        });
-        // console.log(posa.name);
+        this.$axios({
+          method: "post",
+          url: "/haha/api/note/login",
+          headers: {
+            "Content-type": "application/json"
+          },
+          data: {
+            keydatahash: this.name,
+            password: this.password
+          }
+        })
+          .then(res => {
+            console.log(res.data.Status);
+            if (res.data.Status == "success") {
+              sessionStorage.setItem("token", res.data.Token.access_token);
+              this.$router.push({
+                name: "home"
+              });
+            } else {
+              this.warn = "Incorrect username or password.";
+            }
+          })
+          .catch(err => {
+            console.log(err); //错误信息
+          });
         // this.$axios
-        //   .post("/api/note/login", postData, {
-        //     headers: { "Content-type": "application/json" }
+        //   .post("/haha/api/note/login", {
+        //     headers: {
+        //       "Content-type":"application/json"
+        //     },
+        //     data:JSON.stringify({
+        //       keydatahash: "6bf9e33c4ca162df6cf762f8a1ab376a",
+        //       password: "1372852000"
+        //     })
         //   })
         //   .then(res => {
-        //     console.log(res);
-        //   }) ;
-        // $.ajax({
-        //   url: "/api/note/login", //请求的url地址
-        //   headers: { 
-		    //         "Content-type": "application/json" 
+        //     console.log(res.data);
 
-        //   },
-        //   dataType: "json", //返回格式为json
-        //   async: true, //请求是否异步，默认为异步，这也是ajax重要特性
-        //   data: { keydatahash: this.name,password:this.password }, //参数值,键值对
-        //   type: "POST", //请求方式
-        //   beforeSend: function() {
-        //     //请求前的处理
-        //   },
-        //   success: function(req) {
-        //     //请求成功时处理
-        //     console.log(req)
-        //   },
-        //   complete: function() {
-        //     //请求完成的处理
-        //   },
-        //   error: function() {
-        //     //请求出错处理
-        //   }
-        // });
-          this.$axios
-            .post("/haha/api/note/login", {
-              headers: {
-                "Content-type": "application/json"
-              },
-              data:{
-                keydatahash: this.name,
-                password: this.password
-              }
-            })
-            .then(res => {
-              // console.log(res.data);
-               this.warn="Incorrect username or password."
-              // sessionStorage.setItem("aaa",'111');
-              sessionStorage.setItem("aaa",'22');
-              // console.log(sessionStorage.setItem("tokendata",this.name))
-              // let storage = { token: res.data.token };
-              // storage = JSON.stringify(storage);
-              // sessionStorage.setItem("tokenData",storage);
-              // console.log(sessionStorage.setItem("tokenData",storage))
-              // window.sessioStorage.setItem("tokenData", storage);
-              this.$router.push({
-                // name: "home"
-              });
-            })
-            .catch(error => {
-              console.log(error);
-            });
+        //   sessionStorage.setItem("aaa", "22");
+        //     this.$router.push({
+        //       // name: "home"
+        //     });
+        //   })
+        //   .catch(error => {
+        //     console.log(error);
+        //   });
       } else {
         this.warn = "name or password can not be empty";
       }
@@ -213,7 +172,7 @@ export default {
     height: 55px;
     color: #bec8d6;
     font-size: 14px;
-    color:#f56c6c;
+    color: #f56c6c;
     line-height: 55px;
     text-align: center;
   }
