@@ -13,45 +13,64 @@ Vue.use(Router)
 const routes = [{
     path: '/login',
     name: 'login',
-    component: login
+    component: login,
   },
   {
     path: '/home',
     name: 'home',
     component: home,
     meta: {
-      keepAlive: true // 需要被缓存
+      keepAlive: true, // 需要被缓存
+      requireAuth: true
     }
   },
   {
     path: '/send',
     name: 'send',
-    component: send
+    component: send,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/receive',
     name: 'receive',
-    component: receive
+    component: receive,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/deposit',
     name: 'deposit',
-    component: deposit
+    component: deposit,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/exchange',
     name: 'exchange',
     component: exchange,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/exchange2',
     name: 'exchange2',
-    component: exchange2
+    component: exchange2,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/withdraw',
     name: 'withdraw',
-    component: withdraw
+    component: withdraw,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '*',
@@ -128,27 +147,32 @@ let router = new Router({
 });
 // 全局路由守卫
 // 在进入某个路由前执行的代码
-
 router.beforeEach((to, from, next) => {
-  // 判断是否登录
   let token = sessionStorage.getItem('token');
-  // 发送ajax请求给后端进行验证
-  // axios.get('/verifytoken').then(res=>{
-  // 验证通过则放行，否则回到登录界面
-  // let data = res.data;
-  if (token) {
-    // if(router.app.$store.state.token){
-    next();
+  if (to.meta.requireAuth) {
+    // 判断是否登录
+    if (token) {
+      next();
+    } else {
+      next({
+        path: '/login'
+      })
+    }
   } else {
-    next({
-      path: '/'
-    })
+    if (to.path === '/login' && token) {
+      next({
+        path: '/home'
+      });
+    } else {
+      next();
+    }
+    // 要进入to路由，必须调用next()方法
+
   }
-  // })
 });
-router.afterEach((to, from) => {
-  console.log('after')
-})
+// router.afterEach((to, from) => {
+//   console.log('after')
+// })
 
 export default router;
 
