@@ -34,16 +34,9 @@ export default {
     return {};
   },
   created() {
-    var tokenData = sessionStorage.getItem("tokenData");
-    //在页面加载时读取sessionStorage里的状态信息
-    // if (sessionStorage.getItem("store") ) {
-    //     this.$store.replaceState(Object.assign({}, this.$store.state,JSON.parse(sessionStorage.getItem("store"))))
-    // }
+    var token = sessionStorage.getItem("token");
+    var email = sessionStorage.getItem("email");
 
-    // //在页面刷新时将vuex里的信息保存到sessionStorage里
-    // window.addEventListener("beforeunload",()=>{
-    //     sessionStorage.setItem("store",JSON.stringify(this.$store.state))
-    // })
   },
   methods: {
     focuson: function(event) {
@@ -76,35 +69,27 @@ export default {
   
 }
 
-/* #top .top {
-  height: 60px;
-  color: white;
-  position: relative;
-  /* text-indent: -230px; */
-
 .btn{
   cursor: pointer;
 }
-@media screen and (min-width: 768px) {
-  #top .top {
-   /* text-indent: 0px; */
-  }
+
+::-webkit-input-placeholder { /* WebKit browsers */
+  /* color: #999; */
+  /* font-size: 16px; */
+  opacity: 0.5;
 }
-@media screen and (min-width: 992px) {
-  #top .top {
-    /* text-indent: -30px; */
-  }
-} 
-@media screen and (min-width: 1200px) {
-  #top .top {
-    text-indent: -230px;
-  }
-} /* 大型设备（大台式电脑，1200px 起） */
 
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  /* color: #999; */
+  /* font-size: 16px; */
+  opacity: 0.5;
+}
 
-/* 中型设备（台式电脑，992px 起） */
-
- /* 小型设备（平板电脑，768px 起） */
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  /* color: #999;
+  font-size: 16px; */
+  opacity: 0.5;
+}   
 </style>
 <style lang="scss" scoped>
 #content {

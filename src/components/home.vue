@@ -1,13 +1,25 @@
 <template>
   <div>
-    <div id="top">
-      NETNOTE
-      <span class="signout">
-        <i>
-          <img src="../assets/2e26699f27582e26d295c263d1e7c5c.png" alt>
-        </i>
-        <u @click="back">Sign out</u>
-      </span>
+    <div id="top">NETNOTE
+      <div class="top_right">
+        <div @click="user" class="username">
+          <img src="../assets/person_icon.png" alt>
+          <span>{{this.$store.state.currentUser}}</span>
+          <i>
+            <img :class="[ok?'down':'up']" src="../assets/arrows.png" alt>
+          </i>
+        </div>
+        <ul ref="username" v-show="ok">
+          <li>
+            <img src="../assets/history_icon.png" alt>
+            history
+          </li>
+          <li @click="back">
+            <img src="../assets/d5dde342f63280669d570442a3d8511.png" alt>
+            sign&nbsp;out
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="content">
       <div class="trend" ref="mychart">
@@ -38,8 +50,9 @@ export default {
   name: "home",
   data() {
     return {
-      //图片数据
-      walletdata: "",
+      ok: false, //用户信息的开关
+      walletdata: "", //图片数据
+      //图标的option
       option: {
         xAxis: {
           data: ["2017-10-24", "2017-10-25", "2017-10-26", "2017-10-27"],
@@ -94,6 +107,7 @@ export default {
           }
         ]
       },
+      //钱币的图片
       tabs: [
         {
           id: 0,
@@ -117,10 +131,6 @@ export default {
   components: {
     variety
   },
-  // beforeMount() {
-  //   var token = sessionStorage.getItem("token");
-  //   console.log(token);
-  // },
   mounted() {
     var token = sessionStorage.getItem("token");
     console.log(token);
@@ -137,7 +147,7 @@ export default {
       // }
     })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         if (token) {
           this.walletdata = res.data.Tokens;
         }
@@ -148,10 +158,15 @@ export default {
     //图片初始化实例
     var echart = echarts.init(this.$refs.mychart);
     echart.setOption(this.option);
-
   },
 
   methods: {
+    // 点击用户弹出信息.
+    user() {
+      this.ok = !this.ok;
+      let user = this.$refs.username;
+      //  console.log(this.$refs.username)
+    },
     hidePopoverPanel() {
       this.popoverPanelShow = false;
     },
@@ -248,5 +263,59 @@ export default {
   margin: 0 auto;
   height: 400px;
   margin-bottom: 40px;
+}
+#top {
+  .top_right {
+    cursor: pointer;
+    float: right;
+    font-size: 10px;
+    position: relative;
+    .username {
+      height: 60px;
+      i {
+        .down {
+          transform: rotate(-90deg);
+          transition: all 0.2s;
+        }
+        .up {
+          transition: all 0.2s;
+        }
+      }
+      img {
+        vertical-align: middle;
+      }
+      span {
+        margin-left: 5px;
+        margin-right: 5px;
+        vertical-align: middle;
+        color: #cbcfd8;
+      }
+    }
+    ul {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      z-index: 3;
+      border-radius: 3px;
+      li {
+        padding-left: 20px;
+        box-sizing: border-box;
+        line-height: 50px;
+        img {
+          vertical-align: middle;
+          height: 14px;
+          width: 14px;
+          margin-right: 9px;
+        }
+
+        width: 120px;
+        // text-align: center;
+        color: #616a71;
+        // line-height: 60px;
+      }
+    }
+  }
 }
 </style>

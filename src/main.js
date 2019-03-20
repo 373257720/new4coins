@@ -6,9 +6,11 @@ import router from './router'
 import ElementUI from 'element-ui';
 import axios from 'axios'
 import qs from "qs";
-import 'babel-polyfill'  //ie浏览器
+import 'babel-polyfill' //ie浏览器
 Vue.prototype.$qs = qs;
 Vue.prototype.$axios = axios;
+//实例化 store
+import store from './store/index.js'
 // Vue.prototype.$axios = axios;
 Vue.use(ElementUI);
 Vue.config.productionTip = false
@@ -17,13 +19,13 @@ Vue.config.productionTip = false
 //   el.focus()
 // })a
 // Vue.directive('focus', {inserted(el)}
+//重新获取焦点
 Vue.directive('focus', {
   inserted(el) {
     // console.log(el)
     el.onclick = function (e) {
-      // console.log(e)
       if (e.target.nodeName == 'I') {
-        console.log(this.querySelector('input'))
+        // console.log(this.querySelector('input'))
         this.querySelector('input').focus();
       }
     }
@@ -31,10 +33,12 @@ Vue.directive('focus', {
   }
 })
 
+
 new Vue({
   el: '#app',
   router,
   axios,
+  store,
   components: {
     App
   },

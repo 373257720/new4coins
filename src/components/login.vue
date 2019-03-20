@@ -7,7 +7,12 @@
         <div>
           <h3>Enter your name</h3>
           <p class="name">
-            <el-input placeholder="Emails" v-model.trim="name" clearable autofocus v-focus></el-input>
+            <el-input placeholder="Emails" v-model.trim="name"
+              clearable
+              autofocus
+              v-focus
+            
+            ></el-input>
           </p>
         </div>
         <div>
@@ -43,21 +48,30 @@ export default {
       warn: ""
     };
   },
-  created(){
-     console.log(sessionStorage.getItem("token"))
+  created() {
+    // console.log(sessionStorage.getItem("token"));
   },
   methods: {
     //邮箱验证
-    // sendEmail() {
+    // emailblur(e) {
     //   var regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-    //   if (this.name == "") {
-    //     alert("请输入邮箱");
-    //   } else if () {
-    //     alert("邮箱格式不正确");
+    //   // if (this.name) {
+    //   if (!regEmail.test(this.name)) {
+    //     // this.warn="888"
+    //     console.log(e.target);
+    //     e.target.style.border = " 1px solid #f56c6c";
+    //     // this.warn = "buzhengque";
     //   }
+
+    //   // alert("邮箱格式不正确");
+    // },
+    // emailfocus(e) {
+    //   this
+    //   e.target.style.border = "0";
     // },
 
     goto1() {
+
       if (this.name && this.password) {
         this.warn = "";
         this.$axios({
@@ -74,6 +88,10 @@ export default {
           .then(res => {
             console.log(res.data.Status);
             if (res.data.Status == "success") {
+              //将用户名放入sessionStorage
+              sessionStorage.setItem('userName',this.name);
+               //将用户名放入vuex
+              this.$store.dispatch('setUser',this.name);
               sessionStorage.setItem("token", res.data.Token.access_token);
               this.$router.push({
                 name: "home"
@@ -85,27 +103,6 @@ export default {
           .catch(err => {
             console.log(err); //错误信息
           });
-        // this.$axios
-        //   .post("/haha/api/note/login", {
-        //     headers: {
-        //       "Content-type":"application/json"
-        //     },
-        //     data:JSON.stringify({
-        //       keydatahash: "6bf9e33c4ca162df6cf762f8a1ab376a",
-        //       password: "1372852000"
-        //     })
-        //   })
-        //   .then(res => {
-        //     console.log(res.data);
-
-        //   sessionStorage.setItem("aaa", "22");
-        //     this.$router.push({
-        //       // name: "home"
-        //     });
-        //   })
-        //   .catch(error => {
-        //     console.log(error);
-        //   });
       } else {
         this.warn = "name or password can not be empty";
       }
