@@ -48,22 +48,22 @@ export default {
   },
   methods: {
     //邮箱验证
-    // emailblur(e) {
-    //   var regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-    //   // if (this.name) {
-    //   if (!regEmail.test(this.name)) {
-    //     // this.warn="888"
-    //     // console.log(e.target);
-    //     e.target.style.border = " 1px solid #f56c6c";
-    //     // this.warn = "buzhengque";
-    //   }
+    emailblur(e) {
+      var regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+      // if (this.name) {
+      if (!regEmail.test(this.name)) {
+        // this.warn="888"
+        // console.log(e.target);
+        e.target.style.border = " 1px solid #f56c6c";
+        // this.warn = "buzhengque";
+      }
 
-    //   // alert("邮箱格式不正确");
-    // },
-    // emailfocus(e) {
-    //   this
-    //   e.target.style.border = "0";
-    // },
+      // alert("邮箱格式不正确");
+    },
+    emailfocus(e) {
+      this
+      e.target.style.border = "0";
+    },
 
     goto1() {
       if (this.name && this.password) {
