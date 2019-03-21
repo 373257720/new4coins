@@ -10,7 +10,7 @@
           <p>
             <span>1.0</span>
             &nbsp;{{walletson&&walletson.CoinCurrency}}&nbsp;per
-            <span>1</span>
+            <span>{{walletson&&walletson.ExchangeFtoC}}</span>
             &nbsp;{{walletson&&walletson.FiatCurrency}}
           </p>
         </div>
@@ -49,12 +49,13 @@ export default {
   },
   methods: {
     receive(id) {
-      this.$router.push({
-        name: "receive",
-        params: {
-          receiveid: id
-        }
-      });
+      alert("未开通");
+      // this.$router.push({
+      //   name: "receive",
+      //   params: {
+      //     receiveid: id
+      //   }
+      // });
     },
     send(id) {
       alert("未开通");

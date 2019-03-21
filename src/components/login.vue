@@ -7,12 +7,7 @@
         <div>
           <h3>Enter your name</h3>
           <p class="name">
-            <el-input placeholder="Emails" v-model.trim="name"
-              clearable
-              autofocus
-              v-focus
-            
-            ></el-input>
+            <el-input placeholder="Emails" v-model.trim="name" clearable autofocus v-focus @blur="emailblur" @focus="emailfocus"></el-input>
           </p>
         </div>
         <div>
@@ -58,7 +53,7 @@ export default {
     //   // if (this.name) {
     //   if (!regEmail.test(this.name)) {
     //     // this.warn="888"
-    //     console.log(e.target);
+    //     // console.log(e.target);
     //     e.target.style.border = " 1px solid #f56c6c";
     //     // this.warn = "buzhengque";
     //   }
@@ -71,27 +66,34 @@ export default {
     // },
 
     goto1() {
-
       if (this.name && this.password) {
         this.warn = "";
-        this.$axios({
-          method: "post",
-          url: "/haha/api/note/login",
-          headers: {
-            "Content-type": "application/json"
-          },
-          data: {
-            keydatahash: this.name,
-            password: this.password
-          }
-        })
+        // this.$axios({
+        //   method: "get",
+        //   url: "/newlogin/growthing-02/users/pcLogin",
+        //   // url: 192.168.1.37:8080/growthing-02/users/pcLogin
+        //   // headers: {
+        //   //   "Content-type": "application/json"
+        //   // },
+        //   data: {
+        //     email: this.name,
+        //     password: this.password
+        //   }
+        // })
+        this.$axios
+          .get("/newlogin/growthing-02/users/pcLogin", {
+            params: {
+              email: this.name,
+              password:this.password
+            }
+          })
           .then(res => {
             console.log(res.data.Status);
             if (res.data.Status == "success") {
-              //将用户名放入sessionStorage
-              sessionStorage.setItem('userName',this.name);
-               //将用户名放入vuex
-              this.$store.dispatch('setUser',this.name);
+              // //将用户名放入sessionStorage
+              // sessionStorage.setItem('userName',this.name);
+              //将用户名放入vuex
+              this.$store.dispatch("setUser", this.name);
               sessionStorage.setItem("token", res.data.Token.access_token);
               this.$router.push({
                 name: "home"

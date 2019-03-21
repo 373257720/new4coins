@@ -34,9 +34,17 @@ export default {
     return {};
   },
   created() {
-    var token = sessionStorage.getItem("token");
-    var email = sessionStorage.getItem("email");
-
+    //在页面刷新时将vuex里的信息保存到sessionStorage里
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.setItem(
+        "userName",
+       this.$store.state.currentUser
+      );
+    });
+    //在页面加载时读取sessionStorage里的状态信息
+    if (sessionStorage.getItem("userName")) {
+       this.$store.commit('userStatus',sessionStorage.getItem("userName"));
+    }
   },
   methods: {
     focuson: function(event) {
@@ -63,33 +71,35 @@ export default {
   background: #25262e;
   font-size: 24px;
   line-height: 60px;
-  color:white;
-  padding-left: 4%; 
+  color: white;
+  padding-left: 4%;
   padding-right: 10%;
-  
 }
 
-.btn{
+.btn {
   cursor: pointer;
 }
 
-::-webkit-input-placeholder { /* WebKit browsers */
+::-webkit-input-placeholder {
+  /* WebKit browsers */
   /* color: #999; */
   /* font-size: 16px; */
   opacity: 0.5;
 }
 
-::-moz-placeholder { /* Mozilla Firefox 19+ */
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
   /* color: #999; */
   /* font-size: 16px; */
   opacity: 0.5;
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10+ */
+:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
   /* color: #999;
   font-size: 16px; */
   opacity: 0.5;
-}   
+}
 </style>
 <style lang="scss" scoped>
 #content {

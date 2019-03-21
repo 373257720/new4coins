@@ -14,6 +14,8 @@ import store from './store/index.js'
 // Vue.prototype.$axios = axios;
 Vue.use(ElementUI);
 Vue.config.productionTip = false
+
+
 //在Vue中要给input设置焦点，需要注册自定义指令
 // Vue.directive('focus', function (el) {a
 //   el.focus()

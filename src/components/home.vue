@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div id="top">NETNOTE
+    <div id="top">
+      NETNOTE
       <div class="top_right">
         <div @click="user" class="username">
           <img src="../assets/person_icon.png" alt>
@@ -10,7 +11,7 @@
           </i>
         </div>
         <ul ref="username" v-show="ok">
-          <li>
+          <li @click="deposit">
             <img src="../assets/history_icon.png" alt>
             history
           </li>
@@ -34,10 +35,10 @@
       <div class="content_bottom">
         <div>
           <span @click="withdraw" class="btn">FIAT WITHDRAW</span>
-          <span @click="exchange" class="btn">EXCHANGE</span>
+          <span @click="deposit" class="btn">FIAT DEPOSIT</span>
         </div>
         <div>
-          <span @click="deposit" class="btn">FIAT DEPOSIT</span>
+          <span @click="exchange" class="btn">EXCHANGE</span>
         </div>
       </div>
     </div>
@@ -115,15 +116,15 @@ export default {
         },
         {
           id: 1,
-          text: require("../assets/rmb.png")
+          text: require("../assets/hkd.png")
         },
         {
           id: 2,
-          text: require("../assets/jpy.png")
+          text: require("../assets/rmb.png")
         },
         {
           id: 3,
-          text: require("../assets/hkd.png")
+          text: require("../assets/jpy.png")
         }
       ]
     };
@@ -147,7 +148,7 @@ export default {
       // }
     })
       .then(res => {
-        // console.log(res.data);
+        console.log(res.data);
         if (token) {
           this.walletdata = res.data.Tokens;
         }
@@ -173,27 +174,31 @@ export default {
     //退出登录
     back() {
       sessionStorage.removeItem("token");
+      sessionStorage.removeItem("userName");
       this.$router.push({
         name: "login"
       });
     },
     //点击跳到取现
     withdraw() {
-      this.$router.push({
-        name: "withdraw"
-      });
+      alert("weikaitong");
+      // this.$router.push({
+      //   name: "withdraw"
+      // });
     },
     //点击跳到兑换
     exchange() {
-      this.$router.push({
-        name: "exchange"
-      });
+      // this.$router.push({
+      //   name: "exchange"
+      // });
+      alert("weikaitong");
     },
     //点击存款
     deposit() {
-      this.$router.push({
-        name: "deposit"
-      });
+      // this.$router.push({
+      //   name: "deposit"
+      // });
+      alert("weikaitong");
     }
   }
 };

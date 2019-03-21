@@ -12,7 +12,7 @@ export default new Vuex.Store({
   state: {
 
     currentUser: null, //当前用户
-    isLogin: false //判断当前用户是否已经登录
+    //isLogin: false //判断当前用户是否已经登录
   },
   getters: {
     // currentUser = state => state.currentUser,
