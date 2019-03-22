@@ -79,10 +79,10 @@ export default {
         //   }
         // })
         this.$axios
-          .get("http://113.52.134.95:8080/growthing-02/users/pcLogin", {
+          .get("http://192.168.1.37:8080/growthing-02/users/pcLogin", {
             params: {
-              email: "this.name",
-              password: "this.password"
+              email: this.name,
+              password: this.password
             }
           })
           .then(res => {
