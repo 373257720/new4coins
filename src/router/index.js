@@ -84,11 +84,11 @@ const routes = [{
       name: 'login'
     }
   },
-  // {
-  //   path:'/history',
-  //   name:'history',
-  //   component:history
-  // }
+  {
+    path:'/history',
+    name:'history',
+    component:history
+  }
 ]
 
 // export default new Router({
