@@ -147,6 +147,33 @@ export default {
       ]
     };
   },
+  created(){
+        var token = sessionStorage.getItem("token");
+        this.$axios
+          .get("/walletapi/growthing-02/users/transfer_history", {
+            params: {
+              limit: 100,
+              offset: 0,
+              access_token:token
+            }
+          })
+          .then(res => {
+            console.log(res.data);
+            // if (res.data.Status == "success") {
+              
+            //   // this.$store.dispatch("setUser", this.name);
+            //   // sessionStorage.setItem("token", res.data.Token.access_token);
+            //   // this.$router.push({
+            //   //   name: "home"
+            //   // });
+            // } else {
+            //   // this.warn = "Incorrect username or password.";
+            // }
+          })
+          .catch(err => {
+            //console.log(err); //错误信息
+          });
+  },
   methods: {
     handleCurrentChange(cpage) {
       this.currpage = cpage;
@@ -178,7 +205,7 @@ export default {
   position: absolute;
   left:50%;
   transform: translateX(-50%);
-  bottom:78px;
+  bottom:170px;
   background: #302e39;
 }
 .box_tap .el-tab-pane {

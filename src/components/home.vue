@@ -145,12 +145,12 @@ export default {
     //   // }
     // })
     this.$axios
-      .get("/walletapi/growthing-02/users/wallet_data")
+      .get("/walletapi/growthing-02/users/wallet_data?access_token="+token)
       .then(res => {
         console.log(res.data);
-        // if (token) {
-        //   this.walletdata = res.data.Tokens;
-        // }
+        if (token) {
+          this.walletdata = res.data.Tokens;
+        }
       })
       .catch(err => {
         //console.log(err); //错误信息
