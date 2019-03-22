@@ -7,7 +7,7 @@
         <div>
           <h3>Enter your name</h3>
           <p class="name">
-            <el-input placeholder="Emails" v-model.trim="name" clearable autofocus v-focus @blur="emailblur" @focus="emailfocus"></el-input>
+            <el-input placeholder="Emails" v-model.trim="name" clearable autofocus v-focus></el-input>
           </p>
         </div>
         <div>
@@ -32,8 +32,6 @@
   </div>
 </template>
 <script>
-// import jquery from "jquery";
-import $ from "jquery";
 export default {
   name: "login",
   data() {
@@ -61,7 +59,7 @@ export default {
       // alert("邮箱格式不正确");
     },
     emailfocus(e) {
-      this
+      this;
       e.target.style.border = "0";
     },
 
@@ -81,18 +79,15 @@ export default {
         //   }
         // })
         this.$axios
-          .get("/newlogin/growthing-02/users/pcLogin", {
+          .get("http://113.52.134.95:8080/growthing-02/users/pcLogin", {
             params: {
-              email: this.name,
-              password:this.password
+              email: "this.name",
+              password: "this.password"
             }
           })
           .then(res => {
             console.log(res.data.Status);
             if (res.data.Status == "success") {
-              // //将用户名放入sessionStorage
-              // sessionStorage.setItem('userName',this.name);
-              //将用户名放入vuex
               this.$store.dispatch("setUser", this.name);
               sessionStorage.setItem("token", res.data.Token.access_token);
               this.$router.push({

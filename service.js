@@ -17,21 +17,22 @@ app.all('*', function (req, res, next) {
     next();
   }
 });
-
-app.use('/haha', proxy({
-  'target': "https://113.52.134.95:8004",
-  " changeOrigin": true,
-  "pathRewrite":{
-    "^/haha":""
-  }
-}));
-app.use('/newlogin', proxy({
-  "target": "http://192.168.1.37:8080",
-  "changeOrigin": true,
-  "pathRewrite": {
-    "^/newlogin":""
-  }
-}));
-app.listen(8000, function () {
-  console.log('Server running on httplocalhost8000');
-});
+// app.use('/haha', proxy({
+//   'target': "https://113.52.134.95:8004",
+//   " changeOrigin": true,
+//   // 'ws': true,
+//   "pathRewrite":{
+//     "^/haha":""
+//   }
+// }));
+// app.use('/newlogin', proxy({
+//   "target": "http://192.168.1.37:8080",
+//   "changeOrigin": true,
+//   // 'ws': true,
+//   "pathRewrite": {
+//     "^/newlogin":""
+//   }
+// }));
+// app.listen(8008, function () {
+//   console.log('Server running on httplocalhost8008');
+// });

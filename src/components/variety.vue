@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     receive(id) {
-      alert("未开通");
+      alert("Sorry,this service has not been opened yet");
       // this.$router.push({
       //   name: "receive",
       //   params: {
@@ -58,7 +58,7 @@ export default {
       // });
     },
     send(id) {
-      alert("未开通");
+      alert("Sorry,this service has not been opened yet");
       // this.$router.push({
       //   name: "send",
       //   params: {

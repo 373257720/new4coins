@@ -8,6 +8,7 @@ import deposit from '@/components/deposit'
 import exchange from '@/components/exchange'
 import exchange2 from '@/components/exchange2'
 import withdraw from '@/components/withdraw'
+import history from '@/components/history'
 Vue.use(Router)
 
 const routes = [{
@@ -83,6 +84,11 @@ const routes = [{
       name: 'login'
     }
   },
+  // {
+  //   path:'/history',
+  //   name:'history',
+  //   component:history
+  // }
 ]
 
 // export default new Router({
@@ -147,29 +153,29 @@ let router = new Router({
 });
 // 全局路由守卫
 // 在进入某个路由前执行的代码
-router.beforeEach((to, from, next) => {
-  let token = sessionStorage.getItem('token');
-  if (to.meta.requireAuth) {
-    // 判断是否登录
-    if (token) {
-      next();
-    } else {
-      next({
-        path: '/login'
-      })
-    }
-  } else {
-    if (to.path === '/login' && token) {
-      next({
-        path: '/home'
-      });
-    } else {
-      next();
-    }
-    // 要进入to路由，必须调用next()方法
+// router.beforeEach((to, from, next) => {
+//   let token = sessionStorage.getItem('token');
+//   if (to.meta.requireAuth) {
+//     // 判断是否登录
+//     if (token) {
+//       next();
+//     } else {
+//       next({
+//         path: '/login'
+//       })
+//     }
+//   } else {
+//     if (to.path === '/login' && token) {
+//       next({
+//         path: '/home'
+//       });
+//     } else {
+//       next();
+//     }
+//     // 要进入to路由，必须调用next()方法
 
-  }
-});
+//   }
+// });
 // router.afterEach((to, from) => {
 //   console.log('after')
 // })

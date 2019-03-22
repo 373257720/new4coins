@@ -1,10 +1,6 @@
 <template>
   <div class="deposit">
-    <div id="top">
-
-        DEPOSIT
-
-    </div>
+    <div id="top">DEPOSIT</div>
     <div class="content con">
       <div class="title">
         <img src="../assets/up.png" alt>
@@ -19,8 +15,8 @@
             :on-preview="handlePictureCardPreview"
             :on-remove="appear"
             :on-error="appear"
-            :before-upload='dispear'
-            :limit=1
+            :before-upload="dispear"
+            :limit="1"
           >
             <i class="el-icon-plus"></i>
           </el-upload>
@@ -73,8 +69,7 @@ export default {
         {
           value: "选项4",
           label: "USD"
-        },
-      
+        }
       ],
       value: ""
       //   dialogImageUrl: "",
@@ -82,37 +77,38 @@ export default {
     };
   },
   methods: {
-    goto(){
-       this.$router.push({
-              name: "home"
-        })
+    goto() {
+      this.$router.push({
+        name: "home"
+      });
     },
 
     //上传文件之前的钩子，参数为上传的文件,把那个十字选择框去掉
-    dispear(file){
-          // console.log(111)
-         var a=  document.querySelector('.el-upload--picture-card')
-            console.log(a)
-          a.style="display:none;"
-          // var b=document.querySelector('.el-upload-list__item')
-          // b.style="transition:0s
-            // console.log(response,file,fileList)
+    dispear(file) {
+      // console.log(111)
+      var a = document.querySelector(".el-upload--picture-card");
+      console.log(a);
+      a.style = "display:none;";
+      // var b=document.querySelector('.el-upload-list__item')
+      // b.style="transition:0s
+      // console.log(response,file,fileList)
     },
-  //文件上传不成功时的钩子
-//文件列表移除文件时的钩子
-    appear(file, fileList){
-         var a=  document.querySelector('.el-upload--picture-card')
-         var b=document.querySelector('.el-upload-list__item')
-          // a.style="display:";
-           b.style="transition:0s"
-          //  b.style="width:80%;height:80%;transition:0s"top
-          a.style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;"
-          //  a.style="margin:0 auto;display:block;"
+    //文件上传不成功时的钩子
+    //文件列表移除文件时的钩子
+    appear(file, fileList) {
+      var a = document.querySelector(".el-upload--picture-card");
+      var b = document.querySelector(".el-upload-list__item");
+      // a.style="display:";
+      b.style = "transition:0s";
+      //  b.style="width:80%;height:80%;transition:0s"top
+      a.style =
+        "position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;";
+      //  a.style="margin:0 auto;display:block;"
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
     },
-    	//点击文件列表中已上传的文件时的钩子
+    //点击文件列表中已上传的文件时的钩子
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
@@ -121,48 +117,46 @@ export default {
 };
 </script>
 <style>
-.pic{
+.pic {
   padding-top: 37px;
   position: relative;
   box-sizing: border-box;
 }
-.pic .el-upload-list__item-status-label{
+.pic .el-upload-list__item-status-label {
   background: #5ce2ee;
 }
-.pic .el-upload-list--picture-card .el-upload-list__item{
-   width: 300px;
+.pic .el-upload-list--picture-card .el-upload-list__item {
+  width: 300px;
   /* height: 100%; */
   display: block;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .pic .avatar-uploader {
   width: 468px;
   height: 222px;
 }
-.pic .el-upload-list__item-thumbnail{
-    /* width: 100%;
+.pic .el-upload-list__item-thumbnail {
+  /* width: 100%;
     height: 100%; */
 }
-.select .el-select{
-    width:468px;
-    
+.select .el-select {
+  width: 468px;
 }
-.common .el-input__inner{
-    border-radius: 0;
-    background: #25262e;
-    border:0;
-    color:#BEC8D6;
+.common .el-input__inner {
+  border-radius: 0;
+  background: #25262e;
+  border: 0;
+  color: #bec8d6;
 }
-.pic .el-upload--picture-card{
-      background:none;
+.pic .el-upload--picture-card {
+  background: none;
 
-      display: block;
-      margin :0 auto;
-      /* text-align: center； */
-      
-      
-      /* display: block; */
+  display: block;
+  margin: 0 auto;
+  /* text-align: center； */
+
+  /* display: block; */
 }
 /* .pic .el-icon-plus{
         display: inline-block;
@@ -173,7 +167,6 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-
 .content {
   height: 800px;
   // background:#363541;

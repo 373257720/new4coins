@@ -23,8 +23,8 @@
       </div>
     </div>
     <div class="content">
-      <div class="trend" ref="mychart">
-        <!-- <img src="../assets/2主界面_r2_c2.png" alt=""> -->
+      <div class="trend" ref="mychart" style="margin-top:14px;">
+        <img src="../assets/d57bcb765433304e7ca905009882f84.png" alt="">
       </div>
       <variety
         v-for="(item,index) in tabs"
@@ -137,15 +137,11 @@ export default {
     console.log(token);
     this.$axios({
       method: "get",
-      url: "/haha/api/note/wallet_data",
+      url: "https://113.52.134.95:8004/api/note/wallet_data",
       headers: {
         "Content-type": "application/json",
         Authorization: "Bearer" + " " + token
       }
-      // data: {
-      //   keydatahash: this.name,
-      //   password: this.password
-      // }
     })
       .then(res => {
         console.log(res.data);
@@ -157,8 +153,8 @@ export default {
         console.log(err); //错误信息
       });
     //图片初始化实例
-    var echart = echarts.init(this.$refs.mychart);
-    echart.setOption(this.option);
+    // var echart = echarts.init(this.$refs.mychart);
+    // echart.setOption(this.option);
   },
 
   methods: {
@@ -181,7 +177,7 @@ export default {
     },
     //点击跳到取现
     withdraw() {
-      alert("weikaitong");
+      alert("Sorry,this service has not been opened yet");
       // this.$router.push({
       //   name: "withdraw"
       // });
@@ -191,14 +187,14 @@ export default {
       // this.$router.push({
       //   name: "exchange"
       // });
-      alert("weikaitong");
+      alert("Sorry,this service has not been opened yet");
     },
     //点击存款
     deposit() {
       // this.$router.push({
       //   name: "deposit"
       // });
-      alert("weikaitong");
+      alert("Sorry,this service has not been opened yet");
     }
   }
 };
