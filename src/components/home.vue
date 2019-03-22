@@ -134,7 +134,7 @@ export default {
   },
   mounted() {
     var token = sessionStorage.getItem("token");
-    console.log(token);
+    // console.log(token);
     this.$axios({
       method: "get",
       url: "https://113.52.134.95:8004/api/note/wallet_data",
@@ -144,13 +144,13 @@ export default {
       }
     })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         if (token) {
           this.walletdata = res.data.Tokens;
         }
       })
       .catch(err => {
-        console.log(err); //错误信息
+        //console.log(err); //错误信息
       });
     //图片初始化实例
     // var echart = echarts.init(this.$refs.mychart);

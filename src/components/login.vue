@@ -86,7 +86,7 @@ export default {
             }
           })
           .then(res => {
-            console.log(res.data.Status);
+            // console.log(res.data.Status);
             if (res.data.Status == "success") {
               this.$store.dispatch("setUser", this.name);
               sessionStorage.setItem("token", res.data.Token.access_token);
@@ -98,7 +98,7 @@ export default {
             }
           })
           .catch(err => {
-            console.log(err); //错误信息
+            //console.log(err); //错误信息
           });
       } else {
         this.warn = "name or password can not be empty";
