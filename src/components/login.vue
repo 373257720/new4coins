@@ -65,6 +65,7 @@ export default {
 
     goto1() {
       if (this.name && this.password) {
+        // const url ="http://192.168.1.37:8080"
         this.warn = "";
         // this.$axios({
         //   method: "get",
@@ -79,15 +80,16 @@ export default {
         //   }
         // })
         this.$axios
-          .get("http://113.52.134.95:8080/growthing-02/users/pcLogin", {
+          .get("walletapi/growthing-02/users/pcLogin", {
             params: {
               email: this.name,
               password: this.password
             }
           })
           .then(res => {
-            // console.log(res.data.Status);
+            
             if (res.data.Status == "success") {
+              console.log(res.data);
               this.$store.dispatch("setUser", this.name);
               sessionStorage.setItem("token", res.data.Token.access_token);
               this.$router.push({

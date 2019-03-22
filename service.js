@@ -24,7 +24,7 @@ app.all('*', function (req, res, next) {
 //   "pathRewrite":{
 //     "^/haha":""
 //   }
-// }));
+});
 // app.use('/newlogin', proxy({
 //   "target": "http://192.168.1.37:8080",
 //   "changeOrigin": true,

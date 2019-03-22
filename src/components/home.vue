@@ -24,7 +24,7 @@
     </div>
     <div class="content">
       <div class="trend" ref="mychart" style="margin-top:14px;">
-        <img src="../assets/d57bcb765433304e7ca905009882f84.png" alt="">
+        <img src="../assets/d57bcb765433304e7ca905009882f84.png" alt>
       </div>
       <variety
         v-for="(item,index) in tabs"
@@ -134,20 +134,23 @@ export default {
   },
   mounted() {
     var token = sessionStorage.getItem("token");
-    // console.log(token);
-    this.$axios({
-      method: "get",
-      url: "http://192.168.1.37:8080/growthing-02/users/wallet_data",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: "Bearer" + " " + token
-      }
-    })
+
+    // console.log(url);
+    // this.$axios({
+    //   method: "get",
+    //   url: "/walletapi/growthing-02/users/wallet_data",
+    //   // headers: {
+    //   //   "Content-type": "application/json",
+    //   //   Authorization: "Bearer" + " " + token
+    //   // }
+    // })
+    this.$axios
+      .get("/walletapi/growthing-02/users/wallet_data")
       .then(res => {
-        // console.log(res.data);
-        if (token) {
-          this.walletdata = res.data.Tokens;
-        }
+        console.log(res.data);
+        // if (token) {
+        //   this.walletdata = res.data.Tokens;
+        // }
       })
       .catch(err => {
         //console.log(err); //错误信息
