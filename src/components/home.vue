@@ -145,7 +145,7 @@ export default {
     //   // }
     // })
     this.$axios
-      .get("/walletapi/growthing-02/users/wallet_data?access_token="+token)
+      .get("this.$baseurl.api/growthing-02/users/wallet_data?access_token="+token)
       .then(res => {
         console.log(res.data);
         if (token) {

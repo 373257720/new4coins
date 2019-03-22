@@ -42,7 +42,7 @@ export default {
     };
   },
   created() {
-    // console.log(sessionStorage.getItem("token"));
+    console.log(this.$baseurl.api);
   },
   methods: {
     //邮箱验证
@@ -80,7 +80,7 @@ export default {
         //   }
         // })
         this.$axios
-          .get("/walletapi/growthing-02/users/pcLogin", {
+          .get(this.$baseurl.api+"/growthing-02/users/pcLogin", {
             params: {
               email: this.name,
               password: this.password
