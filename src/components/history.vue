@@ -17,7 +17,15 @@
               <el-table-column prop="date" label="Date" sortable width="180"></el-table-column>
               <el-table-column prop="name" label="姓名" sortable width="180"></el-table-column>
               <el-table-column prop="address" label="地址"></el-table-column>
-            </el-table> -->
+            </el-table>
+             <el-pagination
+            :page-size="pagesize"
+            :pager-count="5"
+            layout="prev, pager, next"
+            @current-change="handleCurrentChange"
+            @size-change="handleSizeChange"
+            :total="tableData.length"
+            ></el-pagination>-->
           </el-tab-pane>
           <el-tab-pane label="EXCHANGES" name="second">
             <el-table
@@ -26,22 +34,22 @@
               :default-sort="{prop: 'date', order: 'descending'}"
             >
               <el-table-column prop="date" label="Date" sortable width="180"></el-table-column>
-              <el-table-column prop="name" label="Opear-tion"  width="180"></el-table-column>
+              <el-table-column prop="name" label="Opear-tion" width="180"></el-table-column>
               <el-table-column prop="address" label="Token"></el-table-column>
               <el-table-column prop="address" label="Amount"></el-table-column>
               <el-table-column prop="address" label="Rusult"></el-table-column>
             </el-table>
           </el-tab-pane>
-          <el-pagination
-            :page-size="pagesize"
-            :pager-count="5"
-            layout="prev, pager, next"
-            @current-change="handleCurrentChange"
-            @size-change="handleSizeChange"
-            :total="tableData.length"
-          ></el-pagination>
         </el-tabs>
       </div>
+      <el-pagination
+        :page-size="pagesize"
+        :pager-count="5"
+        layout="prev, pager, next"
+        @current-change="handleCurrentChange"
+        @size-change="handleSizeChange"
+        :total="tableData.length"
+      ></el-pagination>
     </div>
   </div>
 </template>
@@ -52,7 +60,7 @@ export default {
     return {
       msg: 8888,
       // list: [],
-      pagesize: 5, // 每页条数
+      pagesize: 10, // 每页条数
       currpage: 1, //当前页数
       activeName: "second",
       tableData: [
@@ -163,23 +171,36 @@ export default {
   padding-left: 12px;
   margin-bottom: 0;
   height: 55px;
+}
 
+
+.content .el-pagination{
+  position: absolute;
+  left:50%;
+  transform: translateX(-50%);
+  bottom:78px;
+  background: #302e39;
 }
-/* .box_tap .el-table td,  {
-  border:1px dashed #EBEEF5;
-} */
-.box_tap .el-table td, .el-table th.is-leaf {
-    border-bottom: 1px dashed #EBEEF5;
+.box_tap .el-tab-pane {
+  /* position: relative; */
 }
-.box_tap .el-table td, .el-table th {
-    text-align: center;
+
+.box_tap .el-table td,
+.el-table th.is-leaf {
+  border-bottom: 1px dashed #ebeef5;
+}
+.box_tap .el-table td,
+.el-table th {
+  text-align: center;
+  color: #afb9c7;
 }
 .box_tap .el-tabs__item {
   color: #aaaaaa;
   line-height: 55px;
 }
-.box_tap .el-table th, .el-table tr{
-  background:#302E39;
+.box_tap .el-table th,
+.el-table tr {
+  background: #302e39;
 }
 .box_tap .el-tabs__item.is-active {
   color: #409eff;
@@ -195,6 +216,7 @@ export default {
 <style lang="scss" scoped>
 .content {
   height: 872px;
+  position: relative;
   .title {
     height: 50px;
     width: 1200px;

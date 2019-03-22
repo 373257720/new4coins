@@ -137,7 +137,7 @@ export default {
     // console.log(token);
     this.$axios({
       method: "get",
-      url: "https://113.52.134.95:8004/api/note/wallet_data",
+      url: "http://192.168.1.37:8080/growthing-02/users/wallet_data",
       headers: {
         "Content-type": "application/json",
         Authorization: "Bearer" + " " + token
