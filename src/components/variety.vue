@@ -28,9 +28,20 @@
         </p>
       </div>
       <div class="end fr">
-        <span @click="receive(son.id)" class="btn">RECEIVE</span>
-        <span @click="send(son.id)" class="btn">SEND</span>
+        <span @click="receive(son.id)" class="btn">
+          <el-button type="text" @click="dialogVisible = true">RECEIVE</el-button>
+        </span>
+        <span @click="send(son.id)" class="btn">
+          <el-button type="text" @click="dialogVisible = true">SEND</el-button>
+        </span>
+       
       </div>
+       <el-dialog title="Remind" :visible.sync="dialogVisible" width="30%">
+          <span>Sorry, this service has not been opened yet</span>
+          <span slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="dialogVisible = false">Comfirm</el-button>
+          </span>
+        </el-dialog>
     </div>
   </div>
 </template>
@@ -39,8 +50,10 @@ import axios from "axios";
 export default {
   props: ["son", "walletson"],
   name: "variety",
+ 
   data() {
-    return {
+    return { 
+      dialogVisible: false,
       // son:[{}]
     };
   },
@@ -49,7 +62,7 @@ export default {
   },
   methods: {
     receive(id) {
-      alert("Sorry,this service has not been opened yet");
+      // alert("Sorry,this service has not been opened yet");
       // this.$router.push({
       //   name: "receive",
       //   params: {
@@ -58,7 +71,7 @@ export default {
       // });
     },
     send(id) {
-      alert("Sorry,this service has not been opened yet");
+      // alert("Sorry,this service has not been opened yet");
       // this.$router.push({
       //   name: "send",
       //   params: {
@@ -69,6 +82,21 @@ export default {
   }
 };
 </script>
+<style>
+.end .el-button {
+  /* background: #5ce2ee; */
+  height: 36px;
+  font-size: 14px;
+  color: #5ce2ee;
+  line-height: 13px;
+  font-weight: 600;
+  /* line-height: 40px; */
+  /* width: 100px;  */
+}
+/* .end .el-button span{
+    line-height: 36px;
+  } */
+</style>
 <style lang="scss" scoped>
 #varitey {
   .varitey {
@@ -119,19 +147,18 @@ export default {
       box-sizing: border-box;
       color: #aaaaaa;
       font-size: 14px;
-      >p{
-        span:nth-child(1){
+      > p {
+        span:nth-child(1) {
           display: inline-block;
-            width: 54px;
+          width: 54px;
         }
-        span:nth-child(2){
-           display: inline-block;
-            // width: 54px;
+        span:nth-child(2) {
+          display: inline-block;
+          // width: 54px;
         }
       }
       p:nth-child(1) {
         margin-bottom: 9px;
-       
       }
     }
     .end {
@@ -157,7 +184,7 @@ export default {
         text-align: center;
         line-height: 36px;
         border-radius: 25px;
-        background: #25262e;
+        // background: #59d6e2;
         border: 2px solid #59d6e2;
         // -webkit-box-sizing: border-box;
 

@@ -47,14 +47,15 @@ export default {
     }
   },
   methods: {
-    focuson: function(event) {
+    focuson(event) {
       event.target.focus();
-    }
+    },
+  
   }
 };
 </script>
 
-<style >
+<style>
 @import "element-ui/lib/theme-chalk/index.css";
 @import "./css/base.css";
 
@@ -74,7 +75,10 @@ export default {
   color: white;
   padding-left: 4%;
   padding-right: 10%;
+ 
 }
+
+
 
 .btn {
   cursor: pointer;

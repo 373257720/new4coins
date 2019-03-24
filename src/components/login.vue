@@ -80,7 +80,7 @@ export default {
         //   }
         // })
         this.$axios
-          .get(this.$baseurl.api+"/growthing-02/users/pcLogin", {
+          .get("/walletapi/growthing-02/users/pcLogin", {
             params: {
               email: this.name,
               password: this.password
@@ -110,11 +110,7 @@ export default {
 };
 </script>
 <style>
-/* .name .el-input{
-  height: 40px;
- 
-} */
-/* // .name .password { */
+
 .name input.el-input__inner {
   background: #25262e;
   height: 40px;

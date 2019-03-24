@@ -9,6 +9,8 @@ import exchange from '@/components/exchange'
 import exchange2 from '@/components/exchange2'
 import withdraw from '@/components/withdraw'
 import history from '@/components/history'
+import forgetpassword1 from '@/components/forgetpass_first'
+import forgetpassword2 from '@/components/forgetpass_sec'
 Vue.use(Router)
 
 const routes = [{
@@ -85,9 +87,19 @@ const routes = [{
     }
   },
   {
-    path:'/history',
-    name:'history',
-    component:history
+    path: '/history',
+    name: 'history',
+    component: history
+  },
+  {
+    path:'/forgetpassword1',
+    name:'forgetpassword1',
+    component:forgetpassword1
+  },
+  {
+    path:'/forgetpassword2',
+    name:'forgetpassword2',
+    component:forgetpassword2
   }
 ]
 
@@ -181,5 +193,3 @@ let router = new Router({
 // })
 
 export default router;
-
-

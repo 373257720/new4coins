@@ -11,9 +11,10 @@
           </i>
         </div>
         <ul ref="username" v-show="ok">
-          <li @click="deposit">
-            <img src="../assets/history_icon.png" alt>
-            history
+          <li>
+            <el-button type="text" @click="dialogVisible = true">
+              <img src="../assets/history_icon.png" alt> History
+            </el-button>
           </li>
           <li @click="back">
             <img src="../assets/d5dde342f63280669d570442a3d8511.png" alt>
@@ -34,14 +35,27 @@
       ></variety>
       <div class="content_bottom">
         <div>
-          <span @click="withdraw" class="btn">FIAT WITHDRAW</span>
-          <span @click="deposit" class="btn">FIAT DEPOSIT</span>
+          <span class="btn">
+            <el-button type="text" @click="dialogVisible = true">FIAT WITHDRAW</el-button>
+          </span>
+          <span @click="deposit" class="btn">
+            <el-button type="text" @click="dialogVisible = true">FIAT DEPOSIT</el-button>
+          </span>
         </div>
         <div>
-          <span @click="exchange" class="btn">EXCHANGE</span>
+          <span @click="exchange" class="btn">
+            <el-button type="text" @click="dialogVisible = true">EXCHANGE</el-button>
+          </span>
         </div>
       </div>
     </div>
+
+    <el-dialog title="Remind" :visible.sync="dialogVisible" width="30%">
+      <span>Sorry, this service has not been opened yet</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogVisible = false">Comfirm</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -51,6 +65,7 @@ export default {
   name: "home",
   data() {
     return {
+      dialogVisible: false,
       ok: false, //用户信息的开关
       walletdata: "", //图片数据
       //图标的option
@@ -145,7 +160,7 @@ export default {
     //   // }
     // })
     this.$axios
-      .get("this.$baseurl.api/growthing-02/users/wallet_data?access_token="+token)
+      .get("/walletapi/growthing-02/users/wallet_data?access_token=" + token)
       .then(res => {
         console.log(res.data);
         if (token) {
@@ -167,9 +182,7 @@ export default {
       let user = this.$refs.username;
       //  console.log(this.$refs.username)
     },
-    hidePopoverPanel() {
-      this.popoverPanelShow = false;
-    },
+ 
     //退出登录
     back() {
       sessionStorage.removeItem("token");
@@ -180,7 +193,7 @@ export default {
     },
     //点击跳到取现
     withdraw() {
-      alert("Sorry,this service has not been opened yet");
+      // alert("Sorry,this service has not been opened yet");
       // this.$router.push({
       //   name: "withdraw"
       // });
@@ -190,20 +203,49 @@ export default {
       // this.$router.push({
       //   name: "exchange"
       // });
-      alert("Sorry,this service has not been opened yet");
+      // alert("Sorry,this service has not been opened yet");
     },
     //点击存款
     deposit() {
       // this.$router.push({
       //   name: "deposit"
       // });
-      alert("Sorry,this service has not been opened yet");
+      // alert("Sorry, this service has not been opened yet");
     }
   }
 };
 </script>
 
-
+<style>
+.el-dialog{
+  border-radius: 10px;
+}
+.top_right .el-button{
+      color: #616a71;
+      font-size: 12px;
+}
+.el-dialog__title {
+  font-size: 23px;
+  color:black;
+}
+.el-dialog__header {
+  text-align: center;
+}
+.el-dialog__body {
+  text-align: center;
+  font-size: 18px;
+  color:black;
+}
+.el-button {
+  color: #25262e;
+  font-weight: 700;
+  font-size: 16px;
+}
+.el-button--primary {
+  background: #5ce2ee;
+  border: 0;
+}
+</style>
 <style lang="scss" scoped>
 .signout {
   float: right;
