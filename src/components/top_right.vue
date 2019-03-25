@@ -8,10 +8,9 @@
       </i>
     </div>
     <ul ref="username" v-show="ok">
-      <li>
-      
-          <img src="../assets/history_icon.png" alt> History
-       
+      <li @click="go">
+        <img src="../assets/history_icon.png" alt>
+        History
       </li>
       <li @click="back">
         <img src="../assets/d5dde342f63280669d570442a3d8511.png" alt>
@@ -43,6 +42,11 @@ export default {
       this.$router.push({
         name: "login"
       });
+    },
+    go() {
+      this.$router.push({
+        name: "history"
+      });
     }
   }
 };
@@ -51,7 +55,6 @@ export default {
 //    .top_right .el-button--text{
 //         // color:#616a71;
 //     }
-    
 </style>
 <style lang="scss" scoped>
 .top_right {

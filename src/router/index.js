@@ -165,29 +165,29 @@ let router = new Router({
 });
 // 全局路由守卫
 // 在进入某个路由前执行的代码
-// router.beforeEach((to, from, next) => {
-//   let token = sessionStorage.getItem('token');
-//   if (to.meta.requireAuth) {
-//     // 判断是否登录
-//     if (token) {
-//       next();
-//     } else {
-//       next({
-//         path: '/login'
-//       })
-//     }
-//   } else {
-//     if (to.path === '/login' && token) {
-//       next({
-//         path: '/home'
-//       });
-//     } else {
-//       next();
-//     }
-//     // 要进入to路由，必须调用next()方法
+router.beforeEach((to, from, next) => {
+  let token = sessionStorage.getItem('token');
+  if (to.meta.requireAuth) {
+    // 判断是否登录
+    if (token) {
+      next();
+    } else {
+      next({
+        path: '/login'
+      })
+    }
+  } else {
+    if (to.path === '/login' && token) {
+      next({
+        path: '/home'
+      });
+    } else {
+      next();
+    }
+    // 要进入to路由，必须调用next()方法
 
-//   }
-// });
+  }
+});
 // router.afterEach((to, from) => {
 //   console.log('after')
 // })
