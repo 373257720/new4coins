@@ -80,7 +80,7 @@ export default {
         //   }
         // })
         this.$axios
-          .get(`${this.baseurl}/growthing-02/users/pcLogin`, {
+          .get(this.$baseurl+"/growthing-02/users/pcLogin", {
             params: {
               email: this.name,
               password: this.password

@@ -58,7 +58,7 @@ export default {
   created() {
     var token = sessionStorage.getItem("token");
     this.$axios
-      .get(`${this.baseurl}growthing-02/users/transfer_history`, {
+      .get(`${this.baseurl}/growthing-02/users/transfer_history`, {
         params: {
           limit: 100,
           offset: 0,

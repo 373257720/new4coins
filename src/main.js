@@ -18,7 +18,7 @@ Vue.config.productionTip = false
 var baseurl={
    api:"http://4coins.wearetechman.com",
 }
-Vue.prototype.$baseurl=baseurl
+Vue.prototype.$baseurl=baseurl.api
 
 //在Vue中要给input设置焦点，需要注册自定义指令
 // Vue.directive('focus', function (el) {a
