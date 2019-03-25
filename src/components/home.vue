@@ -11,10 +11,9 @@
           </i>
         </div>
         <ul ref="username" v-show="ok">
-          <li>
-            <el-button type="text" @click="dialogVisible = true">
-              <img src="../assets/history_icon.png" alt> History
-            </el-button>
+          <li @click="go">
+            <img src="../assets/history_icon.png" alt>
+            History
           </li>
           <li @click="back">
             <img src="../assets/d5dde342f63280669d570442a3d8511.png" alt>
@@ -160,7 +159,7 @@ export default {
     //   // }
     // })
     this.$axios
-      .get("/walletapi/growthing-02/users/wallet_data?access_token=" + token)
+      .get(this.$baseurl+"/growthing-02/users/wallet_data?access_token=" + token)
       .then(res => {
         console.log(res.data);
         if (token) {
@@ -182,7 +181,7 @@ export default {
       let user = this.$refs.username;
       //  console.log(this.$refs.username)
     },
- 
+
     //退出登录
     back() {
       sessionStorage.removeItem("token");
@@ -211,35 +210,52 @@ export default {
       //   name: "deposit"
       // });
       // alert("Sorry, this service has not been opened yet");
+    },
+    go() {
+      this.$router.push({
+        name: "history"
+      });
+      // alert("Sorry, this service has not been opened yet");
     }
   }
 };
 </script>
 
 <style>
-.el-dialog{
-  border-radius: 10px;
+.el-dialog {
+  /* border-radius: 10px; */
+  background: #373542;
 }
-.top_right .el-button{
-      color: #616a71;
-      font-size: 12px;
+.top_right .el-button {
+  color: #616a71;
+  font-size: 12px;
 }
 .el-dialog__title {
-  font-size: 23px;
-  color:black;
+  font-size: 24px;
+  color: #fefefc;
 }
+
 .el-dialog__header {
   text-align: center;
+  padding: 50px 20px 13px;
 }
 .el-dialog__body {
   text-align: center;
-  font-size: 18px;
-  color:black;
+  font-size: 14px;
+  color: #aaaaa8;
+  padding: 0px 20px 27px;
 }
 .el-button {
   color: #25262e;
   font-weight: 700;
   font-size: 16px;
+  width: 100%;
+}
+.el-dialog__footer {
+  text-align: center;
+}
+.el-dialog__footer .el-button {
+  width: 106px;
 }
 .el-button--primary {
   background: #5ce2ee;

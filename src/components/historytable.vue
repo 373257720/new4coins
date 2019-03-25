@@ -5,11 +5,38 @@
       style="width: 100%"
       :default-sort="{prop: 'CreatedStr', order: 'descending'}"
     >
-      <el-table-column prop="CreatedStr" :label="tablehead[0]" sortable width="180"></el-table-column>
-      <el-table-column prop="date" :label="tablehead[1]" width="180"></el-table-column>
-      <el-table-column prop="date" :label="tablehead[2]"></el-table-column>
-      <el-table-column prop="date" :label="tablehead[3]"></el-table-column>
-      <el-table-column prop="date" :label="tablehead[4]"></el-table-column>
+      <el-table-column prop="CreatedStr" :label="tablehead[0]" width="180" sortable>
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{ scope.row.CreatedStr }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column :label="tablehead[1]">
+        <template slot-scope="scope">
+          <div slot="reference" class="name-wrapper">{{type[scope.row.Type]}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column :label="tablehead[2]">
+        <template slot-scope="scope">
+          <div slot="reference" class="name-wrapper">
+            <span>{{scope.row.CurrencyTo==""?"-":scope.row.CurrencyTo}}</span>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column :label="tablehead[3]">
+        <template slot-scope="scope">
+          <div slot="reference" class="name-wrapper">
+            <span>{{scope.row.Type==2?scope.row.AmountTo:-scope.row.AmountTo}}</span>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column :label="tablehead[4]">
+        <template slot-scope="scope">
+          <el-tooltip placement="top">
+            <div slot="content">{{resultimg[scope.row.State].inf}}</div>
+            <img :src="resultimg[scope.row.State].text" alt>
+          </el-tooltip>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       :page-size="pagesize"
@@ -32,22 +59,51 @@ export default {
       pagesize: 10, // 每页条数
       newdata: "",
       // transfer_currpage:1,
-      currpage: 1 //当前页数
+      currpage: 1,
+      //当前页数
+      //sort-change绑定方法具有参数：column，这是一个对象
+      // column: {
+      //   prop: "CreatedStr", // el-table-column中的prop
+      //   order: "descending" // 'ascending' or 'descending'
+      // },
+      type: [
+        "Send",
+        "Withdrawal",
+        "Deposit",
+        "Fiat" + " " + "to" + " " + "Fiat",
+        "Fiat" + " " + "to" + " " + "Note",
+        "Note" + " " + "to" + " " + "Fiat",
+        "Note" + " " + "to" + " " + "Note",
+        "Fee"
+      ],
+      resultimg: [
+        {
+          inf: "deals are done",
+          text: require("../assets/rusult_complete.png")
+        },
+        {
+          inf: "deals are Pending",
+          text: require("../assets/rusult_complete.png")
+        },
+        {
+          inf: "deals are failed",
+          text: require("../assets/result_failed.png")
+        }
+      ]
     };
   },
   created() {
     //  this.newdata=this.transfer.CreatedStr
-    // console.log(typeof(this.transfer));
-    for (let i = 0; i < this.transfer.length; i++) {
-        // console.log(this.transfer[i].CreatedStr)
-      var str=this.transfer[i].CreatedStr
-      var time = str.slice(-8);  
-      var date=str.slice(0,2)
-      var month=str.slice(3,5)
-      var year=str.slice(6,10)
-      this.transfer[i].CreatedStr=`${year}-${month}-${date} ${time}`
-
-    }
+    // console.log(this.transfer);
+    // for (let i = 0; i < this.transfer.length; i++) {
+    //     // console.log(this.transfer[i].CreatedStr)
+    //   var str=this.transfer[i].CreatedStr
+    //   var time = str.slice(-8);
+    //   var date=str.slice(0,2)
+    //   var month=str.slice(3,5)
+    //   var year=str.slice(6,10)
+    //   this.transfer[i].CreatedStr=`${year}-${month}-${date} ${time}`
+    // }
   },
   methods: {
     handleCurrentChange(cpage) {
@@ -56,10 +112,28 @@ export default {
     handleSizeChange(psize) {
       this.pagesize = psize;
     }
+    // sort_change(column) {
+    //   this.current_page = 1; // return to the first page after sorting
+    //   if (column.prop === "col_1") {
+    //     if (column.order === "descending") {
+    //       this.transfer = this.transfer.sort(this.my_desc_sort);
+    //     } else if (column.order === "ascending") {
+    //       this.transfer = this.transfer.sort(this.my_asc_sort);
+    //     }
+    //   }
+    //   this.transfer = this.transfer.slice((this.currpage - 1) * this.pagesize, this.currpage * this.pagesize); // show only one page
+    // }
   }
 };
 </script>
 <style>
+.el-table__header-wrapper {
+  /* height: 50px; */
+}
+.el-table td,
+.el-table th {
+  padding: 7px 0;
+}
 .box_tap .el-tabs__content {
   height: 650px;
 }

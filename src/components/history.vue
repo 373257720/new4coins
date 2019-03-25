@@ -9,10 +9,10 @@
         <!-- <img src="../assets/up.png" alt> -->
         <p>History</p>
       </div>
-
       <div class="box_tap">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="TRANSFERS" name="first">
+            <div class="norecord" v-if="transferdata.length<=0">No record</div>
             <historytable
               :transfer="transferdata"
               :tablehead="transferhead"
@@ -20,10 +20,11 @@
             ></historytable>
           </el-tab-pane>
           <el-tab-pane label="EXCHANGES" name="second">
+            <div class="norecord" v-if="exchangedata.length<=0">No record</div>
             <historyexchange
-              :transfer="table"
+              :transfer="exchangedata"
               :tablehead="exchangehead"
-              v-if="transferdata.length>0"
+              v-if="exchangedata.length>0"
             ></historyexchange>
           </el-tab-pane>
         </el-tabs>
@@ -51,191 +52,27 @@ export default {
       exchangehead: ["Date", "Opear-tion", "Token", "Amount", "Result"],
       transferdata: [],
       exchangedata: [],
-      table: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        }
-      ],
 
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        }
-      ]
     };
   },
   created() {
     var token = sessionStorage.getItem("token");
     this.$axios
-      .get("/walletapi/growthing-02/users/transfer_history", {
+      .get(`${this.baseurl}growthing-02/users/transfer_history`, {
         params: {
           limit: 100,
           offset: 0,
           access_token: token
         }
-      })
+      })  
       .then(res => {
         this.transferdata = res.data.records;
-        // console.log(this.transferdata)
+        // console.log(this.transferdata.length)
       })
       .catch(err => {});
 
     this.$axios
-      .get("/walletapi/growthing-02/users/exchange_history", {
+      .get(`${this.baseurl}/growthing-02/users/exchange_history`, {
         params: {
           limit: 100,
           offset: 0,
@@ -245,8 +82,8 @@ export default {
       .then(res => {
         // console.log(res.data);
         if (res.data.status == "success") {
-          this.exchangedata = res.data;
-          // console.log(res.data.records)
+          this.exchangedata = res.data.records;
+          console.log(res.data.records)
         }
       })
       .catch(err => {
@@ -320,6 +157,12 @@ export default {
       height: 50px;
     }
   }
+}
+.norecord{
+  color:#aaaaaa;
+  font-size: 16px;
+ text-align: center;
+ margin-top:100px;
 }
 </style>
 

@@ -49,7 +49,7 @@ export default {
 </style>
 <style lang="scss" scopd>
 .content {
-  height: 872px;
+  height: 866px;
   position: relative;
   .title {
     height: 50px;
