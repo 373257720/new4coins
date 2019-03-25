@@ -15,10 +15,12 @@ import store from './store/index.js'
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 
-var baseurl={
-   api:"http://",
+const instance = axios.create({
+  baseURL: baseUrl
+})
+export function login(params = {}) {
+  return instance.post('/duty/login', qs.stringify(params))
 }
-Vue.prototype.$baseurl=baseurl
 
 //在Vue中要给input设置焦点，需要注册自定义指令
 // Vue.directive('focus', function (el) {a
