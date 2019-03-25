@@ -16,7 +16,7 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false
 
 var baseurl={
-   api:"http://",
+   api:"http://4coins.wearetechman.com",
 }
 Vue.prototype.$baseurl=baseurl
 
