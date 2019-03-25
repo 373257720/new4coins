@@ -159,7 +159,7 @@ export default {
     //   // }
     // })
     this.$axios
-      .get(`${this.$baseurl}/growthing-02/users/wallet_data?access_token="${token}`)
+      .get(`${this.$baseurl}/growthing-02/users/wallet_data?access_token=${token}`)
       .then(res => {
         console.log(res.data);
         if (token) {
