@@ -83,7 +83,7 @@ export default {
         // console.log(res.data);
         if (res.data.status == "success") {
           this.exchangedata = res.data.records;
-          console.log(res.data.records)
+          // console.log(res.data.records)
         }
       })
       .catch(err => {

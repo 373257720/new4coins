@@ -1,11 +1,10 @@
 <template>
   <div class="historytable">
     <el-table
-      :data="transfer.slice((currpage - 1) * pagesize, currpage * pagesize)"
-      style="width: 100%"
-      :default-sort="{prop: 'CreatedStr', order: 'descending'}"
-    >
-      <el-table-column :label="tablehead[0]" width="180" sortable>
+       :data="transfer.slice((currpage - 1) * pagesize, currpage * pagesize)"
+       style="width: 100%" 
+      :default-sort="{prop: 'CreatedStr', order: 'ascending'}" >
+      <el-table-column :label="tablehead[0]" width="180" sortable prop="CreatedStr">
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{ scope.row.CreatedStr}}</span>
         </template>
@@ -37,7 +36,7 @@
       </el-table-column>
       <el-table-column :label="tablehead[4]">
         <template slot-scope="scope">
-          <el-tooltip placement="top" >
+          <el-tooltip placement="top">
             <div slot="content">{{resultimg[scope.row.State].inf}}</div>
             <img :src="resultimg[scope.row.State].text" alt>
           </el-tooltip>
@@ -59,7 +58,7 @@
 export default {
   name: "historyexchange",
   props: ["transfer", "tablehead"],
-
+  
   data() {
     return {
       // currencyfrom:
@@ -84,7 +83,7 @@ export default {
         },
         {
           inf: "deals are Pending",
-          text: require("../assets/rusult_complete.png")
+          text: require("../assets/2517c241736f218dd6561f2dab31812.png")
         },
         {
           inf: "deals are failed",
@@ -107,7 +106,12 @@ export default {
     },
     handleSizeChange(psize) {
       this.pagesize = psize;
-    }
+    },
+
+
+ 
+ 
+
   }
 };
 </script>

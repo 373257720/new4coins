@@ -1,10 +1,13 @@
 <template>
   <div class="historytable">
     <el-table
-      :data="transfer.slice((currpage - 1) * pagesize, currpage * pagesize)"
+      :data="fillter.slice((currpage - 1) * pagesize, currpage * pagesize)"
       style="width: 100%"
+      
       :default-sort="{prop: 'CreatedStr', order: 'descending'}"
     >
+      <!-- @sort-change="sort_change" -->
+      <!-- "transfer.slice((currpage - 1) * pagesize, currpage * pagesize)" -->
       <el-table-column prop="CreatedStr" :label="tablehead[0]" width="180" sortable>
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{ scope.row.CreatedStr }}</span>
@@ -58,8 +61,8 @@ export default {
     return {
       pagesize: 10, // 每页条数
       newdata: "",
-      // transfer_currpage:1,
       currpage: 1,
+      fillter: [],
       //当前页数
       //sort-change绑定方法具有参数：column，这是一个对象
       // column: {
@@ -83,7 +86,7 @@ export default {
         },
         {
           inf: "deals are Pending",
-          text: require("../assets/rusult_complete.png")
+          text: require("../assets/2517c241736f218dd6561f2dab31812.png")
         },
         {
           inf: "deals are failed",
@@ -93,17 +96,9 @@ export default {
     };
   },
   created() {
-    //  this.newdata=this.transfer.CreatedStr
-    // console.log(this.transfer);
-    // for (let i = 0; i < this.transfer.length; i++) {
-    //     // console.log(this.transfer[i].CreatedStr)
-    //   var str=this.transfer[i].CreatedStr
-    //   var time = str.slice(-8);
-    //   var date=str.slice(0,2)
-    //   var month=str.slice(3,5)
-    //   var year=str.slice(6,10)
-    //   this.transfer[i].CreatedStr=`${year}-${month}-${date} ${time}`
-    // }
+    this.fillter = [...this.transfer];
+    // this.fillter=[...this.transfer]
+    // console.log(this.fillter);
   },
   methods: {
     handleCurrentChange(cpage) {
@@ -111,17 +106,56 @@ export default {
     },
     handleSizeChange(psize) {
       this.pagesize = psize;
-    }
+    },
+    // sort_change(column) {
+    //   this.currpage = 1; // return to the first page after sorting
+    //   // console.log(column);
+
+    //   if (column.prop === "CreatedStr") {
+    //     if (column.order === "descending") {
+    //       this.fillter = this.fillter.sort(function(a,b){
+    //          return  b.CreatedStr - a.CreatedStr
+    //       });
+    //     } else if (column.order === "ascending") {
+    //       // this.this.transfer = this.transfer.sort(this.my_desc_sort);
+    //        this.fillter = this.fillter.sort(function(a,b){
+    //          return   a.CreatedStr - b.CreatedStr
+    //       });
+    //     }
+    //   }
+    //   this.fillter = this.fillter.slice((this.currpage - 1) * this.pagesize, this.currpage * this.pagesize); // show only one page
+    // }
+    // my_desc_sort(a, b) {
+    //   if (a.CreatedStr > b.CreatedStr) {
+    //     return -1;
+    //   } else if (a.CreatedStr < b.CreatedStr) {
+    //     return 1;
+    //   } else {
+    //     return 0;
+    //   }
+    // },
+    // my_asc_sort(a, b) {
+    //   if (a.CreatedStr < b.CreatedStr) {
+    //     return -1;
+    //   } else if (a.CreatedStr > b.CreatedStr) {
+    //     return 1;
+    //   } else {
+    //     return 0;
+    //   }
+    // },
     // sort_change(column) {
     //   this.current_page = 1; // return to the first page after sorting
     //   if (column.prop === "col_1") {
     //     if (column.order === "descending") {
-    //       this.transfer = this.transfer.sort(this.my_desc_sort);
+    //       this.fillter = this.fillter.sort(this.my_desc_sort);
     //     } else if (column.order === "ascending") {
-    //       this.transfer = this.transfer.sort(this.my_asc_sort);
+    //       this.fillter = this.fillter.sort(this.my_asc_sort);
     //     }
     //   }
-    //   this.transfer = this.transfer.slice((this.currpage - 1) * this.pagesize, this.currpage * this.pagesize); // show only one page
+    //   this.fillter = this.fillter.slice(
+    //     (this.currpage - 1) * this.pagesize,
+    //     this.currpage * this.pagesize
+    //   ); // show only one page
     // }
   }
 };

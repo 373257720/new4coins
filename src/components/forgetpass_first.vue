@@ -9,16 +9,19 @@
       <div class="box_password">
         <div class="inputaccout">
           <p>Input accout</p>
-          <el-input v-model="input10" clearable></el-input>
+          <el-input v-model="inputaccount" clearable></el-input>
         </div>
         <div class="GraphicVerificationCode">
           <p>Graphic Verification Code</p>
           <div>
-            <el-input v-model="input10" clearable></el-input>
-            <span class="code">code</span>
+            <el-input v-model="VerificationCode" clearable></el-input>
+            <span class="code btn" @click="getcode">{{code}}</span>
+            <!-- <span v-show="!show" class="count">{{count}} s</span> -->
           </div>
+              <aside>{{this.warn}}</aside>
         </div>
-        <div class="btn">Next step</div>
+     
+        <div class="btn" @click="nextstep">Next step</div>
       </div>
     </div>
   </div>
@@ -26,10 +29,48 @@
 <script>
 export default {
   name: "forgetpassword1",
+
   data() {
     return {
-      input10: ""
+      show: true, //驗證碼開關
+      count: "", //驗證碼倒計時
+      timer: null,
+      code: "Code",
+      inputaccount: "",
+      warn:null,
+      VerificationCode: ""
     };
+  },
+  methods: {
+    randomnum(num) {
+      var str =
+        "0123456789abcdefghijklmnopqrstuvwsyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      var arr = [];
+      for (var i = 0; i < num; i++) {
+        var random = parseInt(Math.random() * 62);
+        var a = str.charAt(random);
+        arr.push(a);
+      }
+      return arr.join("");
+    },
+    getcode() {
+     
+      this.code = this.randomnum(4);
+      const TIME_COUNT = 5;
+    },
+    nextstep(){
+       this.warn="";
+        if(this.inputaccount && this.VerificationCode){
+            if(dsf){
+                //請求這個用戶是否存在
+            }else{
+              this.warn="Incorrect Accout or Verification Code"
+            }
+
+        }else{
+            this.warn="Accout or Verification Code can not be empty"
+        }
+    }
   }
 };
 </script>
@@ -83,7 +124,13 @@ export default {
       }
     }
     .GraphicVerificationCode {
-      margin-bottom: 55px;
+      margin-bottom: 55px; 
+      aside{
+        text-align: center;
+        height: 55px;
+        line-height: 55px;
+        color:#f56c6c;
+      }
       div {
         height: 40px;
         .code {
@@ -91,8 +138,9 @@ export default {
           height: 40px;
           width: 178px;
 
-          background: #5ce2ee;
+          background: white;
           float: right;
+          color:#2e4b53;
           border-radius: 2px;
           text-align: center;
           line-height: 40px;

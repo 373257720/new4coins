@@ -190,6 +190,24 @@ export default {
         name: "login"
       });
     },
+     goto(name, id) {
+      // 编程式路由导航：获取router实例
+      // this.$router  路由实例（包含跳转等方法）
+      // this.$route   当前路由信息
+      // console.log(this.$route,this.$router)
+      // 路由传参
+      let obj = { name };
+      if (name === "Search") {
+        obj.params = { keyword: this.hotmovie, a: 100, name: "tiantian" };
+        // obj.query = {keyword:this.hotmovie};//保存在url地址中，刷新后还存在
+      } else if (id) {
+        obj.params = { id };
+      }
+      // else{
+      //   obj.params = {go:true}
+      // }
+      this.$router.push(obj);
+    },
     //点击跳到取现
     withdraw() {
       // alert("Sorry,this service has not been opened yet");
