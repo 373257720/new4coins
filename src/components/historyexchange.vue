@@ -6,7 +6,7 @@
       @sort-change="sort_change"
       :default-sort="{prop: 'CreatedStr', order: 'ascending'}"
     >
-      <el-table-column :label="tablehead[0]" width="180" sortable prop="CreatedStr">
+      <el-table-column :label="tablehead[0]" width="230" sortable prop="CreatedStr">
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{ scope.row.CreatedStr}}</span>
         </template>

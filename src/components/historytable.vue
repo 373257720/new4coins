@@ -7,7 +7,7 @@
       :default-sort="{prop: 'CreatedStr', order: 'descending'}"
     >
       <!-- "transfer.slice((currpage - 1) * pagesize, currpage * pagesize)" -->
-      <el-table-column prop="CreatedStr" :label="tablehead[0]" width="180" sortable>
+      <el-table-column prop="CreatedStr" :label="tablehead[0]" width="230" sortable>
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{ scope.row.CreatedStr }}</span>
         </template>
