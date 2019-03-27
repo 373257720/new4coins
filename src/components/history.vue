@@ -1,7 +1,7 @@
 <template>
   <div class="history">
     <div id="top">
-      NETNOTE
+      <h2 class="btn" @click="goto('home')">NETNOTE</h2>
       <topright></topright>
     </div>
     <div class="content con">
@@ -35,7 +35,7 @@
 <script>
 import historytable from "@/components/historytable";
 import historyexchange from "@/components/historyexchange";
-import topright from "@/components/top_right"
+import topright from "@/components/top_right";
 export default {
   name: "history",
   components: {
@@ -51,8 +51,7 @@ export default {
       transferhead: ["Date", "Opear-tion", "Token", "Amount", "Result"],
       exchangehead: ["Date", "Opear-tion", "Token", "Amount", "Result"],
       transferdata: [],
-      exchangedata: [],
-
+      exchangedata: []
     };
   },
   created() {
@@ -62,9 +61,9 @@ export default {
         params: {
           limit: 100,
           offset: 0,
-          access_token: token
+          // access_token: token
         }
-      })  
+      })
       .then(res => {
         this.transferdata = res.data.records;
         // console.log(this.transferdata.length)
@@ -76,7 +75,7 @@ export default {
         params: {
           limit: 100,
           offset: 0,
-          access_token: token
+          // access_token: token
         }
       })
       .then(res => {
@@ -92,11 +91,20 @@ export default {
   },
   methods: {
     //tap切换
-    handleClick(tab, event) {}
-    // //点击当前页面
-    // current_change: function(currentPage) {
-    //   this.currentPage = currentPage;
-    // }
+    handleClick(tab, event) {},
+      goto(name, id) {
+      // 编程式路由导航：获取router实例
+      // this.$router  路由实例（包含跳转等方法）
+      // this.$route   当前路由信息
+      // console.log(this.$route,this.$router)
+      // 路由传参
+      let obj = { name };
+      // console.log(obj)
+       if (id) {
+        obj.params = { id };
+      }
+      this.$router.push(obj);
+    }
   }
 };
 </script>
@@ -158,11 +166,11 @@ export default {
     }
   }
 }
-.norecord{
-  color:#aaaaaa;
+.norecord {
+  color: #aaaaaa;
   font-size: 16px;
- text-align: center;
- margin-top:100px;
+  text-align: center;
+  margin-top: 100px;
 }
 </style>
 

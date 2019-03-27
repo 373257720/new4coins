@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="content">
-      <div class="trend" ref="mychart" style="margin-top:14px;">
+      <div class="trend" ref="mychart" style="padding-top:14px;">
         <img src="../assets/d57bcb765433304e7ca905009882f84.png" alt>
       </div>
       <variety
@@ -159,7 +159,7 @@ export default {
     //   // }
     // })
     this.$axios
-      .get(`${this.$baseurl}/growthing-02/users/wallet_data?access_token=${token}`)
+      .get(`${this.$baseurl}/growthing-02/users/wallet_data`)
       .then(res => {
         console.log(res.data);
         if (token) {
@@ -341,6 +341,7 @@ export default {
 .trend {
   width: 1200px;
   margin: 0 auto;
+  box-sizing: border-box;
   height: 400px;
   margin-bottom: 40px;
 }

@@ -70,13 +70,19 @@ export default {
 #top {
   height: 60px;
   background: #25262e;
-  font-size: 24px;
+  font-size: 30px;
   line-height: 60px;
   color: white;
   padding-left: 4%;
   padding-right: 10%;
+  
  
 }
+#top h2{
+  width: 140px;
+  float: left;
+}
+
 
 
 

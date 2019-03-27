@@ -18,9 +18,9 @@
             <span class="code btn" @click="getcode">{{code}}</span>
             <!-- <span v-show="!show" class="count">{{count}} s</span> -->
           </div>
-              <aside>{{this.warn}}</aside>
+          <aside>{{this.warn}}</aside>
         </div>
-     
+
         <div class="btn" @click="nextstep">Next step</div>
       </div>
     </div>
@@ -37,7 +37,7 @@ export default {
       timer: null,
       code: "Code",
       inputaccount: "",
-      warn:null,
+      warn: null,
       VerificationCode: ""
     };
   },
@@ -54,22 +54,20 @@ export default {
       return arr.join("");
     },
     getcode() {
-     
       this.code = this.randomnum(4);
       const TIME_COUNT = 5;
     },
-    nextstep(){
-       this.warn="";
-        if(this.inputaccount && this.VerificationCode){
-            if(dsf){
-                //請求這個用戶是否存在
-            }else{
-              this.warn="Incorrect Accout or Verification Code"
-            }
-
-        }else{
-            this.warn="Accout or Verification Code can not be empty"
+    nextstep() {
+      this.warn = "";
+      if (this.inputaccount && this.VerificationCode) {
+        if (dsf) {
+          //請求這個用戶是否存在
+        } else {
+          this.warn = "Incorrect Accout or Verification Code";
         }
+      } else {
+        this.warn = "Accout or Verification Code can not be empty";
+      }
     }
   }
 };
@@ -124,12 +122,12 @@ export default {
       }
     }
     .GraphicVerificationCode {
-      margin-bottom: 55px; 
-      aside{
+      margin-bottom: 55px;
+      aside {
         text-align: center;
         height: 55px;
         line-height: 55px;
-        color:#f56c6c;
+        color: #f56c6c;
       }
       div {
         height: 40px;
@@ -140,7 +138,7 @@ export default {
 
           background: white;
           float: right;
-          color:#2e4b53;
+          color: #2e4b53;
           border-radius: 2px;
           text-align: center;
           line-height: 40px;

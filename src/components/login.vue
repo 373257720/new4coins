@@ -68,8 +68,8 @@ export default {
         // const url ="http://192.168.1.37:8080"
         this.warn = "";
         // this.$axios({
-        //   method: "get",
-        //   url: "/newlogin/growthing-02/users/pcLogin",
+        //   method: "post",
+        //   url: this.$baseurl + "/growthing-02/users/pcLogin",
         //   // url: 192.168.1.37:8080/growthing-02/users/pcLogin
         //   // headers: {
         //   //   "Content-type": "application/json"
@@ -78,26 +78,26 @@ export default {
         //     email: this.name,
         //     password: this.password
         //   }
-        // })
-        this.$axios
-          .get(this.$baseurl+"/growthing-02/users/pcLogin", {
-            params: {
-              email: this.name,
-              password: this.password
-            }
-          })
+        // });
+        this.$axios({
+          method: "post",
+          url: this.$baseurl+"/growthing-02/users/pcLogin",
+          data: {
+            email: this.name,
+            password: this.password
+          }
+        })
           .then(res => {
-            
-            if (res.data.Status == "success") {
-              console.log(res.data);
+            // if (res.data.Status == "success") {
+              console.log(111);
               this.$store.dispatch("setUser", this.name);
               sessionStorage.setItem("token", res.data.Token.access_token);
               this.$router.push({
                 name: "home"
               });
-            } else {
-              this.warn = "Incorrect username or password.";
-            }
+            // } else {
+            //   this.warn = "Incorrect username or password.";
+            // }
           })
           .catch(err => {
             //console.log(err); //错误信息
@@ -110,7 +110,6 @@ export default {
 };
 </script>
 <style>
-
 .name input.el-input__inner {
   background: #25262e;
   height: 40px;

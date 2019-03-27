@@ -15,7 +15,7 @@
             autofocus
             v-focus
             show-password
-            @focus="confirm"
+            @focus="dispear"
           ></el-input>
           <span v-if="!newpasswordreg" class="judge">password can not be empty</span>
         </div>
@@ -52,6 +52,7 @@
           </div>
         </div>
         <div class="btn" @click="submit">SUBMIT</div>
+        <div class="btn" @click="submit" style="">SUBMIT</div>
       </div>
     </div>
   </div>
@@ -88,6 +89,10 @@ export default {
       var e = e.target;
       e.style.border = 0;
       this.judge = true;
+      this.newpasswordreg=true
+    },
+    remind(e) {
+      var e = e.target;
     },
     confirm(e) {
       if (this.confirmpassword !== this.newpassword) {
@@ -127,7 +132,7 @@ export default {
         // }
       } else {
         // console.log("")
-        this.newpasswordreg = false;
+        // this.newpasswordreg = false;
       }
     }
   }

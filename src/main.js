@@ -9,6 +9,9 @@ import qs from "qs";
 import 'babel-polyfill' //ie浏览器
 Vue.prototype.$qs = qs;
 Vue.prototype.$axios = axios;
+// 全局函数
+import global_func from "./global/global_func"
+Vue.use(global_func);
 //实例化 store
 import store from './store/index.js'
 // Vue.prototype.$axios = axios;
@@ -16,10 +19,25 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false
 
 var baseurl={
-   api:"http://4coins.wearetechman.com",
-  //  api:"http://113.52.134.95:8080"
+  //  api:"http://4coins.wearetechman.com",
+  //  api:"http://113.52.134.95:8080",
+   api:"http://192.168.1.37:8080",
+
 }
 Vue.prototype.$baseurl=baseurl.api
+
+//设置axios为form-data
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.transformRequest = [function (data) {
+    let ret = ''
+    for (let it in data) {
+      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+    }
+    return ret
+}]
+//然后再修改原型链
+Vue.prototype.$axios = axios
 
 //在Vue中要给input设置焦点，需要注册自定义指令
 // Vue.directive('focus', function (el) {a
