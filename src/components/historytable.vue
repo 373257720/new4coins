@@ -3,10 +3,9 @@
     <el-table
       :data="fillter.slice((currpage - 1) * pagesize, currpage * pagesize)"
       style="width: 100%"
-      
+      @sort-change="sort_change"
       :default-sort="{prop: 'CreatedStr', order: 'descending'}"
     >
-      <!-- @sort-change="sort_change" -->
       <!-- "transfer.slice((currpage - 1) * pagesize, currpage * pagesize)" -->
       <el-table-column prop="CreatedStr" :label="tablehead[0]" width="180" sortable>
         <template slot-scope="scope">
@@ -81,7 +80,7 @@ export default {
       ],
       resultimg: [
         {
-          inf: "deals are done",
+          inf: "deals were done",
           text: require("../assets/rusult_complete.png")
         },
         {
@@ -89,7 +88,7 @@ export default {
           text: require("../assets/2517c241736f218dd6561f2dab31812.png")
         },
         {
-          inf: "deals are failed",
+          inf: "Declined by admin",
           text: require("../assets/result_failed.png")
         }
       ]
@@ -97,8 +96,16 @@ export default {
   },
   created() {
     this.fillter = [...this.transfer];
-    // this.fillter=[...this.transfer]
-    // console.log(this.fillter);
+    for (let i = 0; i < this.fillter.length; i++) {
+      var str = this.fillter[i].CreatedStr;
+      var date = str.slice(0,2);
+      var month =str.slice(3,5);
+      var year =str.slice(6,10)
+      var time= str.slice(11);
+      str=`${year}-${month}-${date} ${time}`
+      this.fillter[i].CreatedStr=str
+      
+    }
   },
   methods: {
     handleCurrentChange(cpage) {
@@ -107,56 +114,27 @@ export default {
     handleSizeChange(psize) {
       this.pagesize = psize;
     },
-    // sort_change(column) {
-    //   this.currpage = 1; // return to the first page after sorting
-    //   // console.log(column);
-
-    //   if (column.prop === "CreatedStr") {
-    //     if (column.order === "descending") {
-    //       this.fillter = this.fillter.sort(function(a,b){
-    //          return  b.CreatedStr - a.CreatedStr
-    //       });
-    //     } else if (column.order === "ascending") {
-    //       // this.this.transfer = this.transfer.sort(this.my_desc_sort);
-    //        this.fillter = this.fillter.sort(function(a,b){
-    //          return   a.CreatedStr - b.CreatedStr
-    //       });
-    //     }
-    //   }
-    //   this.fillter = this.fillter.slice((this.currpage - 1) * this.pagesize, this.currpage * this.pagesize); // show only one page
-    // }
-    // my_desc_sort(a, b) {
-    //   if (a.CreatedStr > b.CreatedStr) {
-    //     return -1;
-    //   } else if (a.CreatedStr < b.CreatedStr) {
-    //     return 1;
-    //   } else {
-    //     return 0;
-    //   }
-    // },
-    // my_asc_sort(a, b) {
-    //   if (a.CreatedStr < b.CreatedStr) {
-    //     return -1;
-    //   } else if (a.CreatedStr > b.CreatedStr) {
-    //     return 1;
-    //   } else {
-    //     return 0;
-    //   }
-    // },
-    // sort_change(column) {
-    //   this.current_page = 1; // return to the first page after sorting
-    //   if (column.prop === "col_1") {
-    //     if (column.order === "descending") {
-    //       this.fillter = this.fillter.sort(this.my_desc_sort);
-    //     } else if (column.order === "ascending") {
-    //       this.fillter = this.fillter.sort(this.my_asc_sort);
-    //     }
-    //   }
-    //   this.fillter = this.fillter.slice(
-    //     (this.currpage - 1) * this.pagesize,
-    //     this.currpage * this.pagesize
-    //   ); // show only one page
-    // }
+    sort_change(column) {
+      // this.currpage = 1; // return to the first page after sorting
+      if (column.prop === "CreatedStr") {
+        if (column.order === "descending") {
+          this.fillter.sort(function(a, b) {
+            return (
+              Date.parse(b.CreatedStr.replace(/-/g, "/")) -
+              Date.parse(a.CreatedStr.replace(/-/g, "/"))
+            );
+          });
+          // console.log(this.fillter);
+        } else if (column.order === "ascending") {
+          this.fillter.sort(function(a, b) {
+            return (
+              Date.parse(a.CreatedStr.replace(/-/g, "/")) -
+              Date.parse(b.CreatedStr.replace(/-/g, "/"))
+            );
+          });
+        }
+      }
+    }
   }
 };
 </script>
@@ -185,7 +163,7 @@ export default {
 }
 .el-pagination .el-pager li {
   background: 0;
-  font-size: 18px;
+  font-size: 14px;
 }
 .historytable .el-pagination {
   color: #aaa;

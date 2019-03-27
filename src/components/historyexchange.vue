@@ -1,9 +1,11 @@
 <template>
   <div class="historytable">
     <el-table
-       :data="transfer.slice((currpage - 1) * pagesize, currpage * pagesize)"
-       style="width: 100%" 
-      :default-sort="{prop: 'CreatedStr', order: 'ascending'}" >
+      :data="transfer.slice((currpage - 1) * pagesize, currpage * pagesize)"
+      style="width: 100%"
+      @sort-change="sort_change"
+      :default-sort="{prop: 'CreatedStr', order: 'ascending'}"
+    >
       <el-table-column :label="tablehead[0]" width="180" sortable prop="CreatedStr">
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{ scope.row.CreatedStr}}</span>
@@ -58,7 +60,7 @@
 export default {
   name: "historyexchange",
   props: ["transfer", "tablehead"],
-  
+
   data() {
     return {
       // currencyfrom:
@@ -78,7 +80,7 @@ export default {
       ],
       resultimg: [
         {
-          inf: "deals are done",
+          inf: "deals were done",
           text: require("../assets/rusult_complete.png")
         },
         {
@@ -86,19 +88,23 @@ export default {
           text: require("../assets/2517c241736f218dd6561f2dab31812.png")
         },
         {
-          inf: "deals are failed",
+          inf: "Declined by admin",
           text: require("../assets/result_failed.png")
         }
       ]
     };
   },
   created() {
-    // for (let i = 0; i < this.transfer.length; i++) {
-    //   // console.log(this.transfer[i].CreatedStr)
-    //   var from = this.transfer[i].CurrencyFrom;
-    //   var to = this.transfer[i].CurrencyTo;
-    //   this.transfer[i].CurrencyFrom = `${from}   to   ${to}`;
-    // }
+    this.fillter = [...this.transfer];
+    for (let i = 0; i < this.fillter.length; i++) {
+      var str = this.fillter[i].CreatedStr;
+      var date = str.slice(0, 2);
+      var month = str.slice(3, 5);
+      var year = str.slice(6, 10);
+      var time = str.slice(11);
+      str = `${year}-${month}-${date} ${time}`;
+      this.fillter[i].CreatedStr = str;
+    }
   },
   methods: {
     handleCurrentChange(cpage) {
@@ -107,11 +113,27 @@ export default {
     handleSizeChange(psize) {
       this.pagesize = psize;
     },
-
-
- 
- 
-
+    sort_change(column) {
+      // this.currpage = 1; // return to the first page after sorting
+      if (column.prop === "CreatedStr") {
+        if (column.order === "descending") {
+          this.fillter.sort(function(a, b) {
+            return (
+              Date.parse(b.CreatedStr.replace(/-/g, "/")) -
+              Date.parse(a.CreatedStr.replace(/-/g, "/"))
+            );
+          });
+          // console.log(this.fillter);
+        } else if (column.order === "ascending") {
+          this.fillter.sort(function(a, b) {
+            return (
+              Date.parse(a.CreatedStr.replace(/-/g, "/")) -
+              Date.parse(b.CreatedStr.replace(/-/g, "/"))
+            );
+          });
+        }
+      }
+    }
   }
 };
 </script>
