@@ -16,8 +16,8 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false
 
 var baseurl={
-  //  api:"http://4coins.wearetechman.com",
-   api:"http://113.52.134.95:8080"
+   api:"http://4coins.wearetechman.com",
+  //  api:"http://113.52.134.95:8080"
 }
 Vue.prototype.$baseurl=baseurl.api
 
