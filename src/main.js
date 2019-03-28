@@ -20,9 +20,9 @@ axios.defaults.withCredentials = true; //让ajax携带cookie
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 var baseurl = {
-  api: "http://4coins.wearetechman.com",
+  // api: "http://4coins.wearetechman.com",
   //  api:"http://113.52.134.95:8080",
-  // api: "http://192.168.1.37:8080",
+  api: "http://192.168.1.37:8080",
 
 }
 Vue.prototype.$baseurl = baseurl.api
@@ -37,7 +37,7 @@ axios.defaults.transformRequest = [function (data) {
   return ret
 }]
 //然后再修改原型链
-Vue.prototype.$axios = axios
+
 //在Vue中要给input设置焦点，需要注册自定义指令
 //重新获取焦点
 Vue.directive('focus', {
@@ -53,6 +53,25 @@ Vue.directive('focus', {
   }
 })
 
+//判断token失效处理
+//判断token失效跳转
+axios.interceptors.response.use(response => {
+  // if (response) {
+    if (response.data.Status == "error") {
+      if ("No session. Please do login." == response.data.Message) {
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem("token");
+        router.replace({
+          name: "login"
+        });
+      }
+    }
+  // }
+  return response;
+}, error => {
+  return Promise.reject(error.response.data) //返回接口返回的错误信息
+})
+Vue.prototype.$axios = axios
 
 new Vue({
   el: '#app',

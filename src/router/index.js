@@ -112,62 +112,6 @@ const routes = [{
   }
 ]
 
-// export default new Router({
-//   routes: [
-//     {
-//       path: '/login',
-//       name: 'login',
-//       component: login
-//     },
-//     {
-//       path: '/home',
-//       name: 'home',
-//       component: home
-//     },
-//     {
-//       path: '/send',
-//       name: 'send',
-//       component: send
-//     },
-//     {
-//       path: '/receive',
-//       name: 'receive',
-//       component: receive
-//     },
-//     {
-//       path: '/deposit',
-//       name: 'deposit',
-//       component: deposit
-//     },
-//     {
-//       path: '/exchange',
-//       name: 'exchange',
-//       component: exchange,
-//     },
-//     {
-//       path: '/exchange2',
-//       name: 'exchange2',
-//       component: exchange2
-//     },
-//     {
-//       path: '/withdraw',
-//       name: 'withdraw',
-//       component: withdraw
-//     },
-//     {
-//       path: '*',
-//       name: 'login',
-//       component: login
-//     },
-//     {
-//       path: '/',
-//       redirect: {
-//         name: 'login'
-//       }
-//     },
-//   ],
-
-// })
 let router = new Router({
   // mode:'history',
   routes

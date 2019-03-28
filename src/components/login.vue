@@ -70,7 +70,7 @@ export default {
         // this.$axios({
         //   method: "post",
         //   url: this.$baseurl + "/growthing-02/users/pcLogin",
-           // url: 192.168.1.37:8080/growthing-02/users/pcLogin
+        // url: 192.168.1.37:8080/growthing-02/users/pcLogin
         //   // headers: {
         //   //   "Content-type": "application/json"
         //   // },
@@ -81,23 +81,31 @@ export default {
         // });
         this.$axios({
           method: "post",
-          url: this.$baseurl+"/growthing-02/users/pcLogin",
+          url: this.$baseurl + "/growthing-02/users/pcLogin",
           data: {
             email: this.name,
             password: this.password
           }
         })
           .then(res => {
-            // if (res.data.Status == "success") {
-              // console.log(res.data.Token.access_token);
+            if (res.data.Status == "success") {
+              console.log(res);
               this.$store.dispatch("setUser", this.name);
               sessionStorage.setItem("token", res.data.Token.access_token);
               this.$router.push({
                 name: "home"
               });
-            // } else {
-            //   this.warn = "Incorrect username or password.";
-            // }
+            } else if (res.data.Status == "error") {
+              if ("No session. Please do login." ==res.data.Message ) {
+                sessionStorage.removeItem("token");
+                sessionStorage.removeItem("username");
+                this.$router.replace({
+                  name: "login"
+                });
+              }
+            } else {
+              this.warn = "Incorrect username or password.";
+            }
           })
           .catch(err => {
             //console.log(err); //错误信息

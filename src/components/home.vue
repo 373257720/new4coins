@@ -20,7 +20,7 @@
             sign&nbsp;out
           </li>
         </ul>
-      </div> -->
+      </div>-->
       <topright></topright>
     </div>
     <div class="content">
@@ -167,13 +167,22 @@ export default {
     this.$axios
       .get(`${this.$baseurl}/growthing-02/users/wallet_data`)
       .then(res => {
-        console.log(res.data);
-        if (token) {
+        if (res.data.Status == "success") {
           this.walletdata = res.data.Tokens;
         }
+        // else{
+        // else if (res.data.Status == "error") {
+        //   if ("No session. Please do login." == res.data.error) {
+        //     sessionStorage.removeItem("token");
+        //     sessionStorage.removeItem("username");
+        //     this.$router.replace({
+        //       name: "login"
+        //     });
+        //   }
+        // }
       })
       .catch(err => {
-        //console.log(err); //错误信息
+        console.log(err); //错误信息
       });
     //图片初始化实例
     // var echart = echarts.init(this.$refs.mychart);
