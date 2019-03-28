@@ -2,7 +2,7 @@
   <div>
     <div id="top">
       NETNOTE
-      <div class="top_right">
+      <!-- <div class="top_right">
         <div @click="user" class="username">
           <img src="../assets/person_icon.png" alt>
           <span>{{this.$store.state.currentUser}}</span>
@@ -11,7 +11,7 @@
           </i>
         </div>
         <ul ref="username" v-show="ok">
-          <li @click="go">
+          <li @click="goto('history')">
             <img src="../assets/history_icon.png" alt>
             History
           </li>
@@ -20,18 +20,22 @@
             sign&nbsp;out
           </li>
         </ul>
-      </div>
+      </div> -->
+      <topright></topright>
     </div>
     <div class="content">
       <div class="trend" ref="mychart" style="padding-top:14px;">
         <img src="../assets/d57bcb765433304e7ca905009882f84.png" alt>
       </div>
-      <variety
-        v-for="(item,index) in tabs"
-        :key="index"
-        :son="tabs[index]"
-        :walletson="walletdata[index]"
-      ></variety>
+      <div class="content_mid">
+        <variety
+          v-for="(item,index) in tabs"
+          :key="index"
+          :son="tabs[index]"
+          :walletson="walletdata[index]"
+        ></variety>
+      </div>
+
       <div class="content_bottom">
         <div>
           <span class="btn">
@@ -60,6 +64,7 @@
 <script>
 import echarts from "echarts"; //引入图表
 import variety from "@/components/variety";
+import topright from "@/components/top_right";
 export default {
   name: "home",
   data() {
@@ -144,7 +149,8 @@ export default {
     };
   },
   components: {
-    variety
+    variety,
+    topright
   },
   mounted() {
     var token = sessionStorage.getItem("token");
@@ -190,7 +196,7 @@ export default {
         name: "login"
       });
     },
-     goto(name, id) {
+    goto(name, id) {
       // 编程式路由导航：获取router实例
       // this.$router  路由实例（包含跳转等方法）
       // this.$route   当前路由信息
@@ -228,13 +234,13 @@ export default {
       //   name: "deposit"
       // });
       // alert("Sorry, this service has not been opened yet");
-    },
-    go() {
-      this.$router.push({
-        name: "history"
-      });
-      // alert("Sorry, this service has not been opened yet");
     }
+    // go() {
+    //   this.$router.push({
+    //     name: "history"
+    //   });
+    //   // alert("Sorry, this service has not been opened yet");
+    // }
   }
 };
 </script>
@@ -296,13 +302,16 @@ export default {
 }
 .content {
   height: 870px;
+  .content_mid {
+    height: 360px;
+  }
   .content_bottom {
     width: 1200px;
     margin: 0 auto;
     font-size: 16px;
-    padding-top: 4px;
-    box-sizing: border-box;
-    height: 70px;
+    padding-top: 14px;
+    // box-sizing: border-box;
+    height: 0px;
     // padding-top: -10px;
     display: flex;
     justify-content: space-between;
@@ -343,7 +352,7 @@ export default {
   margin: 0 auto;
   box-sizing: border-box;
   height: 400px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 #top {
   .top_right {

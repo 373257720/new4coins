@@ -42,7 +42,7 @@ export default {
     };
   },
   created() {
-    console.log(this.$baseurl.api);
+    // console.log(this.$baseurl.api);
   },
   methods: {
     //邮箱验证
@@ -70,7 +70,7 @@ export default {
         // this.$axios({
         //   method: "post",
         //   url: this.$baseurl + "/growthing-02/users/pcLogin",
-        //   // url: 192.168.1.37:8080/growthing-02/users/pcLogin
+           // url: 192.168.1.37:8080/growthing-02/users/pcLogin
         //   // headers: {
         //   //   "Content-type": "application/json"
         //   // },
@@ -89,7 +89,7 @@ export default {
         })
           .then(res => {
             // if (res.data.Status == "success") {
-              console.log(111);
+              // console.log(res.data.Token.access_token);
               this.$store.dispatch("setUser", this.name);
               sessionStorage.setItem("token", res.data.Token.access_token);
               this.$router.push({

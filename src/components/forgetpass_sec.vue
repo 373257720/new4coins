@@ -51,8 +51,8 @@
             <span v-if="!judgecode" class="judge">Incorrect Verification Code</span>
           </div>
         </div>
-        <div class="btn" @click="submit">SUBMIT</div>
-        <div class="btn" @click="submit" style="">SUBMIT</div>
+        <div class="btn" @click="submit" v-if="submitok">SUBMIT</div>
+        <div class="btn submitok" v-if="!submitok">SUBMIT</div>
       </div>
     </div>
   </div>
@@ -71,25 +71,27 @@ export default {
       timer: null,
       judge: true,
       judgecode: true,
-      newpasswordreg: true
+      newpasswordreg: true,
+      // submitok: false
     };
   },
-  computed: {
-    // sub: function(newval, oldval) {
-    //   if (this.password && this.confirmpassword && this.Mailbox) {
-    //     // $refs.submit.style.background="whtie"
-    //     console.log($refs.sub);
-    //     // }
-    //   }
-    // }
-  },
+ computed:{
+   submitok:function(){
+     if (this.newpassword && this.confirmpassword && this.Mailbox){
+          return true
+     }else{
+       return false
+     }
+
+   }
+ },
   methods: {
     //驗證密碼是否相等
     dispear(e) {
       var e = e.target;
       e.style.border = 0;
       this.judge = true;
-      this.newpasswordreg=true
+      this.newpasswordreg = true;
     },
     remind(e) {
       var e = e.target;
@@ -126,7 +128,8 @@ export default {
     },
     submit() {
       // this.judgecode=true
-      if (this.password && this.confirmpassword && this.Mailbox) {
+      if (this.newpassword && this.confirmpassword && this.Mailbox) {
+        // this.submitok=true
         // $refs.submit.style.background="whtie"
         // console.log($refs.sub);
         // }
@@ -229,6 +232,10 @@ export default {
       line-height: 40px;
       color: #2e4b53;
       text-align: center;
+    }
+    .submitok {
+      background: #30313b;
+      color: #64656b;
     }
   }
 }

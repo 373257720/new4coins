@@ -88,8 +88,10 @@ export default {
   height: 36px;
   font-size: 14px;
   color: #5ce2ee;
-  line-height: 13px;
-  font-weight: 600;
+  line-height: 12px;
+  font-weight: 500;
+  font-family:'\5FAE\8F6F\96C5\9ED1';
+
   /* line-height: 40px; */
   /* width: 100px;  */
 }
@@ -178,6 +180,7 @@ export default {
       span {
         // flex:1;
         //  box-sizing: border-box;
+      
         width: 116px;
         height: 40px;
         box-sizing: border-box;

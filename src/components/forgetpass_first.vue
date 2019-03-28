@@ -9,19 +9,20 @@
       <div class="box_password">
         <div class="inputaccout">
           <p>Input accout</p>
-          <el-input v-model="inputaccount" clearable></el-input>
+          <el-input v-model.trim="inputaccount" clearable></el-input>
         </div>
         <div class="GraphicVerificationCode">
           <p>Graphic Verification Code</p>
           <div>
-            <el-input v-model="VerificationCode" clearable></el-input>
+            <el-input v-model.trim="VerificationCode" clearable></el-input>
             <span class="code btn" @click="getcode">{{code}}</span>
             <!-- <span v-show="!show" class="count">{{count}} s</span> -->
           </div>
           <aside>{{this.warn}}</aside>
         </div>
 
-        <div class="btn" @click="nextstep">Next step</div>
+        <div class="btn" @click="nextstep" v-if="show2">Next step</div>
+        <div class="btn nextstep" v-else>Next step</div>
       </div>
     </div>
   </div>
@@ -41,6 +42,15 @@ export default {
       VerificationCode: ""
     };
   },
+  computed: {
+    show2: function() {
+      if (this.inputaccount && this.VerificationCode) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
   methods: {
     randomnum(num) {
       var str =
@@ -59,15 +69,13 @@ export default {
     },
     nextstep() {
       this.warn = "";
-      if (this.inputaccount && this.VerificationCode) {
-        if (dsf) {
+        if (111) {
+          
           //請求這個用戶是否存在
         } else {
           this.warn = "Incorrect Accout or Verification Code";
         }
-      } else {
-        this.warn = "Accout or Verification Code can not be empty";
-      }
+     
     }
   }
 };
@@ -124,6 +132,7 @@ export default {
     .GraphicVerificationCode {
       margin-bottom: 55px;
       aside {
+        font-size: 14px;
         text-align: center;
         height: 55px;
         line-height: 55px;
@@ -154,6 +163,10 @@ export default {
       line-height: 40px;
       color: #2e4b53;
       text-align: center;
+    }
+    .nextstep {
+      background: #30313b;
+      color: #64656b;
     }
   }
 }

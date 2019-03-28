@@ -89,17 +89,26 @@ const routes = [{
   {
     path: '/history',
     name: 'history',
-    component: history
+    component: history,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path:'/forgetpassword1',
     name:'forgetpassword1',
-    component:forgetpassword1
+    component:forgetpassword1,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path:'/forgetpassword2',
     name:'forgetpassword2',
-    component:forgetpassword2
+    component:forgetpassword2,
+    meta: {
+      requireAuth: true
+    }
   }
 ]
 

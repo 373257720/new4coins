@@ -55,6 +55,7 @@ export default {
     };
   },
   created() {
+    //  console.log(this.$global_func.goto())
     var token = sessionStorage.getItem("token");
     this.$axios
       .get(`${this.$baseurl}/growthing-02/users/transfer_history`, {
@@ -148,14 +149,6 @@ export default {
     // margin-bottom: 60px;
     color: #ffffff;
     font-size: 20px;
-    // img {
-    //   // margin-left:37px;
-    //   // margin-right:18px;
-
-    //   float: left;
-    //   margin: 13px 22px 0 24px;
-    //   font-weight: 700;
-    // }
     p {
       float: left;
       // display: inline;
