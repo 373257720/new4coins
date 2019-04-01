@@ -10,12 +10,14 @@
         <h3>Receipt</h3>
         <div class="pic">
           <el-upload
-            action="/haha/api/note/login"
+            ref="upload"
+            action
             list-type="picture-card"
+            :http-request="uploadFile"
             :on-preview="handlePictureCardPreview"
             :on-remove="appear"
             :on-error="appear"
-            :before-upload="dispear"
+            :on-change="dispear"
             :limit="1"
           >
             <i class="el-icon-plus"></i>
@@ -24,7 +26,6 @@
             <img width="100%" :src="dialogImageUrl" alt>
           </el-dialog>
         </div>
-
         <h3>Currency</h3>
         <div class="select common">
           <el-select v-model="value" placeholder="-">
@@ -38,9 +39,10 @@
         </div>
         <h3>Amount</h3>
         <div class="amount common">
-          <el-input placeholder="-" v-model="input7" clearable></el-input>
+          <el-input placeholder="-" v-model="amount" clearable></el-input>
         </div>
-        <div class="btn" @click="goto">SUBMIT</div>
+        <div class="btn" @click="submitUpload">SUBMIT</div>
+        <div class="btn submit" v-if="!pic_submit">SUBMIT</div>
       </div>
     </div>
   </div>
@@ -50,7 +52,8 @@ export default {
   name: "deposit",
   data() {
     return {
-      input7: "",
+      amount: "",
+      value: "",
       dialogImageUrl: "",
       dialogVisible: false,
       options: [
@@ -70,11 +73,21 @@ export default {
           value: "选项4",
           label: "USD"
         }
-      ],
-      value: ""
+      ]
+
       //   dialogImageUrl: "",
       //   dialogVisible: false
     };
+  },
+
+  computed: {
+    pic_submit: function() {
+      if (this.dialogVisible && this.value && this.amount) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
   methods: {
     goto() {
@@ -82,36 +95,61 @@ export default {
         name: "home"
       });
     },
-
-    //上传文件之前的钩子，参数为上传的文件,把那个十字选择框去掉
+    //文件状态改变时的钩子，参数为上传的文件,把那个十字选择框去掉
     dispear(file) {
-      // console.log(111)
+      // console.log(this.dialogVisible)
       var a = document.querySelector(".el-upload--picture-card");
-      console.log(a);
+      // console.log(a);
       a.style = "display:none;";
-      // var b=document.querySelector('.el-upload-list__item')
-      // b.style="transition:0s
-      // console.log(response,file,fileList)
     },
-    //文件上传不成功时的钩子
     //文件列表移除文件时的钩子
     appear(file, fileList) {
       var a = document.querySelector(".el-upload--picture-card");
       var b = document.querySelector(".el-upload-list__item");
-      // a.style="display:";
       b.style = "transition:0s";
-      //  b.style="width:80%;height:80%;transition:0s"top
       a.style =
         "position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;";
       //  a.style="margin:0 auto;display:block;"
     },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    //点击文件列表中已上传的文件时的钩子
+    // handleRemove(file, fileList) {
+    //   console.log(file, fileList);
+    // },
+    //点击文件列表中已上传的文件时的钩子,图片放大镜
     handlePictureCardPreview(file) {
+      // console.log(4456)
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
+    },
+    // 自定义上传
+    // 文件上传
+
+    uploadFile(params) {
+      // console.log("uploadFile", params);
+      const _file = params.file;
+      // const isLt2M = _file.size / 1024 / 1024 < 2;
+      // 通过 FormData 对象上传文件
+      var formData = new FormData();
+      formData.append("file", _file);
+      this.$axios({
+        data: this.formData,
+        url: `${this.$baseurl}/growthing-02/users/wallet_data`,
+        method: "get"
+      })
+        .then(res => {
+          
+        })
+        .catch(err => {
+          console.log(err);
+
+        });
+      // if (!isLt2M) {
+      //   this.$message.error("请上传2M以下的.xlsx文件");
+      //   return false;
+      // }
+    },
+    // 确认上传
+    submitUpload() {
+      this.$refs.upload.submit();
     }
   }
 };
@@ -126,7 +164,7 @@ export default {
   background: #5ce2ee;
 }
 .pic .el-upload-list--picture-card .el-upload-list__item {
-  width: 300px;
+  width: 350px;
   /* height: 100%; */
   display: block;
   margin: 0 auto;
@@ -224,6 +262,10 @@ export default {
     line-height: 38px;
     text-align: center;
     font-weight: 700;
+  }
+  .submit {
+    background: #30313b;
+    color: #64656b;
   }
 }
 </style>

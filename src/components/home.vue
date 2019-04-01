@@ -24,8 +24,8 @@
       <topright></topright>
     </div>
     <div class="content">
-      <div class="trend" ref="mychart" style="padding-top:14px;">
-        <img src="../assets/d57bcb765433304e7ca905009882f84.png" alt>
+      <div class="trend" ref="mychart">
+        <!-- <img src="../assets/d57bcb765433304e7ca905009882f84.png" alt> -->
       </div>
       <div class="content_mid">
         <variety
@@ -74,57 +74,96 @@ export default {
       walletdata: "", //图片数据
       //图标的option
       option: {
+        title: {
+           text: "折线图堆叠"
+        },
+        // tooltip: {
+        //   trigger: "axis"
+        // },
+
+        // legend: {
+        //   data: ["USD", "RMB", "HKD", "JPY"]
+        // },
+        grid: {
+          left: "28px",
+          right: "4%",
+          bottom: "12px",
+          containLabel: true
+        },
+        toolbox: {
+          // feature: {
+          //   saveAsImage: {}
+          // }
+        },
         xAxis: {
-          data: ["2017-10-24", "2017-10-25", "2017-10-26", "2017-10-27"],
-          axisLabel: {
-            show: true,
-            textStyle: {
-              color: "#aaaaaa"
-            }
-          },
+          type: "category",
+          boundaryGap: false,
+          data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
           axisTick: {
             show: false
           },
           axisLine: {
-            show: false,
-            // onZero: true,
             lineStyle: {
-              color: "#aaaaaa",
-              width: 1,
-              type: "solid"
+              color: "#8A8A8B"
             }
-          } /*横轴边框色*/
+          },
+          axisLabel: {
+            // rotate: 30,
+            interval: 0,
+            color: "#FFFFFF"
+          }
         },
         yAxis: {
+          type: "value",
           axisTick: {
             show: false
           },
           axisLine: {
             show: false,
-            // onZero: true,
             lineStyle: {
-              color: "#aaaaaa",
-              width: 1,
-              type: "solid"
+              color: "#8A8A8B"
             }
           },
           axisLabel: {
-            show: true,
-            textStyle: {
-              color: "#aaaaaa"
-            }
+            formatter: "${value}",
+            color: "#FFFFFF"
           }
         },
         series: [
+          // {
+          //   name: "USD",
+          //   type: "line",
+          //   symbolSize:12,
+          //   color:'#F3CA0B',
+          //   stack: "总量",
+          //   data: [120, 132, 101, 134, 90, 230, 210],
+          //       itemStyle:{
+          //           normal:{
+          //               lineStyle:{
+          //                   width:4,
+          //                   // type:'dotted'  //'dotted'虚线 'solid'实线
+          //               }
+          //           }
+          //       }
+          // },
           {
-            type: "k",
-            data: [
-              [20, 30, 10, 35],
-              [40, 35, 30, 55],
-              [33, 38, 33, 40],
-              [40, 40, 32, 42]
-            ]
-          }
+            name: "RMB",
+            type: "line",
+            stack: "总量",
+            data: [220, 182, 191, 234, 290, 330, 310]
+          },
+          {
+            name: "HKD",
+            type: "line",
+            stack: "总量",
+            data: [150, 232, 201, 154, 190, 330, 410]
+          },
+          {
+            name: "JPY",
+            type: "line",
+            stack: "总量",
+            data: [320, 332, 301, 334, 390, 330, 320]
+          },
         ]
       },
       //钱币的图片
@@ -185,8 +224,8 @@ export default {
         console.log(err); //错误信息
       });
     //图片初始化实例
-    // var echart = echarts.init(this.$refs.mychart);
-    // echart.setOption(this.option);
+    var echart = echarts.init(this.$refs.mychart);
+    echart.setOption(this.option);
   },
 
   methods: {
@@ -359,9 +398,11 @@ export default {
 .trend {
   width: 1200px;
   margin: 0 auto;
+  background:grey;
   box-sizing: border-box;
   height: 400px;
   margin-bottom: 24px;
+  margin-top: 14px;
 }
 #top {
   .top_right {
