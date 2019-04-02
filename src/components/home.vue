@@ -2,31 +2,49 @@
   <div>
     <div id="top">
       NETNOTE
-      <!-- <div class="top_right">
-        <div @click="user" class="username">
-          <img src="../assets/person_icon.png" alt>
-          <span>{{this.$store.state.currentUser}}</span>
-          <i>
-            <img :class="[ok?'down':'up']" src="../assets/arrows.png" alt>
-          </i>
-        </div>
-        <ul ref="username" v-show="ok">
-          <li @click="goto('history')">
-            <img src="../assets/history_icon.png" alt>
-            History
-          </li>
-          <li @click="back">
-            <img src="../assets/d5dde342f63280669d570442a3d8511.png" alt>
-            sign&nbsp;out
-          </li>
-        </ul>
-      </div>-->
       <topright></topright>
     </div>
     <div class="content">
-      <div class="trend" ref="mychart">
-        <!-- <img src="../assets/d57bcb765433304e7ca905009882f84.png" alt> -->
+      <div class="trend">
+        <div class="trend_tab">
+          <div class="trend_left">
+            <ul>
+              <li>
+                <img
+                  src="../assets/afb06ada6e65999bdc46fe0f9fc19e7.png"
+                  alt
+                  v-show="hkd"
+                  @click="check('hkd')"
+                >
+                <img
+                  src="../assets/829ad48904fa7c4c07c7ae3193c3632.png"
+                  alt
+                  v-show="!hkd"
+                  @click="check('hkd')"
+                >
+                <span>HKD</span>
+              </li>
+              <li>
+                <img src="../assets/afb06ada6e65999bdc46fe0f9fc19e7.png" alt>
+                <span>RMB</span>
+              </li>
+              <li>
+                <img src="../assets/afb06ada6e65999bdc46fe0f9fc19e7.png" alt>
+                <span>JPY</span>
+              </li>
+            </ul>
+          </div>
+          <ul class="trend_time">
+            <li>DAY</li>
+            <li>HOUR</li>
+            <li>15 SEC</li>
+          </ul>
+        </div>
+        <div class="trend_table" ref="mychart">
+          <!-- <img src="../assets/d57bcb765433304e7ca905009882f84.png" alt> -->
+        </div>
       </div>
+
       <div class="content_mid">
         <variety
           v-for="(item,index) in tabs"
@@ -69,25 +87,28 @@ export default {
   name: "home",
   data() {
     return {
+      hkd: true,
       dialogVisible: false,
       ok: false, //用户信息的开关
       walletdata: "", //图片数据
       //图标的option
       option: {
         title: {
-           text: "折线图堆叠"
+          //  text: "折线图堆叠"
         },
-        // tooltip: {
-        //   trigger: "axis"
-        // },
+        tooltip: {
+          trigger: "axis"
+        },
 
         // legend: {
-        //   data: ["USD", "RMB", "HKD", "JPY"]
+        //   data: ["USD", "RMB", "HKD", "JPY"],
+        //   // top:'-5%'
         // },
         grid: {
           left: "28px",
           right: "4%",
           bottom: "12px",
+          top: "17px",
           containLabel: true
         },
         toolbox: {
@@ -118,6 +139,19 @@ export default {
           axisTick: {
             show: false
           },
+          min: 0,
+          max: 1000,
+          splitNumber: 6,
+          // splitLine: {
+          //网格样式
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: ["#8A8A8B"],
+              width: 1,
+              type: "solid"
+            }
+          },
           axisLine: {
             show: false,
             lineStyle: {
@@ -130,40 +164,74 @@ export default {
           }
         },
         series: [
-          // {
-          //   name: "USD",
-          //   type: "line",
-          //   symbolSize:12,
-          //   color:'#F3CA0B',
-          //   stack: "总量",
-          //   data: [120, 132, 101, 134, 90, 230, 210],
-          //       itemStyle:{
-          //           normal:{
-          //               lineStyle:{
-          //                   width:4,
-          //                   // type:'dotted'  //'dotted'虚线 'solid'实线
-          //               }
-          //           }
-          //       }
-          // },
+          {
+            name: "USD",
+            type: "line",
+            symbolSize: 14,
+            color: "#FACB07",
+            stack: "总量",
+            data: [120, 132, 101, 134, 90, 230, 210],
+
+            itemStyle: {
+              normal: {
+                // border:"4px"
+                //  borderColor: "blue",
+                borderWidth: 3
+              }
+            },
+            lineStyle: {
+              width: 6
+              // type:'dotted'  //'dotted'虚线 'solid'实线
+            }
+            // color:
+          },
           {
             name: "RMB",
             type: "line",
             stack: "总量",
-            data: [220, 182, 191, 234, 290, 330, 310]
+            symbolSize: 14,
+            color: "#59D4BE",
+            data: [220, 182, 191, 234, 290, 330, 310],
+            itemStyle: {
+              normal: {
+                // border:"4px"
+                //  borderColor: "blue",
+                borderWidth: 3
+              }
+            },
+            lineStyle: {
+              width: 6
+              // type:'dotted'  //'dotted'虚线 'solid'实线
+            }
           },
           {
             name: "HKD",
             type: "line",
+            symbolSize: 14,
+            color: "#FA529F",
             stack: "总量",
-            data: [150, 232, 201, 154, 190, 330, 410]
-          },
-          {
-            name: "JPY",
-            type: "line",
-            stack: "总量",
-            data: [320, 332, 301, 334, 390, 330, 320]
-          },
+            data: [150, 232, 201, 154, 190, 330, 410],
+            itemStyle: {
+              normal: {
+                // border:"4px"
+                //  borderColor: "blue",
+                borderWidth: 3
+              }
+            },
+            // checkpointStyle: {
+            //   symbolSize: 100
+            // },
+            lineStyle: {
+              width: 6
+              // type:'dotted'  //'dotted'虚线 'solid'实线
+            }
+          }
+          // {
+          //   name: "JPY",
+          //   type: "line",
+          //   stack: "总量",
+          //   data: [320, 332, 301, 334, 390, 330, 320]
+          // }
         ]
       },
       //钱币的图片
@@ -282,6 +350,13 @@ export default {
       //   name: "deposit"
       // });
       // alert("Sorry, this service has not been opened yet");
+    },
+    check:function(item) {
+      console.log(this)
+      // this.setData({
+      //   "prompt.promptMess": false
+      // });
+      // this.item=!this.(item)
     }
     // go() {
     //   this.$router.push({
@@ -396,14 +471,58 @@ export default {
   }
 }
 .trend {
-  width: 1200px;
-  margin: 0 auto;
-  background:grey;
-  box-sizing: border-box;
   height: 400px;
-  margin-bottom: 24px;
-  margin-top: 14px;
+  width: 1200px;
+  // margin-bottom: 24px;
+  margin: 0 auto 24px auto;
+
+  .trend_tab {
+    height: 50px;
+    background: #373541;
+    .trend_left {
+      float: left;
+      padding-top: 12px;
+      box-sizing: border-box;
+      padding-left: 27px;
+      ul {
+        li {
+          float: left;
+          margin-right: 30px;
+          img {
+            margin-right: 10px;
+            vertical-align: middle;
+          }
+          span {
+            color: white;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+    .trend_time {
+      float: right;
+      overflow: hidden;
+      border-radius: 25px;
+      width: 298px;
+      height: 36px;
+      border: 2px solid #5ce2ee;
+      box-sizing: border-box;
+      display: flex;
+      li {
+        flex: 1;
+        background: #5ce2ee;
+        z-index: 8;
+      }
+    }
+  }
+  .trend_table {
+    box-sizing: border-box;
+    height: 350px;
+    background: #25262e;
+    // margin-top: 14px;
+  }
 }
+
 #top {
   .top_right {
     cursor: pointer;
@@ -458,4 +577,4 @@ export default {
     }
   }
 }
-</style>
+</style>75

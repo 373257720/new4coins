@@ -41,7 +41,7 @@
         <div class="amount common">
           <el-input placeholder="-" v-model="amount" clearable></el-input>
         </div>
-        <div class="btn" @click="submitUpload">SUBMIT</div>
+        <div class="btn" @click="submitUpload" v-if="pic_submit" >SUBMIT</div>
         <div class="btn submit" v-if="!pic_submit">SUBMIT</div>
       </div>
     </div>
@@ -54,7 +54,9 @@ export default {
     return {
       amount: "",
       value: "",
+      formData: "",
       dialogImageUrl: "",
+      pic_submitok: false,
       dialogVisible: false,
       options: [
         {
@@ -82,7 +84,7 @@ export default {
 
   computed: {
     pic_submit: function() {
-      if (this.dialogVisible && this.value && this.amount) {
+      if (this.pic_submitok && this.value && this.amount) {
         return true;
       } else {
         return false;
@@ -104,6 +106,7 @@ export default {
     },
     //文件列表移除文件时的钩子
     appear(file, fileList) {
+      this.pic_submitok=false
       var a = document.querySelector(".el-upload--picture-card");
       var b = document.querySelector(".el-upload-list__item");
       b.style = "transition:0s";
@@ -125,23 +128,16 @@ export default {
 
     uploadFile(params) {
       // console.log("uploadFile", params);
+      this.pic_submitok = false;
       const _file = params.file;
       // const isLt2M = _file.size / 1024 / 1024 < 2;
       // 通过 FormData 对象上传文件
-      var formData = new FormData();
-      formData.append("file", _file);
-      this.$axios({
-        data: this.formData,
-        url: `${this.$baseurl}/growthing-02/users/wallet_data`,
-        method: "get"
-      })
-        .then(res => {
-          
-        })
-        .catch(err => {
-          console.log(err);
+      if (_file) {
+        this.pic_submitok = true;
+      }
+      this.formData = new FormData();
+      this.formData.append("file", _file);
 
-        });
       // if (!isLt2M) {
       //   this.$message.error("请上传2M以下的.xlsx文件");
       //   return false;
@@ -150,6 +146,18 @@ export default {
     // 确认上传
     submitUpload() {
       this.$refs.upload.submit();
+
+      this.$axios({
+        data: this.formData,
+        url: `${this.$baseurl}/growthing-02/users/wallet_data`,
+        method: "get"
+      })
+        .then(res => {
+          console.log(111 );
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
