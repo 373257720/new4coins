@@ -9,42 +9,24 @@
         <div class="trend_tab">
           <div class="trend_left">
             <ul>
-              <li>
-                <img
-                  src="../assets/afb06ada6e65999bdc46fe0f9fc19e7.png"
-                  alt
-                  v-show="hkd"
-                  @click="check('hkd')"
-                >
-                <img
-                  src="../assets/829ad48904fa7c4c07c7ae3193c3632.png"
-                  alt
-                  v-show="!hkd"
-                  @click="check('hkd')"
-                >
-                <span>HKD</span>
-              </li>
-              <li>
-                <img src="../assets/afb06ada6e65999bdc46fe0f9fc19e7.png" alt>
-                <span>RMB</span>
-              </li>
-              <li>
-                <img src="../assets/afb06ada6e65999bdc46fe0f9fc19e7.png" alt>
-                <span>JPY</span>
+              <li v-for="(item) in currency" :key="item.id" @click="check(item.id,$event)">
+                <img :src="item.img" v-show="item.switch" alt>
+                <img :src="item.empty" v-show="!item.switch" alt>
+                <span>{{item.type}}</span>
               </li>
             </ul>
           </div>
           <ul class="trend_time">
-            <li>DAY</li>
-            <li>HOUR</li>
-            <li>15 SEC</li>
+            <li
+              v-for="(item) in timer"
+              :key="item.id"
+              :class="{active : activename == item.name}"
+              @click="selected(item.name,item.id)"
+            >{{item.name}}</li>
           </ul>
         </div>
-        <div class="trend_table" ref="mychart">
-          <!-- <img src="../assets/d57bcb765433304e7ca905009882f84.png" alt> -->
-        </div>
+        <div class="trend_table" ref="mychart"></div>
       </div>
-
       <div class="content_mid">
         <variety
           v-for="(item,index) in tabs"
@@ -53,7 +35,6 @@
           :walletson="walletdata[index]"
         ></variety>
       </div>
-
       <div class="content_bottom">
         <div>
           <span class="btn">
@@ -87,7 +68,8 @@ export default {
   name: "home",
   data() {
     return {
-      hkd: true,
+      // list=[],
+      activename: "DAY", //高亮
       dialogVisible: false,
       ok: false, //用户信息的开关
       walletdata: "", //图片数据
@@ -100,10 +82,9 @@ export default {
           trigger: "axis"
         },
 
-        // legend: {
-        //   data: ["USD", "RMB", "HKD", "JPY"],
-        //   // top:'-5%'
-        // },
+        legend: {
+          data: this.legenddata
+        },
         grid: {
           left: "28px",
           right: "4%",
@@ -111,11 +92,7 @@ export default {
           top: "17px",
           containLabel: true
         },
-        toolbox: {
-          // feature: {
-          //   saveAsImage: {}
-          // }
-        },
+        toolbox: {},
         xAxis: {
           type: "category",
           boundaryGap: false,
@@ -171,7 +148,6 @@ export default {
             color: "#FACB07",
             stack: "总量",
             data: [120, 132, 101, 134, 90, 230, 210],
-
             itemStyle: {
               normal: {
                 // border:"4px"
@@ -252,6 +228,46 @@ export default {
           id: 3,
           text: require("../assets/jpy.png")
         }
+      ],
+      //选择时间
+      timer: [
+        {
+          id: 0,
+          name: "DAY"
+        },
+        {
+          id: 1,
+          name: "HOUR"
+        },
+        {
+          id: 2,
+          name: "15 SEC"
+        }
+      ],
+
+      //选择货币的线
+      currency: [
+        {
+          id: 0,
+          img: require("../assets/afb06ada6e65999bdc46fe0f9fc19e7.png"),
+          empty: require("../assets/829ad48904fa7c4c07c7ae3193c3632.png"),
+          type: "USD",
+          switch: true
+        },
+        {
+          id: 1,
+          img: require("../assets/ac904e5be37c1e4a05471820ec1de47.png"),
+          empty: require("../assets/829ad48904fa7c4c07c7ae3193c3632.png"),
+          type: "HKD",
+          switch: true
+        },
+        {
+          id: 2,
+          img: require("../assets/3789e9093a0585810e4cd16ce78980e.png"),
+          empty: require("../assets/829ad48904fa7c4c07c7ae3193c3632.png"),
+          type: "RMB",
+          switch: true
+        }
       ]
     };
   },
@@ -261,8 +277,7 @@ export default {
   },
   mounted() {
     var token = sessionStorage.getItem("token");
-
-    // console.log(url);
+    console.log(this.option.legend.data, this.legenddata);
     // this.$axios({
     //   method: "get",
     //   url: "/walletapi/growthing-02/users/wallet_data",
@@ -295,7 +310,18 @@ export default {
     var echart = echarts.init(this.$refs.mychart);
     echart.setOption(this.option);
   },
-
+  computed: {
+    legenddata() {
+      let list = [];
+      console.log(111);
+      for (var i = 0; i < this.currency.length; i++) {
+        if (this.currency[i].switch == true) {
+          list.push(this.currency[i].type);
+        }
+      }
+      return list;
+    }
+  },
   methods: {
     // 点击用户弹出信息.
     user() {
@@ -351,12 +377,18 @@ export default {
       // });
       // alert("Sorry, this service has not been opened yet");
     },
-    check:function(item) {
-      console.log(this)
-      // this.setData({
-      //   "prompt.promptMess": false
-      // });
-      // this.item=!this.(item)
+    check: function(item, event) {
+      // event.target.switch = !event.target.switch;
+      // this.kaiguan=event.target.switch
+      if (event.target.tagName == "IMG") {
+        this.currency[item].switch = !this.currency[item].switch;
+        // console.log(this.currency[item].switch);
+        console.log(this.legenddata, this.option.legend.data);
+      }
+    },
+    //高亮
+    selected(name, idx) {
+      this.activename = name;
     }
     // go() {
     //   this.$router.push({
@@ -501,17 +533,28 @@ export default {
     }
     .trend_time {
       float: right;
-      overflow: hidden;
-      border-radius: 25px;
-      width: 298px;
-      height: 36px;
+      //  overflow: hidden;
+      border-radius: 18px;
+      margin-top: 6px;
+      margin-right: 14px;
+      width: 300px;
+      height: 34px;
       border: 2px solid #5ce2ee;
-      box-sizing: border-box;
+      //  box-sizing: border-box;
       display: flex;
       li {
         flex: 1;
+        font-weight: 700;
+        font-size: 12px;
+        border-radius: 14px;
+        line-height: 34px;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+      }
+      .active {
         background: #5ce2ee;
-        z-index: 8;
+        color: black;
       }
     }
   }
@@ -577,4 +620,4 @@ export default {
     }
   }
 }
-</style>75
+</style>
