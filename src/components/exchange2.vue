@@ -4,32 +4,32 @@
       EXCHANGE
     </div>
     <div class="content list">
-      <p>Fiat&nbsp;to&nbsp;Note</p>
+      <p>{{types[data.idx].text}}</p>
       <div class="list_top">
         <img src="../assets/hkd.png" alt>
-        <span>RMBn</span>
+        <span>{{data.leftnum}}</span>
         <span>
           Balance:
           $
-          <em>9999.9999</em>
+          <em></em>
         </span>
       </div>
       <div class="list_top sec">
         <img src="../assets/hkd.png" alt>
-        <span>RMBn</span>
+        <span>{{data.rightnum}}</span>
         <span>
           Balance:
           $
-          <em>9999.9999</em>
+          <em></em>
         </span>
       </div>
       <div class="rate first" style="margin-top:28px;">
-        <p>RMBn</p>
+        <p>{{data.leftnum}}</p>
         <el-input v-model="input2" placeholder="请输入内容"></el-input>
         <u>Max</u>
       </div>
       <div class="rate second">
-        <p>RMBn</p>
+        <p>{{data.rightnum}}</p>
         <el-input v-model="input2" placeholder="请输入内容"></el-input>
         <u>Max</u>
       </div>
@@ -44,8 +44,48 @@ export default {
   name: "exchange2",
   data() {
     return {
-      input2: ""
+      input2: "",
+      data:{},
+         //钱币的图片
+      tabs: [
+        {
+          id: 0,
+          text: require("../assets/usd.png")
+        },
+        {
+          id: 1,
+          text: require("../assets/hkd.png")
+        },
+        {
+          id: 2,
+          text: require("../assets/rmb.png")
+        },
+        {
+          id: 3,
+          text: require("../assets/jpy.png")
+        }
+      ],
+      // 兑换方式
+      types:[
+          {
+            id:0,
+            text:`Fiat to Note`,
+
+          },
+           {
+            id:1,
+            text:`Note to Note`
+          },
+           {
+            id:2,
+            text:`Note to Fiat`
+          },
+      ],
     };
+  },
+  created(){
+    this.data=this.$route.params
+     console.log(this.data.idx) 
   },
   methods:{
        goto(){
@@ -55,6 +95,7 @@ export default {
     },
   }
 };
+
 </script>
 <style>
 .rate .el-input__inner {

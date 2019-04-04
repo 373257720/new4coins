@@ -1,8 +1,6 @@
 <template>
   <div class="exchange">
-    <div id="top">
-      EXCHANGE
-    </div>
+    <div id="top">EXCHANGE</div>
     <div class="content">
       <div class="list">
         <p>Fiat&nbsp;to&nbsp;Note</p>
@@ -71,7 +69,8 @@
             ></el-option>
           </el-select>
         </div>
-        <div class="btn" @click="exchange2">SUBMIT</div>
+        <div class="btn" @click="exchange2" v-if="exchange_switch">SUBMIT</div>
+        <div class="btn submit" v-if="!exchange_switch">SUBMIT</div>
       </div>
     </div>
   </div>
@@ -83,22 +82,22 @@ export default {
     return {
       options: [
         {
-          value: "01",
+          value: 0,
           label: "HKD",
           label2: "HKDn"
         },
         {
-          value: "02",
+          value: 1,
           label: "JPY",
           label2: "JPYn"
         },
         {
-          value: "03",
+          value: 2,
           label: "RMB",
           label2: "RMBn"
         },
         {
-          value: "04",
+          value: 3,
           label: "USD",
           label2: "USDn"
         }
@@ -141,18 +140,56 @@ export default {
       }
     }
   },
+  created(){
+    // console.log(this.Ftocoin) 
+  },
+  computed: {
+    exchange_switch: function() {
+      if (this.Ftocoin) {
+         console.log(this.Ftocoin)
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
   methods: {
     // nowchange(){
     //     this.coin1='',
     //     this.coin2=''
     // },
     exchange2() {
-      this.$router.push({
-        name: "exchange2",
-        params: {
-          // exchange2: id
-        }
-      });
+      if (this.Ftocoin) {
+        this.$router.push({
+          name: "exchange2",
+          params: {
+            idx: 0,
+            leftnum:this.Ftocoin,
+            rightnum:this.Ftocoin+'n',
+          
+          }
+        });
+      }
+      if (this.coin1) {
+        this.$router.push({
+          name: "exchange2",
+          params: {
+            idx: 1,
+            leftnum:this.coin1+'n',
+            rightnum:this.coin2+'n',
+          }
+        });
+      }
+      if (this.Ctofiat) {
+        this.$router.push({
+          name: "exchange2",
+          params: {
+            idx: 2,
+            leftnum:this.Ctofiat+'n',
+            rightnum:this.Ctofiat,
+          }
+        });
+      }
     }
   }
 };
@@ -216,6 +253,10 @@ export default {
   text-align: center;
   font-weight: 700;
   margin: 0 auto;
+}
+.submit {
+  background: #30313b;
+  color: #64656b;
 }
 </style>
 

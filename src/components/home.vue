@@ -83,7 +83,11 @@ export default {
         },
 
         legend: {
-          data: this.legenddata
+          data:["USD", "HKD"],
+          selected:{
+            'USD':true,
+            'HKD':false
+          }
         },
         grid: {
           left: "28px",
@@ -277,7 +281,8 @@ export default {
   },
   mounted() {
     var token = sessionStorage.getItem("token");
-    console.log(this.option.legend.data, this.legenddata);
+    // this.option.legend.data=this.legenddata
+    console.log(this.option.legend.data);
     // this.$axios({
     //   method: "get",
     //   url: "/walletapi/growthing-02/users/wallet_data",
@@ -311,16 +316,16 @@ export default {
     echart.setOption(this.option);
   },
   computed: {
-    legenddata() {
-      let list = [];
-      console.log(111);
-      for (var i = 0; i < this.currency.length; i++) {
-        if (this.currency[i].switch == true) {
-          list.push(this.currency[i].type);
-        }
-      }
-      return list;
-    }
+    // legenddata() {
+    //   let list = [];
+    //   for (var i = 0; i < this.currency.length; i++) {
+    //     if (this.currency[i].switch == true) {
+    //       list.push(this.currency[i].type);
+    //     }
+    //   }
+    //   return list;
+    
+    // }
   },
   methods: {
     // 点击用户弹出信息.
@@ -382,8 +387,9 @@ export default {
       // this.kaiguan=event.target.switch
       if (event.target.tagName == "IMG") {
         this.currency[item].switch = !this.currency[item].switch;
+        this.option.legend.data=this.legenddata
         // console.log(this.currency[item].switch);
-        console.log(this.legenddata, this.option.legend.data);
+        console.log( this.option.legend.data);
       }
     },
     //高亮
