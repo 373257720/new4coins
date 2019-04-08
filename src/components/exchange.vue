@@ -82,22 +82,22 @@ export default {
     return {
       options: [
         {
-          value: 0,
+          value: 'HKD',
           label: "HKD",
           label2: "HKDn"
         },
         {
-          value: 1,
+          value: 'JPY',
           label: "JPY",
           label2: "JPYn"
         },
         {
-          value: 2,
+          value: 'RMB',
           label: "RMB",
           label2: "RMBn"
         },
         {
-          value: 3,
+          value: 'USD',
           label: "USD",
           label2: "USDn"
         }
@@ -141,18 +141,18 @@ export default {
     }
   },
   created(){
-    // console.log(this.Ftocoin) 
+    //  console.log(this.Ftocoin) 
   },
   computed: {
     exchange_switch: function() {
-      if (this.Ftocoin) {
-         console.log(this.Ftocoin)
+      if (this.Ftocoin || this.coin1 &&this.coin2 ||this.Ctofiat) {
         return true;
       } else {
         return false;
       }
     }
   },
+
   methods: {
     // nowchange(){
     //     this.coin1='',
@@ -165,7 +165,7 @@ export default {
           params: {
             idx: 0,
             leftnum:this.Ftocoin,
-            rightnum:this.Ftocoin+'n',
+            rightnum:this.Ftocoin,
           
           }
         });
@@ -175,8 +175,8 @@ export default {
           name: "exchange2",
           params: {
             idx: 1,
-            leftnum:this.coin1+'n',
-            rightnum:this.coin2+'n',
+            leftnum:this.coin1,
+            rightnum:this.coin2,
           }
         });
       }
@@ -185,7 +185,7 @@ export default {
           name: "exchange2",
           params: {
             idx: 2,
-            leftnum:this.Ctofiat+'n',
+            leftnum:this.Ctofiat,
             rightnum:this.Ctofiat,
           }
         });

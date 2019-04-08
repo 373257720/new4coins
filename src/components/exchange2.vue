@@ -1,12 +1,10 @@
 <template>
   <div class="exchange2">
-    <div id="top">
-      EXCHANGE
-    </div>
+    <div id="top">EXCHANGE</div>
     <div class="content list">
       <p>{{types[data.idx].text}}</p>
       <div class="list_top">
-        <img src="../assets/hkd.png" alt>
+        <img :src="imgfirst" alt>
         <span>{{data.leftnum}}</span>
         <span>
           Balance:
@@ -15,7 +13,7 @@
         </span>
       </div>
       <div class="list_top sec">
-        <img src="../assets/hkd.png" alt>
+        <img :src="imgsec" alt>
         <span>{{data.rightnum}}</span>
         <span>
           Balance:
@@ -25,7 +23,7 @@
       </div>
       <div class="rate first" style="margin-top:28px;">
         <p>{{data.leftnum}}</p>
-        <el-input v-model="input2" placeholder="请输入内容"></el-input>
+        <el-input v-model="input1" placeholder="请输入内容"></el-input>
         <u>Max</u>
       </div>
       <div class="rate second">
@@ -35,7 +33,8 @@
       </div>
       <div class="rate_sign">1RMbn=1.1681HKD</div>
       <!-- <p>1RMBn = </p> -->
-      <div class="btn" @click="goto">SUBMIT</div>
+      <div class="btn" @click="goto" v-if="exchange_submit">SUBMIT</div>
+      <div class="btn submit" v-if="!exchange_submit">SUBMIT</div>
     </div>
   </div>
 </template>
@@ -44,58 +43,112 @@ export default {
   name: "exchange2",
   data() {
     return {
+      input1: "",
       input2: "",
-      data:{},
-         //钱币的图片
+      data: {},
+      imgfirst: "",
+      imgsec: "",
+      //钱币的图片
       tabs: [
         {
           id: 0,
-          text: require("../assets/usd.png")
+          text: require("../assets/usd.png"),
+          label: "USD"
         },
         {
           id: 1,
-          text: require("../assets/hkd.png")
+          text: require("../assets/hkd.png"),
+          label: "HKD"
         },
         {
           id: 2,
-          text: require("../assets/rmb.png")
+          text: require("../assets/rmb.png"),
+          label: "RMB"
         },
         {
           id: 3,
-          text: require("../assets/jpy.png")
+          text: require("../assets/jpy.png"),
+          label: "JPY"
         }
       ],
       // 兑换方式
-      types:[
-          {
-            id:0,
-            text:`Fiat to Note`,
-
-          },
-           {
-            id:1,
-            text:`Note to Note`
-          },
-           {
-            id:2,
-            text:`Note to Fiat`
-          },
-      ],
+      types: [
+        {
+          id: 0,
+          text: `Fiat to Note`
+        },
+        {
+          id: 1,
+          text: `Note to Note`
+        },
+        {
+          id: 2,
+          text: `Note to Fiat`
+        }
+      ]
     };
   },
-  created(){
-    this.data=this.$route.params
-     console.log(this.data.idx) 
+  created() {
+    this.data = this.$route.params;
+    if (this.data.idx == 0) {
+      this.data.rightnum = this.data.rightnum + "n";
+      for (let i = 0; i < this.tabs.length; i++) {
+        if (this.tabs[i].label == this.data.leftnum) {
+          this.imgfirst = this.tabs[i].text;
+          this.imgsec = this.tabs[i].text;
+        }
+      }
+    }
+    if (this.data.idx == 1) {
+      for (let i = 0; i < this.tabs.length; i++) {
+        if (this.tabs[i].label == this.data.leftnum) {
+          this.imgfirst = this.tabs[i].text;
+        }
+        if (this.tabs[i].label == this.data.rightnum) {
+          this.imgsec = this.tabs[i].text;
+        }
+      }
+      this.data.rightnum = this.data.rightnum + "n";
+      this.data.leftnum = this.data.leftnum + "n";
+    }
+    if (this.data.idx == 2) {
+      this.data.leftnum = this.data.leftnum + "n";
+      for (let i = 0; i < this.tabs.length; i++) {
+        if (this.tabs[i].label == this.data.rightnum) {
+          this.imgfirst = this.tabs[i].text;
+          this.imgsec = this.tabs[i].text;
+        }
+      }
+    }
   },
-  methods:{
-       goto(){
-       this.$router.push({
-              name: "home"
-        })
-    },
+  computed: {
+    exchange_submit: function() {
+      if (this.input1 && this.input2) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
+  beforeRouteEnter: function(to, from, next) {
+    if (from.name == "exchange" && to.params.leftnum) {
+      // console.log(111)
+      next();
+    } else {
+      next({
+        path: "/exchange"
+      });
+    }
+  },
+
+  methods: {
+    goto() {
+      this.$router.push({
+        name: "home"
+      });
+    }
   }
 };
-
 </script>
 <style>
 .rate .el-input__inner {
@@ -121,6 +174,8 @@ export default {
     margin: 0 auto;
     background: #302f39;
     margin-bottom: 12px;
+    padding: 5px 0 0 7px;
+    box-sizing: border-box;
 
     img,
     span {
@@ -128,15 +183,18 @@ export default {
       vertical-align: middle;
     }
     img {
-      margin: 7px 12px 0 12px;
+      // margin: 5px 12px 0 12px;
     }
     > span:nth-child(2) {
       font-size: 20px;
-      margin-right: 170px;
+      display: inline-block;
+      width: 240px;
+      margin-left: 10px;
+      // margin-right: 170px;
     }
     > span:nth-child(3) {
       font-size: 14px;
-   
+
       //   margin-left:203px;
     }
   }
@@ -144,6 +202,11 @@ export default {
     margin: 0 auto;
     width: 470px;
     position: relative;
+    p {
+      color: #bec8d6;
+      font-size: 14px;
+      margin-bottom: 9px;
+    }
     // margin-bottom: 20px;
     u {
       position: absolute;
@@ -180,16 +243,17 @@ export default {
     font-weight: 700;
     margin: 0 auto;
   }
+  .submit {
+    background: #30313b;
+    color: #64656b;
+  }
 }
 
-
-  
-  .rate_sign {
-    font-size: 12px;
-    margin: 0 auto;
-    width: 468px;
-    margin-bottom: 45px;
-  }
-
+.rate_sign {
+  font-size: 12px;
+  margin: 0 auto;
+  width: 468px;
+  margin-bottom: 45px;
+}
 </style>
 
