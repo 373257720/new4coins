@@ -28,20 +28,21 @@
         </p>
       </div>
       <div class="end fr">
-        <span @click="receive(son.id)" class="btn">
-          <el-button type="text" @click="dialogVisible = true">RECEIVE</el-button>
+        <span @click="goto('receive')" class="btn">
+          RECEIVE
+          <!-- <el-button type="text" @click="dialogVisible = true">RECEIVE</el-button> -->
         </span>
-        <span @click="send(son.id)" class="btn">
-          <el-button type="text" @click="dialogVisible = true">SEND</el-button>
+        <span @click="goto('send')" class="btn">
+           SEND 
+          <!-- <el-button type="text" @click="dialogVisible = true">SEND</el-button> -->
         </span>
-       
       </div>
-       <el-dialog title="Remind" :visible.sync="dialogVisible" width="30%">
-          <span>Sorry, this service has not been opened yet</span>
-          <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="dialogVisible = false">Comfirm</el-button>
-          </span>
-        </el-dialog>
+      <el-dialog title="Remind" :visible.sync="dialogVisible" width="30%">
+        <span>Sorry, this service has not been opened yet</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="dialogVisible = false">Comfirm</el-button>
+        </span>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -50,17 +51,33 @@ import axios from "axios";
 export default {
   props: ["son", "walletson"],
   name: "variety",
- 
+
   data() {
-    return { 
-      dialogVisible: false,
+    return {
+      dialogVisible: false
       // son:[{}]
     };
   },
   created() {
-    // console.log(this.walletson);
+    // console.log(this.son);
   },
   methods: {
+    goto(name, id) {
+      let obj = { name };
+      if (name === "receive") {
+        obj.params = { receiveid: this.son.name,pic:this.son.text};
+        // obj.query = {keyword:this.hotmovie};//保存在url地址中，刷新后还存在
+      } else if (id) {
+        obj.params = { id };
+      }
+       if (name === "send") {
+        obj.params = { receiveid: this.son.name,pic:this.son.text};
+        // obj.query = {keyword:this.hotmovie};//保存在url地址中，刷新后还存在
+      } else if (id) {
+        obj.params = { id };
+      }
+      this.$router.push(obj);
+    },
     receive(id) {
       // alert("Sorry,this service has not been opened yet");
       // this.$router.push({
@@ -90,7 +107,7 @@ export default {
   color: #5ce2ee;
   line-height: 12px;
   font-weight: 500;
-  font-family:'\5FAE\8F6F\96C5\9ED1';
+  font-family: "\5FAE\8F6F\96C5\9ED1";
 
   /* line-height: 40px; */
   /* width: 100px;  */
@@ -180,7 +197,7 @@ export default {
       span {
         // flex:1;
         //  box-sizing: border-box;
-      
+
         width: 116px;
         height: 40px;
         box-sizing: border-box;

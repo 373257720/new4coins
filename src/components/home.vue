@@ -83,10 +83,12 @@ export default {
         },
 
         legend: {
-          data:["USD", "HKD"],
-          selected:{
-            'USD':true,
-            'HKD':false
+          top:-100,
+          data: ["USD", "HKD", "RMB"],
+          selected: {
+            "USD": true,
+            "HKD": true,
+            "RMB": true
           }
         },
         grid: {
@@ -170,7 +172,7 @@ export default {
             type: "line",
             stack: "总量",
             symbolSize: 14,
-            color: "#59D4BE",
+            color: "#FA529F",
             data: [220, 182, 191, 234, 290, 330, 310],
             itemStyle: {
               normal: {
@@ -180,7 +182,6 @@ export default {
               }
             },
             lineStyle: {
-              width: 6
               // type:'dotted'  //'dotted'虚线 'solid'实线
             }
           },
@@ -188,7 +189,7 @@ export default {
             name: "HKD",
             type: "line",
             symbolSize: 14,
-            color: "#FA529F",
+            color: "#59D4BE",
             stack: "总量",
             data: [150, 232, 201, 154, 190, 330, 410],
             itemStyle: {
@@ -218,18 +219,22 @@ export default {
       tabs: [
         {
           id: 0,
+          name:'USDn',
           text: require("../assets/usd.png")
         },
         {
           id: 1,
+          name:'HKDn',
           text: require("../assets/hkd.png")
         },
         {
           id: 2,
+          name:'RMBn',
           text: require("../assets/rmb.png")
         },
         {
           id: 3,
+          name:'JPYn',
           text: require("../assets/jpy.png")
         }
       ],
@@ -280,9 +285,10 @@ export default {
     topright
   },
   mounted() {
+    this.render();
     var token = sessionStorage.getItem("token");
     // this.option.legend.data=this.legenddata
-    console.log(this.option.legend.data);
+    // console.log(this.option.legend.data);
     // this.$axios({
     //   method: "get",
     //   url: "/walletapi/growthing-02/users/wallet_data",
@@ -310,24 +316,27 @@ export default {
       })
       .catch(err => {
         console.log(err); //错误信息
+
       });
     //图片初始化实例
-    var echart = echarts.init(this.$refs.mychart);
-    echart.setOption(this.option);
+    // var echart = echarts.init(this.$refs.mychart);
+    // echart.setOption(this.option);
   },
   computed: {
-    // legenddata() {
-    //   let list = [];
-    //   for (var i = 0; i < this.currency.length; i++) {
-    //     if (this.currency[i].switch == true) {
-    //       list.push(this.currency[i].type);
-    //     }
-    //   }
-    //   return list;
-    
-    // }
+    legenddata() {
+      let list = [];
+      for (var i = 0; i < this.currency.length; i++) {
+        list.push(this.currency[i].type);
+      }
+      return list;
+    }
   },
   methods: {
+    render() {
+      //图片初始化实例
+      var echart = echarts.init(this.$refs.mychart);
+      echart.setOption(this.option);
+    },
     // 点击用户弹出信息.
     user() {
       this.ok = !this.ok;
@@ -387,11 +396,13 @@ export default {
       // this.kaiguan=event.target.switch
       if (event.target.tagName == "IMG") {
         this.currency[item].switch = !this.currency[item].switch;
-        this.option.legend.data=this.legenddata
-        // console.log(this.currency[item].switch);
-        console.log( this.option.legend.data);
+        this.option.legend.selected[this.currency[item].type]=!this.option.legend.selected[this.currency[item].type]
+        this.render();
       }
     },
+    // isok(){
+    //     option.legend.selected['RMB']=!option.legend.selected['RMB']
+    // },
     //高亮
     selected(name, idx) {
       this.activename = name;

@@ -1,14 +1,15 @@
 <template>
   <div class="receive">
     <div id="top">
-      TRANSFER
+      <h2 class="btn" @click="goto('home')">TRANSFER</h2>
+      <!-- <topright></topright> -->
     </div>
     <div class="content">
       <div class="title con">
-        <img src="../assets/hkd.png" alt>
+        <img :src="receive_pic" alt>
         <p>
-          Send&nbsp;
-          <span>HKDn</span>
+          Receive&nbsp;
+          <span>{{receive_name}}</span>
         </p>
       </div>
       <div class="box con">
@@ -22,10 +23,37 @@
   </div>
 </template>
 <script>
+import topright from "@/components/top_right";
 export default {
   name: "receive",
   data() {
-    return {};
+    return {
+      receive_pic: this.$route.params.pic,
+      receive_name: this.$route.params.receiveid
+    };
+  },
+  created() {
+  // console.log(this.$route.params);
+  },
+  beforeRouteEnter: function(to, from, next) {
+    if (from.name == "home" && to.params.pic) {
+      next();
+    } else {
+      next({
+        path: "/home"
+      });
+    }
+  },
+  methods:{
+     goto(name, id) {
+      // 路由传参
+      let obj = { name };
+      // console.log(obj)
+       if (id) {
+        obj.params = { id };
+      }
+      this.$router.push(obj);
+    }
   }
 };
 </script>

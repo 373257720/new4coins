@@ -1,14 +1,15 @@
 <template>
   <div class="send">
-    <div id="top">
-      TRANSFER
+     <div id="top">
+      <h2 class="btn" @click="goto('home')">TRANSFER</h2>
+      <!-- <topright></topright> -->
     </div>
     <div class="content">
       <div class="title con">
-        <img src="../assets/hkd.png" alt>
+        <img :src="receive_pic" alt>
         <p>
           Send&nbsp;
-          <span>HKDn</span>
+          <span>{{receive_name}}</span>
         </p>
       </div>
       <div class="box con">
@@ -42,11 +43,22 @@ export default {
     return {
       to: "",
       amount: "",
-      remark: ""
+      remark: "",
+      receive_pic: this.$route.params.pic,
+      receive_name: this.$route.params.receiveid
     };
   },
+   beforeRouteEnter: function(to, from, next) {
+    if (from.name == "home" && to.params.pic) {
+      next();
+    } else {
+      next({
+        path: "/home"
+      });
+    }
+  },
   created(){
-    console.log(this.$route.params.sendid)
+    // console.log(this.$route.params.sendid)
   },
   methods:{
      goto(){
