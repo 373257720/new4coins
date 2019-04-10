@@ -10,7 +10,7 @@ export default new Vuex.Store({
   //     goods
   //   }
   state: {
-
+    LOADING: false,
     currentUser: null, //当前用户
     //isLogin: false //判断当前用户是否已经登录
   },

@@ -4,7 +4,13 @@
       NETNOTE
       <topright></topright>
     </div>
-    <div class="content">
+    <div
+      class="content"
+      v-loading="loading2"
+      element-loading-text="loading"
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(0, 0, 0, 0.8)"
+    >
       <div class="trend">
         <div class="trend_tab">
           <div class="trend_left">
@@ -69,6 +75,7 @@ export default {
   data() {
     return {
       // list=[],
+      loading2: true,
       activename: "DAY", //高亮
       dialogVisible: false,
       ok: false, //用户信息的开关
@@ -83,12 +90,12 @@ export default {
         },
 
         legend: {
-          top:-100,
+          top: -100,
           data: ["USD", "HKD", "RMB"],
           selected: {
-            "USD": true,
-            "HKD": true,
-            "RMB": true
+            USD: true,
+            HKD: true,
+            RMB: true
           }
         },
         grid: {
@@ -219,22 +226,22 @@ export default {
       tabs: [
         {
           id: 0,
-          name:'USDn',
+          name: "USDn",
           text: require("../assets/usd.png")
         },
         {
           id: 1,
-          name:'HKDn',
+          name: "HKDn",
           text: require("../assets/hkd.png")
         },
         {
           id: 2,
-          name:'RMBn',
+          name: "RMBn",
           text: require("../assets/rmb.png")
         },
         {
           id: 3,
-          name:'JPYn',
+          name: "JPYn",
           text: require("../assets/jpy.png")
         }
       ],
@@ -285,6 +292,7 @@ export default {
     topright
   },
   mounted() {
+    // console.log(this.$loading)
     this.render();
     var token = sessionStorage.getItem("token");
     // this.option.legend.data=this.legenddata
@@ -302,6 +310,7 @@ export default {
       .then(res => {
         if (res.data.Status == "success") {
           this.walletdata = res.data.Tokens;
+          this.loading2 = false;
         }
         // else{
         // else if (res.data.Status == "error") {
@@ -316,7 +325,6 @@ export default {
       })
       .catch(err => {
         console.log(err); //错误信息
-
       });
     //图片初始化实例
     // var echart = echarts.init(this.$refs.mychart);
@@ -396,7 +404,8 @@ export default {
       // this.kaiguan=event.target.switch
       if (event.target.tagName == "IMG") {
         this.currency[item].switch = !this.currency[item].switch;
-        this.option.legend.selected[this.currency[item].type]=!this.option.legend.selected[this.currency[item].type]
+        this.option.legend.selected[this.currency[item].type] = !this.option
+          .legend.selected[this.currency[item].type];
         this.render();
       }
     },
@@ -555,7 +564,7 @@ export default {
       margin-top: 6px;
       margin-right: 14px;
       width: 300px;
-      height: 34px;
+      height: 30px;
       border: 2px solid #5ce2ee;
       //  box-sizing: border-box;
       display: flex;
@@ -564,7 +573,7 @@ export default {
         font-weight: 700;
         font-size: 12px;
         border-radius: 14px;
-        line-height: 34px;
+        line-height: 30px;
         color: white;
         text-align: center;
         cursor: pointer;

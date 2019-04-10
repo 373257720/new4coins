@@ -1,6 +1,6 @@
 <template>
   <div class="send">
-     <div id="top">
+    <div id="top">
       <h2 class="btn" @click="goto('home')">TRANSFER</h2>
       <!-- <topright></topright> -->
     </div>
@@ -16,22 +16,23 @@
         <div>
           <h3>To :</h3>
           <p class="to same">
-            <el-input placeholder="-" v-model="to" clearable></el-input>
+            <el-input placeholder="-" v-model.trim="to" clearable></el-input>
           </p>
         </div>
         <div>
           <h3>Amount :</h3>
           <p class="amount same">
-            <el-input placeholder="-" v-model="amount" clearable></el-input>
+            <el-input placeholder="-" v-model.trim="amount" clearable></el-input>
           </p>
         </div>
         <div>
           <h3>Remark :</h3>
           <p class="remark same">
-            <el-input placeholder="-" v-model="remark" clearable></el-input>
+            <el-input placeholder="-" v-model.trim="remark" clearable></el-input>
           </p>
         </div>
-        <div class="btn" @click="goto">SUBMIT</div>
+        <div class="btn" @click="goto" v-if="send_switch">SUBMIT</div>
+         <div class="btn submit" v-if="!send_switch">SUBMIT</div>
       </div>
     </div>
   </div>
@@ -48,7 +49,7 @@ export default {
       receive_name: this.$route.params.receiveid
     };
   },
-   beforeRouteEnter: function(to, from, next) {
+  beforeRouteEnter: function(to, from, next) {
     if (from.name == "home" && to.params.pic) {
       next();
     } else {
@@ -57,15 +58,24 @@ export default {
       });
     }
   },
-  created(){
+  created() {
     // console.log(this.$route.params.sendid)
   },
-  methods:{
-     goto(){
-       this.$router.push({
-              name: "home"
-        })
-    },
+  computed:{
+      send_switch:function(){
+        if(this.to && this.amount && this.remark){
+          return true
+        }else{
+          false
+        }
+      }
+  },
+  methods: {
+    goto() {
+      this.$router.push({
+        name: "home"
+      });
+    }
   }
 };
 </script>
@@ -134,6 +144,10 @@ export default {
     line-height: 38px;
     text-align: center;
     font-weight: 700;
+  }
+  .submit {
+    background: #30313b;
+    color: #64656b;
   }
 }
 </style>
