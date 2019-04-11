@@ -2,7 +2,7 @@
   <div class="receive">
     <div id="top">
       <h2 class="btn" @click="goto('home')">TRANSFER</h2>
-      <!-- <topright></topright> -->
+      <topright></topright>
     </div>
     <div class="content">
       <div class="title con">
@@ -26,6 +26,9 @@
 import topright from "@/components/top_right";
 export default {
   name: "receive",
+  components:{
+    topright
+  },
   data() {
     return {
       receive_pic: this.$route.params.pic,

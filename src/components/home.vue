@@ -73,6 +73,7 @@ import topright from "@/components/top_right";
 export default {
   name: "home",
   data() {
+    
     return {
       // list=[],
       loading2: true,

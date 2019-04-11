@@ -2,7 +2,7 @@
   <div class="send">
     <div id="top">
       <h2 class="btn" @click="goto('home')">TRANSFER</h2>
-      <!-- <topright></topright> -->
+      <topright></topright>
     </div>
     <div class="content">
       <div class="title con">
@@ -38,8 +38,12 @@
   </div>
 </template>
 <script>
+import topright from "@/components/top_right";
 export default {
   name: "send",
+  components:{
+    topright  
+  },
   data() {
     return {
       to: "",

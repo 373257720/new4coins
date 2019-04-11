@@ -22,7 +22,7 @@ Vue.config.productionTip = false
 var baseurl = {
   api: "http://4coins.wearetechman.com",
   //  api:"http://113.52.134.95:8080",
-  // api: "http://192.168.1.37:8080",
+  //  api: "http://192.168.1.37:8080",
 
 }
 Vue.prototype.$baseurl = baseurl.api
@@ -54,7 +54,6 @@ Vue.directive('focus', {
 })
 
 //判断token失效处理
-//判断token失效跳转
 axios.interceptors.response.use(response => {
   // if (response) {
     if (response.data.Status == "error") {

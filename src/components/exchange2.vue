@@ -1,6 +1,9 @@
 <template>
   <div class="exchange2">
-    <div id="top">EXCHANGE</div>
+     <div id="top">
+      <h2 class="btn" @click="goto('home')">EXCHANGE</h2>
+      <topright></topright>
+    </div>
     <div class="content list">
       <p>{{types[data.idx].text}}</p>
       <div class="list_top">
@@ -39,8 +42,12 @@
   </div>
 </template>
 <script>
+import topright from "@/components/top_right";
 export default {
   name: "exchange2",
+   components: {
+    topright
+  },
   data() {
     return {
       input1: "",

@@ -1,6 +1,10 @@
 <template>
   <div class="deposit">
-    <div id="top">DEPOSIT</div>
+    <!-- <div id="top"></div> -->
+    <div id="top">
+      <h2 class="btn" @click="goto('home')">DEPOSIT</h2>
+      <topright></topright>
+    </div>
     <div class="content con">
       <div class="title">
         <img src="../assets/up.png" alt>
@@ -48,8 +52,12 @@
   </div>
 </template>
 <script>
+import topright from "@/components/top_right";
 export default {
   name: "deposit",
+   components: {
+    topright
+  },
   data() {
     return {
       amount: "",

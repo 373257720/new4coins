@@ -1,6 +1,9 @@
 <template>
   <div class="exchange">
-    <div id="top">EXCHANGE</div>
+    <div id="top">
+      <h2 class="topbtn" @click="goto('home')">EXCHANGE</h2>
+      <topright></topright>
+    </div>
     <div class="content">
       <div class="list">
         <p>Fiat&nbsp;to&nbsp;Note</p>
@@ -76,28 +79,32 @@
   </div>
 </template>
 <script>
+import topright from "@/components/top_right";
 export default {
   name: "exchange",
+  components: {
+    topright
+  },
   data() {
     return {
       options: [
         {
-          value: 'HKD',
+          value: "HKD",
           label: "HKD",
           label2: "HKDn"
         },
         {
-          value: 'JPY',
+          value: "JPY",
           label: "JPY",
           label2: "JPYn"
         },
         {
-          value: 'RMB',
+          value: "RMB",
           label: "RMB",
           label2: "RMBn"
         },
         {
-          value: 'USD',
+          value: "USD",
           label: "USD",
           label2: "USDn"
         }
@@ -140,12 +147,12 @@ export default {
       }
     }
   },
-  created(){
-    //  console.log(this.Ftocoin) 
+  created() {
+    //  console.log(this.Ftocoin)
   },
   computed: {
     exchange_switch: function() {
-      if (this.Ftocoin || this.coin1 &&this.coin2 ||this.Ctofiat) {
+      if (this.Ftocoin || (this.coin1 && this.coin2) || this.Ctofiat) {
         return true;
       } else {
         return false;
@@ -164,9 +171,8 @@ export default {
           name: "exchange2",
           params: {
             idx: 0,
-            leftnum:this.Ftocoin,
-            rightnum:this.Ftocoin,
-          
+            leftnum: this.Ftocoin,
+            rightnum: this.Ftocoin
           }
         });
       }
@@ -175,8 +181,8 @@ export default {
           name: "exchange2",
           params: {
             idx: 1,
-            leftnum:this.coin1,
-            rightnum:this.coin2,
+            leftnum: this.coin1,
+            rightnum: this.coin2
           }
         });
       }
@@ -185,8 +191,8 @@ export default {
           name: "exchange2",
           params: {
             idx: 2,
-            leftnum:this.Ctofiat,
-            rightnum:this.Ctofiat,
+            leftnum: this.Ctofiat,
+            rightnum: this.Ctofiat
           }
         });
       }
@@ -257,6 +263,9 @@ export default {
 .submit {
   background: #30313b;
   color: #64656b;
+}
+.topbtn{
+  cursor: pointer;
 }
 </style>
 

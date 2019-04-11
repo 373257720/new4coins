@@ -1,6 +1,9 @@
 <template>
   <div class="withdraw">
-    <div id="top">WITHDRAW</div>
+    <div id="top">
+      <h2 class="topbtn" @click="goto('home')">WITHDRAW</h2>
+      <topright></topright>
+    </div>
     <div class="content">
       <div class="content_first">
         <p>
@@ -33,8 +36,12 @@
   </div>
 </template>
 <script>
+import topright from "@/components/top_right";
 export default {
   name: "withdraw",
+  components:{
+    topright
+  },
   data() {
     return {
       options: [
@@ -147,6 +154,9 @@ export default {
  .submit {
     background: #30313b;
     color: #64656b;
+  }
+  .topbtn{
+    cursor: pointer;
   }
 </style>
 
