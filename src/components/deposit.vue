@@ -146,7 +146,7 @@ export default {
       this.formData = new FormData();
       this.formData.append("file", _file);
 
-      // if (!isLt2M) {
+      // if (!isLt2M) { 
       //   this.$message.error("请上传2M以下的.xlsx文件");
       //   return false;
       // }

@@ -58,6 +58,7 @@ export default {
 </style>
 <style lang="scss" scoped>
 .top_right {
+  z-index: 999999;
   cursor: pointer;
   float: right;
   font-size: 10px;

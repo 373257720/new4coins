@@ -11,6 +11,9 @@ import withdraw from '@/components/withdraw'
 import history from '@/components/history'
 import forgetpassword1 from '@/components/forgetpass_first'
 import forgetpassword2 from '@/components/forgetpass_sec'
+// import daddy from '@/components/daddy'
+// import sonny from '@/components/sonny'
+
 Vue.use(Router)
 
 const routes = [{
@@ -108,8 +111,10 @@ const routes = [{
     component:forgetpassword2,
     meta: {
       requireAuth: true
-    }
-  }
+    },
+    
+  },
+
 ]
 
 let router = new Router({
@@ -117,7 +122,7 @@ let router = new Router({
   routes
 });
 // 全局路由守卫
-// 在进入某个路由前执行的代码
+//在进入某个路由前执行的代码
 router.beforeEach((to, from, next) => {
   let token = sessionStorage.getItem('token');
   if (to.meta.requireAuth) {

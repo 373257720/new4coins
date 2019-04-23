@@ -38,7 +38,7 @@ export default {
     return {
       name: "",
       password: "",
-      warn: ""
+      warn: "",
     };
   },
   created() {
@@ -81,7 +81,7 @@ export default {
         // });
         this.$axios({
           method: "post",
-          url: this.$baseurl + "/growthing-02/users/pcLogin",
+          url: this.$baseurl + "/coin4_project/users/pcLogin",
           data: {
             email: this.name,
             password: this.password
@@ -89,14 +89,14 @@ export default {
         })
           .then(res => {
             if (res.data.Status == "success") {
-              console.log(res);
+              console.log(111);
               this.$store.dispatch("setUser", this.name);
               sessionStorage.setItem("token", res.data.Token.access_token);
               this.$router.push({
                 name: "home"
               });
             } else if (res.data.Status == "error") {
-              if ("No session. Please do login." ==res.data.Message ) {
+              if ("No session. Please do login." == res.data.Message) {
                 sessionStorage.removeItem("token");
                 sessionStorage.removeItem("username");
                 this.$router.replace({

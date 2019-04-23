@@ -29,12 +29,12 @@
       </div>
       <div class="end fr">
         <span @click="goto('receive')" class="btn">
-          RECEIVE
-          <!-- <el-button type="text" @click="dialogVisible = true">RECEIVE</el-button> -->
+          <!-- RECEIVE -->
+          <el-button type="text" @click="dialogVisible = true">RECEIVE</el-button>
         </span>
         <span @click="goto('send')" class="btn">
-           SEND 
-          <!-- <el-button type="text" @click="dialogVisible = true">SEND</el-button> -->
+          <!-- SEND  -->
+          <el-button type="text" @click="dialogVisible = true">SEND</el-button>
         </span>
       </div>
       <el-dialog title="Remind" :visible.sync="dialogVisible" width="30%">
@@ -43,6 +43,7 @@
           <el-button type="primary" @click="dialogVisible = false">Comfirm</el-button>
         </span>
       </el-dialog>
+
     </div>
   </div>
 </template>
@@ -65,13 +66,13 @@ export default {
     goto(name, id) {
       let obj = { name };
       if (name === "receive") {
-        obj.params = { receiveid: this.son.name,pic:this.son.text};
+        obj.params = { receiveid: this.son.name, pic: this.son.text };
         // obj.query = {keyword:this.hotmovie};//保存在url地址中，刷新后还存在
       } else if (id) {
         obj.params = { id };
       }
-       if (name === "send") {
-        obj.params = { receiveid: this.son.name,pic:this.son.text};
+      if (name === "send") {
+        obj.params = { receiveid: this.son.name, pic: this.son.text };
         // obj.query = {keyword:this.hotmovie};//保存在url地址中，刷新后还存在
       } else if (id) {
         obj.params = { id };

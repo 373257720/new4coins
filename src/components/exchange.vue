@@ -87,6 +87,12 @@ export default {
   },
   data() {
     return {
+      data123: [
+        {
+          data: [1, 2, 3],
+          type: "bar"
+        }
+      ],
       options: [
         {
           value: "HKD",
@@ -148,7 +154,13 @@ export default {
     }
   },
   created() {
-    //  console.log(this.Ftocoin)
+    // const gg = this.data123.map(good => {
+    //   let list = good.data;
+    //   // console.log(list)
+    //   // return list
+    //   return [...list];
+    // });
+    // console.log(gg)
   },
   computed: {
     exchange_switch: function() {
@@ -196,6 +208,11 @@ export default {
           }
         });
       }
+    },
+    goto(a) {
+      this.$router.push({
+        name: "home"
+      });
     }
   }
 };
@@ -264,7 +281,7 @@ export default {
   background: #30313b;
   color: #64656b;
 }
-.topbtn{
+.topbtn {
   cursor: pointer;
 }
 </style>

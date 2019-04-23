@@ -1,10 +1,10 @@
 <template>
   <div class="historytable">
     <el-table
-      :data="transfer.slice((currpage - 1) * pagesize, currpage * pagesize)"
+      :data="fillter.slice((currpage - 1) * pagesize, currpage * pagesize)"
       style="width: 100%"
       @sort-change="sort_change"
-      :default-sort="{prop: 'CreatedStr', order: 'ascending'}"
+      :default-sort="{prop: 'CreatedStr', order: 'descending'}"
     >
       <el-table-column :label="tablehead[0]" width="230" sortable prop="CreatedStr">
         <template slot-scope="scope">
@@ -65,6 +65,7 @@ export default {
     return {
       // currencyfrom:
       pagesize: 10, // 每页条数
+      fillter:[],
       // transfer_currpage:1,
       currpage: 1, //当前页数
       //货币兑换类型

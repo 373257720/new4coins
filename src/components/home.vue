@@ -32,6 +32,9 @@
           </ul>
         </div>
         <div class="trend_table" ref="mychart"></div>
+        <!-- <div class="trend_table" >
+          <img src="../assets/d57bcb765433304e7ca905009882f84.png" alt="">
+        </div> -->
       </div>
       <div class="content_mid">
         <variety
@@ -164,16 +167,12 @@ export default {
             data: [120, 132, 101, 134, 90, 230, 210],
             itemStyle: {
               normal: {
-                // border:"4px"
-                //  borderColor: "blue",
                 borderWidth: 3
               }
             },
             lineStyle: {
               width: 6
-              // type:'dotted'  //'dotted'虚线 'solid'实线
             }
-            // color:
           },
           {
             name: "RMB",
@@ -184,13 +183,11 @@ export default {
             data: [220, 182, 191, 234, 290, 330, 310],
             itemStyle: {
               normal: {
-                // border:"4px"
-                //  borderColor: "blue",
                 borderWidth: 3
               }
             },
             lineStyle: {
-              // type:'dotted'  //'dotted'虚线 'solid'实线
+               width: 6
             }
           },
           {
@@ -202,17 +199,11 @@ export default {
             data: [150, 232, 201, 154, 190, 330, 410],
             itemStyle: {
               normal: {
-                // border:"4px"
-                //  borderColor: "blue",
                 borderWidth: 3
               }
             },
-            // checkpointStyle: {
-            //   symbolSize: 100
-            // },
             lineStyle: {
               width: 6
-              // type:'dotted'  //'dotted'虚线 'solid'实线
             }
           }
           // {
@@ -307,29 +298,27 @@ export default {
     //   // }
     // })
     this.$axios
-      .get(`${this.$baseurl}/growthing-02/users/wallet_data`)
+      .get(`${this.$baseurl}/coin4_project/users/wallet_data`)
       .then(res => {
         if (res.data.Status == "success") {
           this.walletdata = res.data.Tokens;
           this.loading2 = false;
         }
         // else{
-        // else if (res.data.Status == "error") {
-        //   if ("No session. Please do login." == res.data.error) {
-        //     sessionStorage.removeItem("token");
-        //     sessionStorage.removeItem("username");
-        //     this.$router.replace({
-        //       name: "login"
-        //     });
-        //   }
-        // }
+        else if (res.data.Status == "error") {
+          this.dialogVisible =true
+          // if ("No session. Please do login." == res.data.error) {
+          //   sessionStorage.removeItem("token");
+          //   sessionStorage.removeItem("username");
+          //   this.$router.replace({
+          //     name: "login"
+          //   });
+          // }
+        }
       })
       .catch(err => {
         console.log(err); //错误信息
       });
-    //图片初始化实例
-    // var echart = echarts.init(this.$refs.mychart);
-    // echart.setOption(this.option);
   },
   computed: {
     legenddata() {

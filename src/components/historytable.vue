@@ -55,7 +55,6 @@
 export default {
   name: "historytable",
   props: ["transfer", "tablehead"],
-
   data() {
     return {
       pagesize: 10, // 每页条数
@@ -151,13 +150,12 @@ export default {
 }
 .historytable .el-pagination {
   position: absolute;
-
   left: 50%;
   transform: translateX(-50%);
   bottom: 40px;
   /* background: #302e39; */
 }
-
+  
 .historytable .el-pagination button:disabled {
   background: 0;
 }

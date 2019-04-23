@@ -25,9 +25,6 @@
 </template>
 
 <script>
-// import axios from "axios";
-// 把axios写入Vue的原型对象，方便后面调用
-// Vue.prototype.$axios = axios;
 export default {
   name: "App",
   data() {

@@ -58,24 +58,26 @@ export default {
     //  console.log(this.$global_func.goto())
     var token = sessionStorage.getItem("token");
     this.$axios
-      .get(`${this.$baseurl}/growthing-02/users/transfer_history`, {
+      .get(`${this.$baseurl}/coin4_project/users/transfer_history`, {
         params: {
           limit: 100,
-          offset: 0,
+          offset: 0
           // access_token: token
         }
       })
       .then(res => {
-        this.transferdata = res.data.records;
+        if (res.data.status == "success") {
+          this.transferdata = res.data.records;
+        }
         // console.log(this.transferdata.length)
       })
       .catch(err => {});
 
     this.$axios
-      .get(`${this.$baseurl}/growthing-02/users/exchange_history`, {
+      .get(`${this.$baseurl}/coin4_project/users/exchange_history`, {
         params: {
           limit: 100,
-          offset: 0,
+          offset: 0
           // access_token: token
         }
       })
@@ -93,7 +95,7 @@ export default {
   methods: {
     //tap切换
     handleClick(tab, event) {},
-      goto(name, id) {
+    goto(name, id) {
       // 编程式路由导航：获取router实例
       // this.$router  路由实例（包含跳转等方法）
       // this.$route   当前路由信息
@@ -101,7 +103,7 @@ export default {
       // 路由传参
       let obj = { name };
       // console.log(obj)
-       if (id) {
+      if (id) {
         obj.params = { id };
       }
       this.$router.push(obj);
