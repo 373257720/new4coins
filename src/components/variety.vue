@@ -28,11 +28,13 @@
         </p>
       </div>
       <div class="end fr">
-        <span @click="goto('receive')" class="btn">
+         <span class="btn">
+        <!-- <span @click="goto('receive')" class="btn"> -->
           <!-- RECEIVE -->
           <el-button type="text" @click="dialogVisible = true">RECEIVE</el-button>
         </span>
-        <span @click="goto('send')" class="btn">
+         <span  class="btn">
+        <!-- <span @click="goto('send')" class="btn"> -->
           <!-- SEND  -->
           <el-button type="text" @click="dialogVisible = true">SEND</el-button>
         </span>
