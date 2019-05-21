@@ -49,6 +49,7 @@
       @size-change="handleSizeChange"
       :total="transfer.length"
     ></el-pagination>
+
   </div>
 </template>
 <script>
@@ -97,13 +98,12 @@ export default {
     this.fillter = [...this.transfer];
     for (let i = 0; i < this.fillter.length; i++) {
       var str = this.fillter[i].CreatedStr;
-      var date = str.slice(0,2);
-      var month =str.slice(3,5);
-      var year =str.slice(6,10)
-      var time= str.slice(11);
-      str=`${year}-${month}-${date} ${time}`
-      this.fillter[i].CreatedStr=str
-      
+      var date = str.slice(0, 2);
+      var month = str.slice(3, 5);
+      var year = str.slice(6, 10);
+      var time = str.slice(11);
+      str = `${year}-${month}-${date} ${time}`;
+      this.fillter[i].CreatedStr = str;
     }
   },
   methods: {
@@ -155,7 +155,7 @@ export default {
   bottom: 40px;
   /* background: #302e39; */
 }
-  
+
 .historytable .el-pagination button:disabled {
   background: 0;
 }

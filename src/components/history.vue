@@ -6,7 +6,6 @@
     </div>
     <div class="content con">
       <div class="title">
-        <!-- <img src="../assets/up.png" alt> -->
         <p>History</p>
       </div>
       <div class="box_tap">
@@ -96,10 +95,6 @@ export default {
     //tap切换
     handleClick(tab, event) {},
     goto(name, id) {
-      // 编程式路由导航：获取router实例
-      // this.$router  路由实例（包含跳转等方法）
-      // this.$route   当前路由信息
-      // console.log(this.$route,this.$router)
       // 路由传参
       let obj = { name };
       // console.log(obj)

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div id="content">
-      <router-view/>
+      <!-- <keep-alive> -->
+        <router-view></router-view>
+      <!-- </keep-alive> -->
     </div>
     <div id="bottom">
       <div class="bottom">
@@ -33,28 +35,24 @@ export default {
   created() {
     //在页面刷新时将vuex里的信息保存到sessionStorage里
     window.addEventListener("beforeunload", () => {
-      sessionStorage.setItem(
-        "userName",
-       this.$store.state.currentUser
-      );
+      sessionStorage.setItem("userName", this.$store.state.currentUser);
     });
     //在页面加载时读取sessionStorage里的状态信息
     if (sessionStorage.getItem("userName")) {
-       this.$store.commit('userStatus',sessionStorage.getItem("userName"));
+      this.$store.commit("userStatus", sessionStorage.getItem("userName"));
     }
   },
   methods: {
     focuson(event) {
       event.target.focus();
-    },
-  
+    }
   }
 };
 </script>
 
 <style>
-@import "element-ui/lib/theme-chalk/index.css";
-@import "./css/base.css";
+/* @import "element-ui/lib/theme-chalk/index.css"; */
+/* @import "./css/base.css"; */
 
 /* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -72,16 +70,11 @@ export default {
   color: white;
   padding-left: 4%;
   padding-right: 10%;
-  
- 
 }
-#top h2{
+#top h2 {
   width: 140px;
   float: left;
 }
-
-
-
 
 .btn {
   cursor: pointer;

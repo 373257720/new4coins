@@ -160,6 +160,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+
 .content {
   height: 866px;
   position: relative;

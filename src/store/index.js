@@ -5,10 +5,6 @@ Vue.use(Vuex);
 // 1.创建一个store
 export default new Vuex.Store({
   // 2. 创建state数据交由store来管理
-  //   modules:{
-  //     cart,
-  //     goods
-  //   }
   state: {
     LOADING: false,
     currentUser: null, //当前用户
@@ -23,7 +19,6 @@ export default new Vuex.Store({
     //   }));
     // }
   },
-
   // 通过mutations修改state中的数据
   mutations: {
     // changeData(state, obj) { // store中的数据只能通过commit mutation来改变
@@ -31,7 +26,6 @@ export default new Vuex.Store({
     //   state.allpeople = obj.datas.list[7].data.column_images[0][0].img_url
     // }
     userStatus(state, user) {
-
       if (user) {
         state.currentUser = user
         //    state.isLogin = true
@@ -42,7 +36,6 @@ export default new Vuex.Store({
         state.currentUser = null;
         //  state.isLogin = false;
       }
-
     }
   },
 
@@ -50,16 +43,14 @@ export default new Vuex.Store({
   //   actions: {
   // getKuncun(context, payload) {
   //   // 请求服务器，获取库存信息
-
   // }
   actions: {
     // 封装一个 ajax 方法
     setUser(context, user) {
       // commit('userStatus',user)
       context.commit( 'userStatus', user )
-      //context.commit('userStatus',user) // 通过接口获取的后台数据保存到store中，等待组件取用
-     
-
+      //context.commit('userStatus',user) 
+      // 通过接口获取的后台数据保存到store中，等待组件取用
     }
   }
 

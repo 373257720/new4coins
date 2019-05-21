@@ -6,18 +6,22 @@ import router from './router'
 import ElementUI from 'element-ui';
 import axios from 'axios'
 import qs from "qs";
+import 'element-ui/lib/theme-chalk/index.css'
+import "./css/base.css";
 import 'babel-polyfill' //ie浏览器
 Vue.prototype.$qs = qs;
-
+Vue.use(ElementUI);
 // 全局函数
 import global_func from "./global/global_func"
+
 Vue.prototype.$global_func = global_func;
 // Vue.use(global);
 
 //实例化 store
 import store from './store/index.js'
-axios.defaults.withCredentials = true; //让ajax携带cookie
-Vue.use(ElementUI);
+//让ajax携带cookie
+axios.defaults.withCredentials = true; 
+
 
 //设置为 false 以阻止 vue 在启动时生成生产提示。
 Vue.config.productionTip = false
@@ -25,8 +29,8 @@ Vue.config.productionTip = false
 //设置baseurl
 var baseurl = {
   //  api: "http://4coins.wearetechman.com",
-  //  api:"http://113.52.134.95:8080",
-   api: "http://192.168.1.37:8080",
+   api:"http://113.52.134.95:8080",
+  //  api: "http://192.168.1.37:8080",
 }
 Vue.prototype.$baseurl = baseurl.api
 
@@ -51,6 +55,7 @@ Vue.directive('focus', {
     // console.log(el)
     el.onclick = function (e) {
       if (e.target.nodeName == 'I') {
+        // console.log(this)
         this.querySelector('input').focus();
       }
     }

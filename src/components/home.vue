@@ -6,7 +6,7 @@
     </div>
     <div
       class="content"
-      v-loading="loading2"
+    
       element-loading-text="loading"
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
@@ -335,7 +335,7 @@ export default {
       var echart = echarts.init(this.$refs.mychart);
       echart.setOption(this.option);
     },
-    // 点击用户弹出信息.
+    // 点击用户下拉弹出信息.
     user() {
       this.ok = !this.ok;
       let user = this.$refs.username;

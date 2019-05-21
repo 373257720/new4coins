@@ -135,6 +135,7 @@ export default {
     // 文件上传
 
     uploadFile(params) {
+      console.log(params)
       // console.log("uploadFile", params);
       this.pic_submitok = false;
       const _file = params.file;
@@ -145,7 +146,6 @@ export default {
       }
       this.formData = new FormData();
       this.formData.append("file", _file);
-
       // if (!isLt2M) { 
       //   this.$message.error("请上传2M以下的.xlsx文件");
       //   return false;
@@ -229,7 +229,6 @@ export default {
 .title {
   height: 50px;
   width: 1200px;
-
   background: #302f39;
   margin-bottom: 60px;
   color: #ffffff;
