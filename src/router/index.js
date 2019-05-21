@@ -147,7 +147,7 @@ let router = new Router({
     }
   });
 router.afterEach((to, from) => {
-  console.log('after')
+  // console.log('after')
 })
 
 export default router;
