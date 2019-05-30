@@ -163,63 +163,63 @@ export default {
             formatter: "${value}",
             color: "#FFFFFF"
           }
-        }
-        // series: [
-        //   {
-        //     name: "USD",
-        //     type: "line",
-        //     symbolSize: 14,
-        //     color: "#FACB07",
-        //     stack: "总量",
-        //     data: [120, 132, 101, 134, 90, 230, 210],
-        //     itemStyle: {
-        //       normal: {
-        //         borderWidth: 3
-        //       }
-        //     },
-        //     lineStyle: {
-        //       width: 6
-        //     }
-        //   },
-        //   {
-        //     name: "RMB",
-        //     type: "line",
-        //     stack: "总量",
-        //     symbolSize: 14,
-        //     color: "#FA529F",
-        //     data: [220, 182, 191, 234, 290, 330, 310],
-        //     itemStyle: {
-        //       normal: {
-        //         borderWidth: 3
-        //       }
-        //     },
-        //     lineStyle: {
-        //       width: 6
-        //     }
-        //   },
-        //   {
-        //     name: "HKD",
-        //     type: "line",
-        //     symbolSize: 14,
-        //     color: "#59D4BE",
-        //     stack: "总量",
-        //     data: [150, 232, 201, 154, 190, 330, 410],
-        //     itemStyle: {
-        //       normal: {
-        //         borderWidth: 3
-        //       }
-        //     },
-        //     lineStyle: {
-        //       width: 6
-        //     }
-        //   }
-        //   // {
-        //   //   name: "JPY",
-        //   //   type: "line",
-        //   //   stack: "总量",
-        //   //   data: [320, 332, 301, 334, 390, 330, 320]
-        //   // }
-        // ]
+        },
+        series: [
+          {
+            name: "USD",
+            type: "line",
+            symbolSize: 14,
+            color: "#FACB07",
+            stack: "总量",
+            data: [120, 132, 101, 134, 90, 230, 210],
+            itemStyle: {
+              normal: {
+                borderWidth: 3
+              }
+            },
+            lineStyle: {
+              width: 6
+            }
+          },
+          {
+            name: "RMB",
+            type: "line",
+            stack: "总量",
+            symbolSize: 14,
+            color: "#FA529F",
+            data: [220, 182, 191, 234, 290, 330, 310],
+            itemStyle: {
+              normal: {
+                borderWidth: 3
+              }
+            },
+            lineStyle: {
+              width: 6
+            }
+          },
+          {
+            name: "HKD",
+            type: "line",
+            symbolSize: 14,
+            color: "#59D4BE",
+            stack: "总量",
+            data: [150, 232, 201, 154, 190, 330, 410],
+            itemStyle: {
+              normal: {
+                borderWidth: 3
+              }
+            },
+            lineStyle: {
+              width: 6
+            }
+          }
+          // {
+          //   name: "JPY",
+          //   type: "line",
+          //   stack: "总量",
+          //   data: [320, 332, 301, 334, 390, 330, 320]
+          // }
+        ]
       },
       //钱币的图片
       tabs: [
