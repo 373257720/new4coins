@@ -20,8 +20,36 @@ Vue.prototype.$global_func = global_func;
 //实例化 store
 import store from './store/index.js'
 //让ajax携带cookie
-axios.defaults.withCredentials = true; 
+axios.defaults.withCredentials = true;
 
+// 引入公共组件
+import language from './components/language.vue'
+import top_right from './components/top_right.vue'
+Vue.component('lang', language)
+Vue.component('topright',top_right)
+
+
+// 多语言设置
+import VueI18n from 'vue-i18n'
+import complex from './assets/language/complex';
+import english from './assets/language/english';
+import simple from './assets/language/simple'
+Vue.use(VueI18n)
+// var gg=this.$store.state.lang
+// console.log(store.state.lang)
+if (localStorage.getItem("lang")) {
+  store.commit("currencylang", localStorage.getItem("lang"));
+}
+const i18n = new VueI18n({
+  locale: store.state.lang,
+  // 语言标识
+  messages: {
+    'English': english,
+    'complex': complex,
+    'simple': simple
+
+  }
+})
 
 //设置为 false 以阻止 vue 在启动时生成生产提示。
 Vue.config.productionTip = false
@@ -29,7 +57,7 @@ Vue.config.productionTip = false
 //设置baseurl
 var baseurl = {
   //  api: "http://4coins.wearetechman.com",
-   api:"http://113.52.134.95:8080",
+  api: "http://113.52.134.95:8080",
   //  api: "http://192.168.1.37:8080",
 }
 Vue.prototype.$baseurl = baseurl.api
@@ -65,15 +93,16 @@ Vue.directive('focus', {
 //判断token失效处理
 axios.interceptors.response.use(response => {
   // if (response) {
-    if (response.data.Status == "error") {
-      if ("No session. Please do login." == response.data.Message) {
-        sessionStorage.removeItem('username');
-        sessionStorage.removeItem("token");
-        router.replace({
-          name: "login"
-        });
-      }
+  if (response.data.Status == "error") {
+    if ("No session. Please do login." == response.data.Message) {
+      sessionStorage.removeItem('username');
+      sessionStorage.removeItem("token");
+      
+      router.replace({
+        name: "login"
+      });
     }
+  }
   // }
   return response;
 }, error => {
@@ -85,6 +114,7 @@ new Vue({
   el: '#app',
   router,
   axios,
+  i18n,
   store,
   components: {
     App

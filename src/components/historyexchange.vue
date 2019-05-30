@@ -8,7 +8,7 @@
     >
       <el-table-column :label="tablehead[0]" width="230" sortable prop="CreatedStr">
         <template slot-scope="scope">
-          <span style="margin-left: 10px">{{ scope.row.CreatedStr}}</span>
+          <span style="margin-left: 10px">{{scope.row.CreatedStr}}</span>
         </template>
       </el-table-column>
       <el-table-column :label="tablehead[1]">
@@ -65,37 +65,68 @@ export default {
     return {
       // currencyfrom:
       pagesize: 10, // 每页条数
-      fillter:[],
+      fillter: [],
       // transfer_currpage:1,
       currpage: 1, //当前页数
       //货币兑换类型
-      type: [
-        "Send",
-        "Withdrawal",
-        "Deposit",
-        "Fiat" + " " + "to" + " " + "Fiat",
-        "Fiat" + " " + "to" + " " + "Note",
-        "Note" + " " + "to" + " " + "Fiat",
-        "Note" + " " + "to" + " " + "Note",
-        "Fee"
-      ],
-      resultimg: [
+      // type: [
+      //   this.$t("history.send"),
+      //   this.$t("history.withdrawl"),
+      //   this.$t("history.deposit"),
+      //   this.$t("history.ftof"),
+      //   this.$t("history.fton"),
+      //   this.$t("history.ntof"),
+      //   this.$t("history.nton"),
+      //   this.$t("history.fee")
+      // ],
+      // resultimg: [
+      //   {
+      //     inf: this.$t("history.done"),
+      //     text: require("../assets/rusult_complete.png")
+      //   },
+      //   {
+      //     inf: this.$t("history.pending"),
+      //     text: require("../assets/2517c241736f218dd6561f2dab31812.png")
+      //   },
+      //   {
+      //     inf: this.$t("history.declined"),
+      //     text: require("../assets/result_failed.png")
+      //   }
+      // ]
+    };
+  },
+  computed: {
+    type: function() {
+      return [
+        this.$t("history.send"),
+        this.$t("history.withdrawl"),
+        this.$t("history.deposit"),
+        this.$t("history.ftof"),
+        this.$t("history.fton"),
+        this.$t("history.ntof"),
+        this.$t("history.nton"),
+        this.$t("history.fee")
+      ];
+    },
+    resultimg: function() {
+      return [
         {
-          inf: "deals were done",
+          inf: this.$t("history.done"),
           text: require("../assets/rusult_complete.png")
         },
         {
-          inf: "deals are Pending",
+          inf: this.$t("history.pending"),
           text: require("../assets/2517c241736f218dd6561f2dab31812.png")
         },
         {
-          inf: "Declined by admin",
+          inf: this.$t("history.declined"),
           text: require("../assets/result_failed.png")
         }
-      ]
-    };
+      ];
+    }
   },
   created() {
+    // console.log(this.tablehead);
     this.fillter = [...this.transfer];
     for (let i = 0; i < this.fillter.length; i++) {
       var str = this.fillter[i].CreatedStr;

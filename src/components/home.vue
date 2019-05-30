@@ -3,10 +3,11 @@
     <div id="top">
       NETNOTE
       <topright></topright>
+      <lang></lang>
     </div>
     <div
       class="content"
-    
+      v-loading="loading2"
       element-loading-text="loading"
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
@@ -15,7 +16,8 @@
         <div class="trend_tab">
           <div class="trend_left">
             <ul>
-              <li v-for="(item) in currency" :key="item.id" @click="check(item.id,$event)">
+              <!-- <li v-for="(item) in currency" :key="item.id" @click="check(item.id,$event)"> -->
+              <li v-for="(item) in currency" :key="item.id">
                 <img :src="item.img" v-show="item.switch" alt>
                 <img :src="item.empty" v-show="!item.switch" alt>
                 <span>{{item.type}}</span>
@@ -26,7 +28,7 @@
             <li
               v-for="(item) in timer"
               :key="item.id"
-              :class="{active : activename == item.name}"
+              :class="{active : activename == item.id}"
               @click="selected(item.name,item.id)"
             >{{item.name}}</li>
           </ul>
@@ -34,7 +36,7 @@
         <div class="trend_table" ref="mychart"></div>
         <!-- <div class="trend_table" >
           <img src="../assets/d57bcb765433304e7ca905009882f84.png" alt="">
-        </div> -->
+        </div>-->
       </div>
       <div class="content_mid">
         <variety
@@ -46,25 +48,31 @@
       </div>
       <div class="content_bottom">
         <div>
+          <!-- <span @click="withdraw" class="btn"> -->
           <span class="btn">
-            <el-button type="text" @click="dialogVisible = true">FIAT WITHDRAW</el-button>
+            <!-- {{$t('home.withdraw')}} -->
+            <el-button type="text" @click="dialogVisible = true">{{$t('home.withdraw')}}</el-button>
           </span>
-          <span @click="deposit" class="btn">
-            <el-button type="text" @click="dialogVisible = true">FIAT DEPOSIT</el-button>
+          <!-- <span @click="deposit" class="btn"> -->
+          <!-- {{$t('home.deposit')}} -->
+          <span class="btn">
+            <el-button type="text" @click="dialogVisible = true">{{$t('home.deposit')}}</el-button>
           </span>
         </div>
         <div>
-          <span @click="exchange" class="btn">
-            <el-button type="text" @click="dialogVisible = true">EXCHANGE</el-button>
+          <span class="btn">
+          <!-- <span @click="exchange" class="btn"> -->
+            <!-- {{$t('home.Exchange')}} -->
+            <el-button type="text" @click="dialogVisible = true">{{$t('home.Exchange')}}</el-button>
           </span>
         </div>
       </div>
     </div>
 
-    <el-dialog title="Remind" :visible.sync="dialogVisible" width="30%">
-      <span>Sorry, this service has not been opened yet</span>
+    <el-dialog :title="$t('home.remind')" :visible.sync="dialogVisible" width="30%">
+      <span>{{$t('home.sorry')}}</span>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogVisible = false">Comfirm</el-button>
+        <el-button type="primary" @click="dialogVisible = false">{{$t('home.Comfirm')}}</el-button>
       </span>
     </el-dialog>
   </div>
@@ -72,15 +80,14 @@
 <script>
 import echarts from "echarts"; //引入图表
 import variety from "@/components/variety";
-import topright from "@/components/top_right";
+// import topright from "@/components/top_right";
 export default {
   name: "home",
   data() {
-    
     return {
       // list=[],
       loading2: true,
-      activename: "DAY", //高亮
+      activename: 0, //高亮
       dialogVisible: false,
       ok: false, //用户信息的开关
       walletdata: "", //图片数据
@@ -113,7 +120,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+          data: ["", "", "", "", "", "", ""],
           axisTick: {
             show: false
           },
@@ -156,63 +163,63 @@ export default {
             formatter: "${value}",
             color: "#FFFFFF"
           }
-        },
-        series: [
-          {
-            name: "USD",
-            type: "line",
-            symbolSize: 14,
-            color: "#FACB07",
-            stack: "总量",
-            data: [120, 132, 101, 134, 90, 230, 210],
-            itemStyle: {
-              normal: {
-                borderWidth: 3
-              }
-            },
-            lineStyle: {
-              width: 6
-            }
-          },
-          {
-            name: "RMB",
-            type: "line",
-            stack: "总量",
-            symbolSize: 14,
-            color: "#FA529F",
-            data: [220, 182, 191, 234, 290, 330, 310],
-            itemStyle: {
-              normal: {
-                borderWidth: 3
-              }
-            },
-            lineStyle: {
-               width: 6
-            }
-          },
-          {
-            name: "HKD",
-            type: "line",
-            symbolSize: 14,
-            color: "#59D4BE",
-            stack: "总量",
-            data: [150, 232, 201, 154, 190, 330, 410],
-            itemStyle: {
-              normal: {
-                borderWidth: 3
-              }
-            },
-            lineStyle: {
-              width: 6
-            }
-          }
-          // {
-          //   name: "JPY",
-          //   type: "line",
-          //   stack: "总量",
-          //   data: [320, 332, 301, 334, 390, 330, 320]
-          // }
-        ]
+        }
+        // series: [
+        //   {
+        //     name: "USD",
+        //     type: "line",
+        //     symbolSize: 14,
+        //     color: "#FACB07",
+        //     stack: "总量",
+        //     data: [120, 132, 101, 134, 90, 230, 210],
+        //     itemStyle: {
+        //       normal: {
+        //         borderWidth: 3
+        //       }
+        //     },
+        //     lineStyle: {
+        //       width: 6
+        //     }
+        //   },
+        //   {
+        //     name: "RMB",
+        //     type: "line",
+        //     stack: "总量",
+        //     symbolSize: 14,
+        //     color: "#FA529F",
+        //     data: [220, 182, 191, 234, 290, 330, 310],
+        //     itemStyle: {
+        //       normal: {
+        //         borderWidth: 3
+        //       }
+        //     },
+        //     lineStyle: {
+        //       width: 6
+        //     }
+        //   },
+        //   {
+        //     name: "HKD",
+        //     type: "line",
+        //     symbolSize: 14,
+        //     color: "#59D4BE",
+        //     stack: "总量",
+        //     data: [150, 232, 201, 154, 190, 330, 410],
+        //     itemStyle: {
+        //       normal: {
+        //         borderWidth: 3
+        //       }
+        //     },
+        //     lineStyle: {
+        //       width: 6
+        //     }
+        //   }
+        //   // {
+        //   //   name: "JPY",
+        //   //   type: "line",
+        //   //   stack: "总量",
+        //   //   data: [320, 332, 301, 334, 390, 330, 320]
+        //   // }
+        // ]
       },
       //钱币的图片
       tabs: [
@@ -237,22 +244,6 @@ export default {
           text: require("../assets/jpy.png")
         }
       ],
-      //选择时间
-      timer: [
-        {
-          id: 0,
-          name: "DAY"
-        },
-        {
-          id: 1,
-          name: "HOUR"
-        },
-        {
-          id: 2,
-          name: "15 SEC"
-        }
-      ],
-
       //选择货币的线
       currency: [
         {
@@ -280,8 +271,8 @@ export default {
     };
   },
   components: {
-    variety,
-    topright
+    variety
+    // topright
   },
   mounted() {
     // console.log(this.$loading)
@@ -297,16 +288,18 @@ export default {
     //   //   Authorization: "Bearer" + " " + token
     //   // }
     // })
+
     this.$axios
       .get(`${this.$baseurl}/coin4_project/users/wallet_data`)
       .then(res => {
         if (res.data.Status == "success") {
           this.walletdata = res.data.Tokens;
+          // console.log(res.data)
           this.loading2 = false;
         }
         // else{
         else if (res.data.Status == "error") {
-          this.dialogVisible =true
+          this.dialogVisible = true;
           // if ("No session. Please do login." == res.data.error) {
           //   sessionStorage.removeItem("token");
           //   sessionStorage.removeItem("username");
@@ -327,6 +320,23 @@ export default {
         list.push(this.currency[i].type);
       }
       return list;
+    },
+    //选择时间
+    timer() {
+      return [
+        {
+          id: 0,
+          name: this.$t("home.day")
+        },
+        {
+          id: 1,
+          name: this.$t("home.Hour")
+        },
+        {
+          id: 2,
+          name: this.$t("home.sec")
+        }
+      ];
     }
   },
   methods: {
@@ -371,23 +381,22 @@ export default {
     //点击跳到取现
     withdraw() {
       // alert("Sorry,this service has not been opened yet");
-      // this.$router.push({
-      //   name: "withdraw"
-      // });
+      this.$router.push({
+        name: "withdraw"
+      });
     },
     //点击跳到兑换
     exchange() {
-      // this.$router.push({
-      //   name: "exchange"
-      // });
+      this.$router.push({
+        name: "exchange"
+      });
       // alert("Sorry,this service has not been opened yet");
     },
     //点击存款
     deposit() {
-      // this.$router.push({
-      //   name: "deposit"
-      // });
-      // alert("Sorry, this service has not been opened yet");
+      this.$router.push({
+        name: "deposit"
+      });
     },
     check: function(item, event) {
       // event.target.switch = !event.target.switch;
@@ -404,7 +413,7 @@ export default {
     // },
     //高亮
     selected(name, idx) {
-      this.activename = name;
+      this.activename = idx;
     }
     // go() {
     //   this.$router.push({

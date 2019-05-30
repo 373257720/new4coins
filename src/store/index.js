@@ -7,7 +7,9 @@ export default new Vuex.Store({
   // 2. 创建state数据交由store来管理
   state: {
     LOADING: false,
-    currentUser: null, //当前用户
+    currentUser: null,
+    lang: 'English'
+    //当前用户
     //isLogin: false //判断当前用户是否已经登录
   },
   getters: {
@@ -25,6 +27,26 @@ export default new Vuex.Store({
     //   state.shuju = obj
     //   state.allpeople = obj.datas.list[7].data.column_images[0][0].img_url
     // }
+    currencylang(state, lan) {
+      if (lan) {
+        state.lang = lan
+        // console.log(lan)
+        //    state.isLogin = true
+      } 
+      // else if (lan == "complex") {
+      //   state.lang = '繁體中文'
+      // } else if (lan == "simple") {
+      //   state.lang = '简体中文'
+      // } 
+      else if (lan == null) {
+        //退出的时候清空sessionStorage里的东西
+        sessionStorage.setItem('lang', null);
+        //  sessionStorage.setItem('userToke','');
+        state.lang = null;
+        //  state.isLogin = false;
+      }
+    },
+
     userStatus(state, user) {
       if (user) {
         state.currentUser = user
@@ -48,7 +70,7 @@ export default new Vuex.Store({
     // 封装一个 ajax 方法
     setUser(context, user) {
       // commit('userStatus',user)
-      context.commit( 'userStatus', user )
+      context.commit('userStatus', user)
       //context.commit('userStatus',user) 
       // 通过接口获取的后台数据保存到store中，等待组件取用
     }

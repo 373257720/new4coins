@@ -49,7 +49,6 @@
       @size-change="handleSizeChange"
       :total="transfer.length"
     ></el-pagination>
-
   </div>
 </template>
 <script>
@@ -61,38 +60,44 @@ export default {
       pagesize: 10, // 每页条数
       newdata: "",
       currpage: 1,
-      fillter: [],
+      fillter: []
       //当前页数
       //sort-change绑定方法具有参数：column，这是一个对象
       // column: {
       //   prop: "CreatedStr", // el-table-column中的prop
       //   order: "descending" // 'ascending' or 'descending'
       // },
-      type: [
-        "Send",
-        "Withdrawal",
-        "Deposit",
-        "Fiat" + " " + "to" + " " + "Fiat",
-        "Fiat" + " " + "to" + " " + "Note",
-        "Note" + " " + "to" + " " + "Fiat",
-        "Note" + " " + "to" + " " + "Note",
-        "Fee"
-      ],
-      resultimg: [
+    };
+  },
+  computed: {
+    type: function() {
+      return [
+        this.$t("history.send"),
+        this.$t("history.withdrawl"),
+        this.$t("history.deposit"),
+        this.$t("history.ftof"),
+        this.$t("history.fton"),
+        this.$t("history.ntof"),
+        this.$t("history.nton"),
+        this.$t("history.fee")
+      ];
+    },
+    resultimg: function() {
+      return [
         {
-          inf: "deals were done",
+          inf: this.$t("history.done"),
           text: require("../assets/rusult_complete.png")
         },
         {
-          inf: "deals are Pending",
+          inf: this.$t("history.pending"),
           text: require("../assets/2517c241736f218dd6561f2dab31812.png")
         },
         {
-          inf: "Declined by admin",
+          inf: this.$t("history.declined"),
           text: require("../assets/result_failed.png")
         }
-      ]
-    };
+      ];
+    }
   },
   created() {
     this.fillter = [...this.transfer];

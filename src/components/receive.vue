@@ -3,6 +3,7 @@
     <div id="top">
       <h2 class="btn" @click="goto('home')">TRANSFER</h2>
       <topright></topright>
+      <lang></lang>
     </div>
     <div class="content">
       <div class="title con">
@@ -13,30 +14,33 @@
         </p>
       </div>
       <div class="box con">
-        <img src="../assets/qr-code.png" alt>
-        <p>
-          <span>sdfgdfgdfgdfgdfgdfgdfvvbertertertdfgdfgdfgdferfsdfsdfvnghdfgdfgdg</span>
-          <img src="../assets/cop.png" alt>
-        </p>
+        <img src="../../static/qr-code.png" alt>
+        <div class="con">
+          <p>
+            <span>sdfgdfgdfgdfgdfgdfgdfvvbertertertdfgdfgdfgdferfsdfsdfvnghdfgdfgdg</span>
+            <img src="../assets/cop.png" alt>
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import topright from "@/components/top_right";
+// import topright from "@/components/top_right";
 export default {
   name: "receive",
-  components:{
-    topright
+  components: {
+    // topright
   },
   data() {
     return {
       receive_pic: this.$route.params.pic,
-      receive_name: this.$route.params.receiveid
+      receive_name: this.$route.params.receiveid,
+      loading1: true
     };
   },
   created() {
-  // console.log(this.$route.params);
+    // console.log(this.$route.params);
   },
   beforeRouteEnter: function(to, from, next) {
     if (from.name == "home" && to.params.pic) {
@@ -47,12 +51,12 @@ export default {
       });
     }
   },
-  methods:{
-     goto(name, id) {
+  methods: {
+    goto(name, id) {
       // 路由传参
       let obj = { name };
       // console.log(obj)
-       if (id) {
+      if (id) {
         obj.params = { id };
       }
       this.$router.push(obj);
@@ -94,11 +98,11 @@ export default {
     margin-bottom: 63px;
   }
   p {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    // width: 1200px;
-    // margin:0 auto;
+    // position: absolute;
+    // left: 50%;
+    // transform: translateX(-50%);
+    width: 380px;
+    margin: 0 auto;
     // height: 50px;
     // text-align:center;
     span {
@@ -106,16 +110,18 @@ export default {
       width: 334px;
       font-size: 16px;
       word-wrap: break-word;
+      // margin: 0 auto;
       color: #bec8d6;
-      //    height: 44px;
       line-height: 28px;
       margin-right: 22px;
-      img {
-        //     position:absolute;
-        //    left:50%;
-        //    transform: translateX(-50%);
+       img {
+            position:absolute;
+           left:50%;
+           transform: translateX(-50%);
       }
+     
     }
+    
   }
 }
 </style>

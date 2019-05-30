@@ -3,6 +3,7 @@
     <div id="top">
       <h2 class="topbtn" @click="goto('home')">WITHDRAW</h2>
       <topright></topright>
+      <lang></lang>
     </div>
     <div class="content">
       <div class="content_first">
@@ -30,17 +31,17 @@
         <el-input v-model.trim="input3" placeholder="请输入内容"></el-input>
         <u>Max</u>
       </div>
-      <div class="btn" @click="goto" v-if="withdraw_switch">SUBMIT</div>
-      <div class="btn submit" v-if="!withdraw_switch">SUBMIT</div>
+      <div class="btn" @click="goto" v-if="withdraw_switch">{{$t('withdraw.Submit')}}</div>
+      <div class="btn submit" v-if="!withdraw_switch">{{$t('withdraw.Submit')}}</div>
     </div>
   </div>
 </template>
 <script>
-import topright from "@/components/top_right";
+// import topright from "@/components/top_right";
 export default {
   name: "withdraw",
   components:{
-    topright
+    // topright
   },
   data() {
     return {

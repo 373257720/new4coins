@@ -1,20 +1,24 @@
 <template>
   <div class="login">
-    <div id="top">NETNOTE</div>
+    <div id="top">
+      NETNOTE
+      <lang></lang>
+    </div>
     <div class="content">
       <div class="box">
         <h1>WELCOME</h1>
         <div>
-          <h3>Enter your name</h3>
+          <h3>{{$t('login.enteryourname')}} :</h3>
           <p class="name">
-            <el-input placeholder="Emails" v-model.trim="name" clearable autofocus v-focus></el-input>
+            <el-input :placeholder="$t('login.email')" v-model.trim="name" clearable autofocus v-focus></el-input>
           </p>
         </div>
         <div>
-          <h3>Enter your password</h3>
+          <h3 class="fl">{{$t('login.enteryourpassword')}} :</h3>
+          <!-- <h3 class="fr forgot">{{$t('login.forgot')}}?</h3> -->
           <p class="password">
             <el-input
-              placeholder="Password"
+              :placeholder="$t('login.password')"
               v-model.trim="password"
               clearable
               v-focus
@@ -23,7 +27,7 @@
           </p>
         </div>
         <aside>{{this.warn}}</aside>
-        <div class="btn" @click="goto1">SIGN&nbsp;&nbsp;IN</div>
+        <div class="btn" @click="goto1">{{$t('login.signin')}}</div>
       </div>
       <div class="photo">
         <img src="../assets/img.png" alt>
@@ -38,7 +42,7 @@ export default {
     return {
       name: "",
       password: "",
-      warn: "",
+      warn: ""
     };
   },
   created() {
@@ -89,7 +93,7 @@ export default {
         })
           .then(res => {
             if (res.data.Status == "success") {
-              console.log(111);
+              // console.log(111);
               this.$store.dispatch("setUser", this.name);
               sessionStorage.setItem("token", res.data.Token.access_token);
               this.$router.push({
@@ -102,16 +106,16 @@ export default {
                 this.$router.replace({
                   name: "login"
                 });
+              } else {
+                this.warn = this.$t('login.warn1');
               }
-            } else {
-              this.warn = "Incorrect username or password.";
             }
           })
           .catch(err => {
             //console.log(err); //错误信息
           });
       } else {
-        this.warn = "name or password can not be empty";
+        this.warn = this.$t('login.warn2');
       }
     }
   }
@@ -162,6 +166,17 @@ export default {
       height: 25px;
       font-size: 12px;
     }
+    .forgot{
+      // text-decoration:underline;
+      color:#4284d6;
+      height: 15px;
+       border-bottom:1px solid #4284d6;
+    }
+    // u{
+    //    height: 25px;
+    //   font-size: 12px;
+    //   cursor: pointer;
+    // }
   }
   > div:nth-child(2) {
     // height: 65px;

@@ -4,14 +4,15 @@
     <div id="top">
       <h2 class="btn" @click="goto('home')">DEPOSIT</h2>
       <topright></topright>
+      <lang></lang>
     </div>
     <div class="content con">
       <div class="title">
         <img src="../assets/up.png" alt>
-        <p>Upload a picture of your bank receipt</p>
+        <p>{{$t('deposit.Upload')}}</p>
       </div>
       <div class="box">
-        <h3>Receipt</h3>
+        <h3>{{$t('deposit.Receipt')}}</h3>
         <div class="pic">
           <el-upload
             ref="upload"
@@ -30,7 +31,7 @@
             <img width="100%" :src="dialogImageUrl" alt>
           </el-dialog>
         </div>
-        <h3>Currency</h3>
+        <h3>{{$t('deposit.Currency')}}</h3>
         <div class="select common">
           <el-select v-model="value" placeholder="-">
             <el-option
@@ -41,22 +42,22 @@
             ></el-option>
           </el-select>
         </div>
-        <h3>Amount</h3>
+        <h3>{{$t('deposit.Amount')}}</h3>
         <div class="amount common">
           <el-input placeholder="-" v-model="amount" clearable></el-input>
         </div>
-        <div class="btn" @click="submitUpload" v-if="pic_submit" >SUBMIT</div>
-        <div class="btn submit" v-if="!pic_submit">SUBMIT</div>
+        <div class="btn" @click="submitUpload" v-if="pic_submit">{{$t('deposit.Submit')}}</div>
+        <div class="btn submit" v-if="!pic_submit">{{$t('deposit.Submit')}}</div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import topright from "@/components/top_right";
+// import topright from "@/components/top_right";
 export default {
   name: "deposit",
-   components: {
-    topright
+  components: {
+    // topright
   },
   data() {
     return {
@@ -114,7 +115,7 @@ export default {
     },
     //文件列表移除文件时的钩子
     appear(file, fileList) {
-      this.pic_submitok=false
+      this.pic_submitok = false;
       var a = document.querySelector(".el-upload--picture-card");
       var b = document.querySelector(".el-upload-list__item");
       b.style = "transition:0s";
@@ -135,7 +136,7 @@ export default {
     // 文件上传
 
     uploadFile(params) {
-      console.log(params)
+      console.log(params);
       // console.log("uploadFile", params);
       this.pic_submitok = false;
       const _file = params.file;
@@ -146,7 +147,7 @@ export default {
       }
       this.formData = new FormData();
       this.formData.append("file", _file);
-      // if (!isLt2M) { 
+      // if (!isLt2M) {
       //   this.$message.error("请上传2M以下的.xlsx文件");
       //   return false;
       // }
@@ -154,18 +155,22 @@ export default {
     // 确认上传
     submitUpload() {
       this.$refs.upload.submit();
-
-      this.$axios({
-        data: this.formData,
-        url: `${this.$baseurl}/growthing-02/users/wallet_data`,
-        method: "get"
-      })
-        .then(res => {
-          console.log(111 );
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.goto();
+      // this.$axios({
+      //   data: this.formData,
+      //   url: `${this.$baseurl}/growthing-02/users/wallet_data`,
+      //   method: "get"
+      // })
+      //   .then(res => {
+      //     console.log(111);
+         
+      //     // this.$router.push({
+      //     //   name: "home"
+      //     // });
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     }
   }
 };

@@ -1,6 +1,10 @@
 <template>
   <div class="forgetpassword2">
-    <div id="top">TRANSFERS</div>
+    <div id="top">
+      <h2 class="btn" @click="goto('home')">NETNOTE</h2>
+      <topright></topright>
+      <lang></lang>
+    </div>
     <div class="content con">
       <div class="title">
         <!-- <img src="../assets/up.png" alt> -->
@@ -30,7 +34,7 @@
               @focus="dispear"
               @blur="confirm"
             ></el-input>
-            <span v-if="!judge" class="judge">mimd fsf sdffdfa</span>
+            <span v-if="!judge" class="judge">Not consistent with the first password entered</span>
             <!-- <el-input v-model="confirmpassword" clearable v-focus></el-input> -->
           </div>
         </div>
@@ -47,7 +51,7 @@
             <el-input v-model="Mailbox" clearable v-focus></el-input>
             <span v-show="show" class="code" @click="getCode">code</span>
             <!-- <span v-show="show" @click="getCode"></span> -->
-            <span v-show="!show" class="code">{{count}} s</span>
+            <span v-show="!show" class="code miao">{{count}} s</span>
             <span v-if="!judgecode" class="judge">Incorrect Verification Code</span>
           </div>
         </div>
@@ -71,22 +75,31 @@ export default {
       timer: null,
       judge: true,
       judgecode: true,
-      newpasswordreg: true,
+      newpasswordreg: true
       // submitok: false
     };
   },
- computed:{
-   submitok:function(){
-     if (this.newpassword && this.confirmpassword && this.Mailbox){
-          return true
-     }else{
-       return false
-     }
-
-   }
- },
+  computed: {
+    submitok: function() {
+      if (
+        this.newpassword &&
+        this.confirmpassword &&
+        this.Mailbox &&
+        this.newpassword === this.confirmpassword
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
   methods: {
     //驗證密碼是否相等
+    goto() {
+      this.$router.push({
+        name: "home"
+      });
+    },
     dispear(e) {
       var e = e.target;
       e.style.border = 0;
@@ -128,14 +141,14 @@ export default {
     },
     submit() {
       // this.judgecode=true
-      if (this.newpassword && this.confirmpassword && this.Mailbox) {
+      if (this.judgecode) {
         // this.submitok=true
         // $refs.submit.style.background="whtie"
         // console.log($refs.sub);
         // }
       } else {
         // console.log("")
-        // this.newpasswordreg = false;
+        this.judgecode = false;
       }
     }
   }
@@ -160,7 +173,6 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-
 .content {
   height: 866px;
   position: relative;
@@ -221,6 +233,9 @@ export default {
           border-radius: 2px;
           text-align: center;
           line-height: 40px;
+        }
+        .miao {
+          background: #30313b;
         }
       }
     }

@@ -28,24 +28,29 @@
         </p>
       </div>
       <div class="end fr">
-         <span class="btn">
-        <!-- <span @click="goto('receive')" class="btn"> -->
-          <!-- RECEIVE -->
+        <span class="btn">
+          <!-- <span @click="goto('receive')" class="btn">
+          RECEIVE-->
           <el-button type="text" @click="dialogVisible = true">RECEIVE</el-button>
         </span>
-         <span  class="btn">
-        <!-- <span @click="goto('send')" class="btn"> -->
+        <span class="btn">
+          <!-- <span @click="goto('send')" class="btn"> -->
           <!-- SEND  -->
           <el-button type="text" @click="dialogVisible = true">SEND</el-button>
         </span>
       </div>
-      <el-dialog title="Remind" :visible.sync="dialogVisible" width="30%">
-        <span>Sorry, this service has not been opened yet</span>
+      <el-dialog :title="$t('home.remind')" :visible.sync="dialogVisible" width="30%">
+        <span>{{$t('home.sorry')}}</span>
         <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="dialogVisible = false">Comfirm</el-button>
+          <el-button type="primary" @click="dialogVisible = false">{{$t('home.Comfirm')}}</el-button>
         </span>
       </el-dialog>
-
+      <!-- <el-dialog title="$t('home.remind')" :visible.sync="dialogVisible" width="30%">
+        <span>{{$t('home.sorry')}}</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="dialogVisible = false">{{$t('home.Comfirm')}}</el-button>
+        </span>
+      </el-dialog> -->
     </div>
   </div>
 </template>

@@ -2,22 +2,22 @@
   <div id="app">
     <div id="content">
       <!-- <keep-alive> -->
-        <router-view></router-view>
+      <router-view></router-view>
       <!-- </keep-alive> -->
     </div>
     <div id="bottom">
       <div class="bottom">
         <p>APK</p>
         <div class="bottommid">
-          <ul>
-            <li>About&nbsp;us</li>
-            <li>Contact&nbsp;us</li>
-            <li>User&nbsp;agreement</li>
-            <li>Privacy&nbsp;treaty</li>
-            <li>Legal&nbsp;statement</li>
-            <li>Rate&nbsp;standard</li>
-            <li>Problem&nbsp;feedback</li>
-            <li>Novice&nbsp;tutorial</li>
+          <ul :class="this.$store.state.lang">
+            <li>{{$t('home.AboutUS')}}</li>
+            <li>{{$t('home.Contactus')}}</li>
+            <li>{{$t('home.useragreement')}}</li>
+            <li>{{$t('home.privacytready')}}</li>
+            <li>{{$t('home.legalstatement')}}</li>
+            <li>{{$t('home.ratestandard')}}</li>
+            <li>{{$t('home.problemfeedback')}}</li>
+            <li>{{$t('home.novicetutorial')}}</li>
           </ul>
         </div>
         <span>copyright@4coin web.2018</span>
@@ -30,12 +30,45 @@
 export default {
   name: "App",
   data() {
-    return {};
+    return {
+      // status: this.$store.state.lang,
+      // statusText: ["ENGLISH", "繁體中文", "简体中文"]
+
+      statusText: {
+        0: ["span-delay", "进行中"],
+        1: ["span-finish", "已完成"],
+        2: ["span-rough", "未开始"]
+      }
+    };
   },
+  computed: {
+    // status: function() {
+    //   for (var i = 0; i < statusText.length; i++) {
+    //     if (statusText[i] == this.$store.state.lang) {
+    //        console.log(i)
+    //     }
+    //   }
+    // }
+  },
+  // watch:{
+  //     status:function(newval, oldval){
+  //         console.log(newval)
+  //     }
+  //     //    if (sessionStorage.getItem("lang")) {
+  //     //   for (var i = 0; i < this.statusText.length; i++) {
+  //     //     if (this.statusText[i] == sessionStorage.getItem("lang")) {
+
+  //     //       this.status=i
+  //     //       console.log(this.status)
+  //     //     }
+  //     //   }
+  //     // }
+  // },
   created() {
     //在页面刷新时将vuex里的信息保存到sessionStorage里
     window.addEventListener("beforeunload", () => {
       sessionStorage.setItem("userName", this.$store.state.currentUser);
+      localStorage.setItem("lang", this.$store.state.lang);
     });
     //在页面加载时读取sessionStorage里的状态信息
     if (sessionStorage.getItem("userName")) {
@@ -123,21 +156,45 @@ export default {
       line-height: 80px;
     }
     .bottommid {
-      width: 818px;
+      width: 950px;
       margin: 0 auto;
     }
-    ul {
+    .complex {
       // margin-top:20;
       height: 20px;
-      // display:flex;
+      display: flex;
       // width: 1200px;
       // margin-left: 200px;
       // overflow: hidden;
+      li {
+        font-size: 12px;
+        flex: 1;
+        color: #788aa2;
+        margin-right: 20px;
+        text-align: center;
+      }
+    }
+    .simple {
+      height: 20px;
+      display: flex;
+      // width: 1200px;
+      // margin-left: 200px;
+      // overflow: hidden;
+      li {
+        font-size: 12px;
+        flex: 1;
+        color: #788aa2;
+        margin-right: 20px;
+        text-align: center;
+      }
+    }
 
+    .English {
+      height: 20px;
+      margin-left: 80px;
       li {
         float: left;
         font-size: 12px;
-        // flex:1;
         color: #788aa2;
         margin-right: 20px;
       }

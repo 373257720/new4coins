@@ -3,10 +3,11 @@
     <div id="top">
       <h2 class="topbtn" @click="goto('home')">EXCHANGE</h2>
       <topright></topright>
+      <lang></lang>
     </div>
     <div class="content">
       <div class="list">
-        <p>Fiat&nbsp;to&nbsp;Note</p>
+        <p>{{$t('history.fton')}}</p>
         <div class="common">
           <el-select v-model="Ftocoin" placeholder="-">
             <el-option
@@ -28,7 +29,7 @@
             ></el-option>
           </el-select>
         </div>
-        <p>Note&nbsp;to&nbsp;Note</p>
+        <p>{{$t('history.nton')}}</p>
         <div class="common">
           <el-select v-model="coin1" placeholder="-">
             <el-option
@@ -50,7 +51,7 @@
             ></el-option>
           </el-select>
         </div>
-        <p>Note&nbsp;to&nbsp;Fiat</p>
+        <p>{{$t('history.ntof')}}</p>
         <div class="common" style="margin-bottom:75px;">
           <el-select v-model="Ctofiat" placeholder="-">
             <el-option
@@ -72,18 +73,18 @@
             ></el-option>
           </el-select>
         </div>
-        <div class="btn" @click="exchange2" v-if="exchange_switch">SUBMIT</div>
-        <div class="btn submit" v-if="!exchange_switch">SUBMIT</div>
+        <div class="btn" @click="exchange2" v-if="exchange_switch">{{$t('deposit.Submit')}}</div>
+        <div class="btn submit" v-if="!exchange_switch">{{$t('deposit.Submit')}}</div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import topright from "@/components/top_right";
+// import topright from "@/components/top_right";
 export default {
   name: "exchange",
   components: {
-    topright
+    // topright
   },
   data() {
     return {

@@ -3,23 +3,24 @@
     <div id="top">
       <h2 class="btn" @click="goto('home')">NETNOTE</h2>
       <topright></topright>
+      <lang></lang>
     </div>
     <div class="content con">
       <div class="title">
-        <p>History</p>
+        <p>{{$t('history.History')}}</p>
       </div>
       <div class="box_tap">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="TRANSFERS" name="first">
-            <div class="norecord" v-if="transferdata.length<=0">No record</div>
+          <el-tab-pane :label="$t('history.Transfer')" name="first">
+            <div class="norecord" v-if="transferdata.length<=0">{{$t('history.Norecord')}}</div>
             <historytable
               :transfer="transferdata"
               :tablehead="transferhead"
               v-if="transferdata.length>0"
             ></historytable>
           </el-tab-pane>
-          <el-tab-pane label="EXCHANGES" name="second">
-            <div class="norecord" v-if="exchangedata.length<=0">No record</div>
+          <el-tab-pane :label="$t('history.Exchange')" name="second">
+            <div class="norecord" v-if="exchangedata.length<=0">{{$t('history.Norecord')}}</div>
             <historyexchange
               :transfer="exchangedata"
               :tablehead="exchangehead"
@@ -34,27 +35,61 @@
 <script>
 import historytable from "@/components/historytable";
 import historyexchange from "@/components/historyexchange";
-import topright from "@/components/top_right";
+// import topright from "@/components/top_right";
 export default {
   name: "history",
   components: {
     historytable,
-    historyexchange,
-    topright
+    historyexchange
+    // topright
   },
   data() {
     return {
       msg: 8888,
       // list: [],
       activeName: "first",
-      transferhead: ["Date", "Opear-tion", "Token", "Amount", "Result"],
-      exchangehead: ["Date", "Opear-tion", "Token", "Amount", "Result"],
+      // transferhead: [
+      //   this.$t("history.DATE"),
+      //   this.$t("history.Opeartion"),
+      //   this.$t("history.Token"),
+      //   this.$t("history.AMOUNT"),
+      //   this.$t("history.Result")
+      // ],
+      // exchangehead: [
+      //   this.$t("history.DATE"),
+      //   this.$t("history.Opeartion"),
+      //   this.$t("history.Token"),
+      //   this.$t("history.AMOUNT"),
+      //   this.$t("history.Result")
+      // ],
       transferdata: [],
       exchangedata: []
     };
   },
+  computed: {
+    transferhead: function() {
+      return [
+        this.$t("history.DATE"),
+        this.$t("history.Opeartion"),
+        this.$t("history.Token"),
+        this.$t("history.AMOUNT"),
+        this.$t("history.Result")
+      ];
+    },
+     exchangehead: function() {
+      return [
+        this.$t("history.DATE"),
+        this.$t("history.Opeartion"),
+        this.$t("history.Token"),
+        this.$t("history.AMOUNT"),
+        this.$t("history.Result")
+      ];
+    },
+
+  },
+
   created() {
-    //  console.log(this.$global_func.goto())
+    //  console.log(this.transferhead,this.$t('history.DATE'))
     var token = sessionStorage.getItem("token");
     this.$axios
       .get(`${this.$baseurl}/coin4_project/users/transfer_history`, {
@@ -93,7 +128,9 @@ export default {
   },
   methods: {
     //tap切换
-    handleClick(tab, event) {},
+    handleClick(tab, event) {
+      // this.transferhead.push(this.$t('history.DATE'), this.$t('history.Opeartion'), this.$t('history.Token'), this.$t('history.AMOUNT'),this.$t('history.Result'))
+    },
     goto(name, id) {
       // 路由传参
       let obj = { name };
@@ -121,6 +158,8 @@ export default {
 .box_tap .el-tabs__item {
   color: #aaaaaa;
   line-height: 55px;
+  width: 80px;
+  text-align: center;
 }
 
 .box_tap .el-tabs__item.is-active {

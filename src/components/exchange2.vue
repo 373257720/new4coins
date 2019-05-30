@@ -1,8 +1,9 @@
 <template>
   <div class="exchange2">
-     <div id="top">
+    <div id="top">
       <h2 class="btn" @click="goto('home')">EXCHANGE</h2>
       <topright></topright>
+      <lang></lang>
     </div>
     <div class="content list">
       <p>{{types[data.idx].text}}</p>
@@ -26,27 +27,27 @@
       </div>
       <div class="rate first" style="margin-top:28px;">
         <p>{{data.leftnum}}</p>
-        <el-input v-model="input1" placeholder="请输入内容"></el-input>
+        <el-input v-model="input1" :placeholder="$t('withdraw.Pleaseinput')"></el-input>
         <u>Max</u>
       </div>
       <div class="rate second">
         <p>{{data.rightnum}}</p>
-        <el-input v-model="input2" placeholder="请输入内容"></el-input>
+        <el-input v-model="input2" :placeholder="$t('withdraw.Pleaseinput')"></el-input>
         <u>Max</u>
       </div>
       <div class="rate_sign">1RMbn=1.1681HKD</div>
       <!-- <p>1RMBn = </p> -->
-      <div class="btn" @click="goto" v-if="exchange_submit">SUBMIT</div>
-      <div class="btn submit" v-if="!exchange_submit">SUBMIT</div>
+      <div class="btn" @click="goto" v-if="exchange_submit">{{$t('deposit.Submit')}}</div>
+      <div class="btn submit" v-if="!exchange_submit">{{$t('deposit.Submit')}}</div>
     </div>
   </div>
 </template>
 <script>
-import topright from "@/components/top_right";
+// import topright from "@/components/top_right";
 export default {
   name: "exchange2",
-   components: {
-    topright
+  components: {
+    // topright
   },
   data() {
     return {

@@ -3,46 +3,47 @@
     <div id="top">
       <h2 class="btn" @click="goto('home')">TRANSFER</h2>
       <topright></topright>
+      <lang></lang>
     </div>
     <div class="content">
       <div class="title con">
         <img :src="receive_pic" alt>
         <p>
-          Send&nbsp;
+          {{$t('Send.Send')}}
           <span>{{receive_name}}</span>
         </p>
       </div>
       <div class="box con">
         <div>
-          <h3>To :</h3>
+          <h3>{{$t('Send.TO')}}:</h3>
           <p class="to same">
             <el-input placeholder="-" v-model.trim="to" clearable></el-input>
           </p>
         </div>
         <div>
-          <h3>Amount :</h3>
+          <h3>{{$t('Send.Amount')}}:</h3>
           <p class="amount same">
             <el-input placeholder="-" v-model.trim="amount" clearable></el-input>
           </p>
         </div>
         <div>
-          <h3>Remark :</h3>
+          <h3>{{$t('Send.REMARK')}}:</h3>
           <p class="remark same">
             <el-input placeholder="-" v-model.trim="remark" clearable></el-input>
           </p>
         </div>
-        <div class="btn" @click="goto" v-if="send_switch">SUBMIT</div>
-         <div class="btn submit" v-if="!send_switch">SUBMIT</div>
+        <div class="btn" @click="goto" v-if="send_switch">{{$t('deposit.Submit')}}</div>
+         <div class="btn submit" v-if="!send_switch">{{$t('deposit.Submit')}}</div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import topright from "@/components/top_right";
+// import topright from "@/components/top_right";
 export default {
   name: "send",
   components:{
-    topright  
+    // topright  
   },
   data() {
     return {

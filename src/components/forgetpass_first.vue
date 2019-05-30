@@ -1,18 +1,23 @@
 <template>
   <div class="forgetpassword1">
-    <div id="top">TRANSFERS</div>
+    <!-- <div id="top">TRANSFERS</div> -->
+    <div id="top">
+      <h2 class="btn" @click="goto('home')">NETNOTE</h2>
+      <topright></topright>
+      <lang></lang>
+    </div>
     <div class="content con">
       <div class="title">
         <!-- <img src="../assets/up.png" alt> -->
-        <p>Forget password</p>
+        <p>{{$t('forgetpassword.changepassword')}}</p>
       </div>
       <div class="box_password">
         <div class="inputaccout">
-          <p>Input accout</p>
+          <p>{{$t('forgetpassword.inputaccout')}}</p>
           <el-input v-model.trim="inputaccount" clearable></el-input>
         </div>
         <div class="GraphicVerificationCode">
-          <p>Graphic Verification Code</p>
+          <p>{{$t('forgetpassword.getcode')}}</p>
           <div>
             <el-input v-model.trim="VerificationCode" clearable></el-input>
             <span class="code btn" @click="getcode">{{code}}</span>
@@ -21,8 +26,8 @@
           <aside>{{this.warn}}</aside>
         </div>
 
-        <div class="btn" @click="nextstep" v-if="show2">Next step</div>
-        <div class="btn nextstep" v-else>Next step</div>
+        <div class="btn" @click="nextstep" v-if="show2">{{$t('forgetpassword.nextstep')}}</div>
+        <div class="btn nextstep" v-else>{{$t('forgetpassword.nextstep')}}</div>
       </div>
     </div>
   </div>
@@ -47,11 +52,17 @@ export default {
       if (this.inputaccount && this.VerificationCode) {
         return true;
       } else {
+        this.warn = "";
         return false;
       }
     }
   },
   methods: {
+    goto() {
+      this.$router.push({
+        name: "home"
+      });
+    },
     randomnum(num) {
       var str =
         "0123456789abcdefghijklmnopqrstuvwsyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -69,13 +80,31 @@ export default {
     },
     nextstep() {
       this.warn = "";
-        if (111) {
-          
-          //請求這個用戶是否存在
-        } else {
-          this.warn = "Incorrect Accout or Verification Code";
-        }
-     
+      if (this.VerificationCode == this.code) {
+        this.$axios
+          .get(`${this.$baseurl}/coin4_project/users/exchange_history`, {
+            params: {
+              // limit: 100,
+              // offset: 0
+              // access_token: token
+            }
+          })
+          .then(res => {
+            if (res.data.status == "success") {
+              this.exchangedata = res.data.records;
+              // console.log(res.data.records)
+            } else {
+              this.warn = "Incorrect Accout";
+            }
+          })
+          .catch(err => {
+            //console.log(err); //错误信息
+          });
+      }
+      //請求這個用戶是否存在
+      else {
+        this.warn = "Incorrect Verification Code";
+      }
     }
   }
 };
@@ -144,7 +173,7 @@ export default {
           display: block;
           height: 40px;
           width: 178px;
-
+          letter-spacing:8px;
           background: white;
           float: right;
           color: #2e4b53;
